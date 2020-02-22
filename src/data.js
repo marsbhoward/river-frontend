@@ -1,6 +1,7 @@
 import React from 'react';
 import adapter from './adapter'
 
+
 let listOfStreams = adapter.getStreams()
 .then(streamsList => streamsList)
 
@@ -9,7 +10,8 @@ class Data extends React.Component {
   constructor() {
     super()
     this.state = {
-      streamsList: []
+      streamsList: [],
+      moviesList: []
     }
   }
 
@@ -21,26 +23,22 @@ componentDidMount () {
           streamsList: json
      }))
   }  
-  
-
 
 
   render() { 
     const resArr = this.state.streamsList.map((r, i)=> {
-      return (<li key={i}>
+      return (<p className= "stream" id = {r.name} key={i}>
         {r.name}
-      </li>
+      </p>
       )
     })  
     return (
       <div>
-        <h1>List of Streams</h1>
-        <ul>
         {resArr}
-        </ul>
     </div>
     )
   }
 }
+
 
 export default Data;

@@ -1,14 +1,27 @@
-import React from 'react';
-import Data from '../data';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import StreamInput from './StreamInput';
 
+class Streams extends Component{
 
-const Streams = () => {
-  return (
-    <div>
-      <h1>Streams Page</h1>
-     {Data.streams}
-    </div>
-  );
+  render() {
+
+    let streams = this.props.streams.map(stream => <li key={stream.id}>{stream.name}</li>);
+
+    return (
+      <div>
+      <h2>Streams</h2>
+        <ul>
+        {streams}
+      	<StreamInput />
+        </ul>
+      </div>
+    );
+  }
 };
 
-export default Streams;
+const mapStateToProps = state => {
+  return { streams: state.streams }
+}
+
+export default connect(mapStateToProps)(Streams);

@@ -1,6 +1,9 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import App from './containers/App';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './reducers/rootReducer';
 
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -11,7 +14,12 @@ import * as serviceWorker from './serviceWorker';
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-render (
-  <App />,
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App store={store}/>
+  </Provider>,
   document.getElementById('root')
 );
