@@ -4,8 +4,8 @@ import {
   Route
 } from 'react-router-dom';
 import Home from '../components/Home';
-import Streams from '../components/Streams';
-import Movies from '../components/Movies';
+import Streams from '../components/streams/Streams';
+import Movies from '../components/movies/Movies';
 
 
 

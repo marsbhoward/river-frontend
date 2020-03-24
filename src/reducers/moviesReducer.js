@@ -1,4 +1,4 @@
-import adapter from '../adapter'
+//import adapter from '../adapter'
 
 function moviesReducer(state = [], action) {
   let idx;

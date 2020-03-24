@@ -1,7 +1,7 @@
 //import adapter from '../adapter'
 
 
-function streamsReducer(state = [], action) {
+export default function streamsReducer(state = {key: "pair"}, action) {
   let idx;
   switch (action.type) {
     case "ADD_STREAM":
@@ -14,5 +14,4 @@ function streamsReducer(state = [], action) {
     default:
       return state;
   }
-}
-export default streamsReducer
+};

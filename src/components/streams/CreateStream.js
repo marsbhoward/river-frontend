@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { addStream } from '../actions';
 import { connect } from 'react-redux'; 
 import adapter from '../adapter'
 
@@ -7,13 +6,16 @@ import adapter from '../adapter'
   .then(streamsList => streamsList)	
 
 
-  export class StreamInput extends Component {
+  class CreateStream extends Component {
 
-  state = {
-    streamsList: [],
-    stream: ''
+  constructor() {
+    super();
+    this.state = {
+      streamsList: [],
+      stream: '',
+    };
   }
-
+  
   componentDidMount () {
    	listOfStreams
     .then (json => 
@@ -43,4 +45,6 @@ import adapter from '../adapter'
   }
 }
 
-export default connect(null, { addStream })(StreamInput);
+const mapStateToProps = ({ bands }) => ({ bands })
+
+export default connect(null, mapStateToProps)(CreateStream);
