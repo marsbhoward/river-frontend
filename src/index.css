@@ -1,3 +1,13 @@
+html{
+    position: fixed;
+      top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow: auto;
+    width: 100%;
+  }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,17 +15,69 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+    
+    position: fixed;
+      top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow: auto;
+    width: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.banner{
+  width: 100%;
+  text-align: center;
+  background: #fe2d56;
+}
 
-.stream{
-  float: left;
-  background: crimson;
-  width: 19%;
-  display: block;
-  height: 20em;
+.app{
+  height: 100%;
+}
+
+.root{
+  height: 100%;
+  overflow: auto;
+}
+
+.stream {
+  width: 80%;
+  padding: 5%;
+  text-align: center;
+}
+
+.movie{
+  width: 90%;
+  padding: 5%;
+  text-align: center;
+}
+
+.streams-list {
+  text-align: center;
+  display: grid;
+  padding: 10px;
+  height: 100%;
+  overflow: auto;
+  grid-template-columns: auto auto;
+}
+.movie-list {
+  text-align: center;
+  display: grid;
+  padding: 10px;
+  height: 100%;
+  overflow: auto;
+  grid-template-columns: auto auto auto auto auto auto;
+}
+
+.show_Movie {
+  text-align: center;
+}
+
+.selected_Movie{
+  text-align:  center;
+  width: 15%
 }

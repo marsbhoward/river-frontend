@@ -1,18 +1,21 @@
-//import adapter from '../adapter'
-
-function moviesReducer(state = [], action) {
-  let idx;
-  switch (action.type) {
-    case "ADD_BOOK":
-      return [...state, action.book];
- 
-    case "REMOVE_BOOK":
-      idx = state.findIndex(book => book.id  === action.id)
-      return [...state.slice(0, idx), ...state.slice(idx + 1)];
- 
+const moviesReducer = (state = { movies: [], loading: false }, action) => {
+   switch(action.type) {
+    case 'LOADING_MOVIES':
+      return {
+        ...state,
+        movies: [...state.movies],
+        loading: true
+      }
+    case 'ADD_MOVIES':
+      return {
+        ...state,
+        movies: action.movies,
+        loading: false
+      }
+      
     default:
       return state;
   }
 }
-
-export default moviesReducer
+ 
+export default moviesReducer;
