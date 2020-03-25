@@ -36,16 +36,19 @@ class App extends Component {
     super(props)
     this.handler = this.handler.bind(this)
     this.state = {
-      currentStream: localStorage.currentStream
+      currentStream: localStorage.currentStream,
+      currentStreamName: localStorage.currentStreamName
     }
-
+  
   }
 // recieves id from passed handler and sets as state   
-  handler = id => {
+  handler = (id,name) => {
     this.setState({
-      currentStream: id
+      currentStream: id,
+      currentStreamName: name
     }, function () {
       localStorage.setItem( 'currentStream', id )
+      localStorage.setItem( 'currentStreamName', name )
     })
   }
 
@@ -56,10 +59,10 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route path="/" render={() => <div className="banner"> riVer</div>} />
+          <Route path="/" render={() => <div className="banner">riVer</div>} />
           <Route exact path="/" render={() => <HomePage/>} />
           <Route exact path='/streams' render={() => <StreamsPage handler={this.handler} />}  />
-          <Route exact path='/streams/:id/movies' render={() => <MoviesPage handler= {this.state.currentStream}/>} />
+          <Route exact path='/streams/:id/movies' render={() => <MoviesPage handler= {this.state.currentStream} streamName= {this.state.currentStreamName}/>} />
         </div>
       </Router>
     );

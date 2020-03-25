@@ -8,6 +8,7 @@ class MoviesPage extends Component {
   componentDidMount() {
 
   this.props.fetchMovies(this.props.handler)
+  console.log(this)
 
   }
   
@@ -26,6 +27,7 @@ class MoviesPage extends Component {
   render() {
     return (
       <div className="App">
+        <div className="banner-2">{this.props.streamName.toUpperCase()}</div>
         {this.handleLoading()}
       </div>
     );

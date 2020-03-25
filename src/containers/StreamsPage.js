@@ -15,12 +15,13 @@ class StreamsPage extends Component {
     this.handler = this.handler.bind(this)
   }
 // recieves id from passed handler
-  handler = id => {
+  handler = (id,name) => {
     this.setState({
-      currentStream: id
+      currentStream: id,
+      currentStreamName: name
     })
  //returns the selected Stream id to App       
-    this.props.handler(id)
+    this.props.handler(id,name)
   }
   
   handleLoading = () => {

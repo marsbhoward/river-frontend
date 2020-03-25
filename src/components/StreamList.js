@@ -12,12 +12,13 @@ export class StreamList extends React.Component {
   }
 
 // recieves id from passed handler
-  handler = id => {
+  handler = (id,name) => {
     this.setState({
-      currentStream: id
+      currentStream: id,
+      currentStreamName:name
     })
  //returns the selected Stream id to StreamsPage   
-    this.props.handler(id)
+    this.props.handler(id,name)
   }
 
 

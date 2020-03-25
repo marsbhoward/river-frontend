@@ -28,7 +28,6 @@ export class Stream extends Component {
     super(props)
     this.state = {
       logo: "",
-      currentStream: "" 
     }
   }
 
@@ -99,11 +98,8 @@ export class Stream extends Component {
 
 
   handleOnClick = () => {
-    this.setState({
-        currentStream: this.props.stream.id
-    });
     //returns the selected Stream id to streamsList
-    this.props.handler(this.props.stream.id)
+    this.props.handler(this.props.stream.id,this.props.stream.name)
     }
      
 
