@@ -6,7 +6,7 @@ let title
 class Movie extends Component {
 
 componentDidMount() {
-  window.addEventListener("scroll", this.handeleScroll); // remove brackets ()
+  window.addEventListener("scroll", this.handeleScroll);
 }
 
 componentWillUnmount() {

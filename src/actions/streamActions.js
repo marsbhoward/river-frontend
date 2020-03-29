@@ -9,7 +9,6 @@ export const fetchStreams = () => {
       		return response.json()
     	}).then(responseJSON => {
       		dispatch({ type: 'ADD_STREAMS', streams: responseJSON})
-      	
     	})
 	}
 }

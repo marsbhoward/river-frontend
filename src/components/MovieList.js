@@ -1,7 +1,7 @@
 import React from 'react';
 import '../index.css';
 import Movie from './Movie';
-import MovieInfo from './MovieInfo'
+import InfoPage from '../containers/InfoPage'
 import {withRouter} from 'react-router-dom';
 
 let showMovie
@@ -46,7 +46,7 @@ class MovieList extends React.Component {
       return(
       <div>
         <br/>
-        <MovieInfo currentMovie={showMovie}/>
+        <InfoPage currentMovie={showMovie}/>
         <div className="movie-list">
             {moviesList}
         </div>

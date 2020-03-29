@@ -5,6 +5,7 @@ import App from './App';
 
 import StreamsReducer from './reducers/streamsReducer';
 import MoviesReducer from './reducers/moviesReducer';
+import TrailersReducer from './reducers/trailersReducer';
 
 
 import { Provider } from 'react-redux';
@@ -14,7 +15,8 @@ import thunk from 'redux-thunk';
 
 const store = createStore(combineReducers({
 	MoviesReducer,
-	StreamsReducer
+	StreamsReducer,
+	TrailersReducer
 }),
  applyMiddleware(thunk));
 

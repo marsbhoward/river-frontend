@@ -43,6 +43,14 @@ code {
   background: #fe2d56;
 }
 
+.banner-3{
+  width: 100%;
+  font-size: 90%;
+  color: #fe2d56;
+  text-align: center;
+  background: black;
+}
+
 .app{
   height: 100%;
 }
@@ -83,9 +91,18 @@ code {
 
 .show_Movie {
   text-align: center;
+  height: 75%;
 }
 
 .selected_Movie{
   text-align:  center;
   width: 15%
+}
+.home{
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+.player{
+  width: 40%;
 }

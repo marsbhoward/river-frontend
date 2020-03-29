@@ -23,7 +23,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(this)
    // const { renewSession } = this.props.auth;
 
     //if (localStorage.getItem('isLoggedIn') === 'true') {
