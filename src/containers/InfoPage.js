@@ -6,10 +6,18 @@ import MovieInfo from '../components/MovieInfo';
 class InfoPage extends Component {  
   
   componentDidMount() {
-  
- this.props.fetchTrailers(this.props.currentMovie.Title)
- console.log(this)
+  	this.fetchTrailer()
+  }
 
+  componentDidUpdate(prevProps){
+  	if (this.props.currentMovie.Title !== prevProps.currentMovie.Title)
+  	{
+  		this.fetchTrailer()
+  	}
+  }
+
+  fetchTrailer = () => {
+  	this.props.fetchTrailers(this.props.currentMovie.Title)
   }
 
   handler = () => {
@@ -31,7 +39,6 @@ class InfoPage extends Component {
   }
 
   render() {
-
     return (
     <div className= "Info">
     	<div className="banner-3">{this.props.currentMovie.Title.toUpperCase()}</div>

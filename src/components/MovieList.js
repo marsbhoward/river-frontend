@@ -43,6 +43,7 @@ class MovieList extends React.Component {
     }
     else
       showMovie = this.state.currentMovie
+      //moviesList to <MovieInfo currentMovie={this.props.currentMovie} trailer={this.props.trailer} handler={this.handler}/>
       return(
       <div>
         <br/>

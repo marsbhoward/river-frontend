@@ -10,5 +10,9 @@ export function fetchTrailers (movieTitle) {
     	}).then(responseJSON => {
       		dispatch({ type: 'LOAD_TRAILER', trailer: responseJSON.items[0].id.videoId})
     	})
+    	.catch((error) => {
+  			console.error('Error:', error);
+  			dispatch({ type: 'LOAD_TRAILER', trailer: 'kJQP7kiw5Fk'})
+		})
 	}
 }
