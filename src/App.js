@@ -57,8 +57,8 @@ class App extends Component {
     //const { isAuthenticated } = this.props.auth;
     return (
       <Router>
-        <div>
-          <Route path="/" render={() => <div className="banner">riVer</div>} />
+        <div className = "page">
+          <Route path="/" render={() => <div className="banner">RIVER</div>} />
           <Route exact path="/" render={() => <HomePage/>} />
           <Route exact path='/streams' render={() => <StreamsPage handler={this.handler} />}  />
           <Route exact path='/streams/:id/movies' render={() => <MoviesPage handler= {this.state.currentStream} streamName= {this.state.currentStreamName}/>} />
