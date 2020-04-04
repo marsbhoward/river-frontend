@@ -3,33 +3,16 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import Profile from "./components/Profile";
 import StreamsPage from './containers/StreamsPage';
 import MoviesPage from './containers/MoviesPage';
 import HomePage from './containers/HomePage';
 import './index.css';
+import { useAuth0 } from "./react-auth0-spa";
 
 
 class App extends Component {  
-  goTo(route) {
-    this.props.history.replace(`/${route}`)
-  }
-
- login() {
-    this.props.auth.login();
-  }
-
-  logout() {
-    this.props.auth.logout();
-  }
-
-  componentDidMount() {
-   // const { renewSession } = this.props.auth;
-
-    //if (localStorage.getItem('isLoggedIn') === 'true') {
-    //  renewSession();
-   // }
-  }
-
   //binds passed handler to App handler
   constructor(props){
     super(props)
@@ -50,16 +33,16 @@ class App extends Component {
       localStorage.setItem( 'currentStreamName', name )
     })
   }
-
-  //function to accecpt params and save it to state 
+  
   
   render() {
     //const { isAuthenticated } = this.props.auth;
     return (
       <Router>
         <div className = "page">
-          <Route path="/" render={() => <div className="banner">RIVER</div>} />
+          <Route path="/" render={() => <NavBar/> } />
           <Route exact path="/" render={() => <HomePage/>} />
+          <Route exact path="/profile" render={() => <Profile/>} />
           <Route exact path='/streams' render={() => <StreamsPage handler={this.handler} />}  />
           <Route exact path='/streams/:id/movies' render={() => <MoviesPage handler= {this.state.currentStream} streamName= {this.state.currentStreamName}/>} />
         </div>
