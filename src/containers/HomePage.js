@@ -6,8 +6,8 @@ const HomePage = () => {
   	  const { loading, user } = useAuth0();
 
 
-  if (loading || !user) {
-    return <div>Loading...</div>;
+  if (loading) {
+    return <div className = "home">Loading...</div>;
   }
  
     return (
