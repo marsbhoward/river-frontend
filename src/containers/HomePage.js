@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { useAuth0 } from "../react-auth0-spa";
 
 const HomePage = () => {  
@@ -11,9 +11,20 @@ const HomePage = () => {
   }
  
     return (
-      <div className = "home">
+      <div className = "home" style ={ { backgroundImage: "url('')" } }>
+        <div className = "home-col"> 
+        </div>
       {!isAuthenticated && (
-        <button onClick={() => loginWithRedirect({})}>Log in</button>
+        <div className = "home-col"> 
+          <h1>Welcome to River</h1>
+          <h2> 
+            River is the pathway to all of your streaming platforms.
+            create an account and you will be able to browse your selected providers 
+            movie catalogs. Select a movie and you can get the trailer, ratings, and more! 
+          </h2>
+          <button onClick={() => loginWithRedirect({})}>Log in</button>
+        </div>
+        
       )}
        {isAuthenticated && (
        

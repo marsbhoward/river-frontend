@@ -9,7 +9,7 @@ import StreamsPage from './containers/StreamsPage';
 import MoviesPage from './containers/MoviesPage';
 import HomePage from './containers/HomePage';
 import './index.css';
-import { useAuth0 } from "./react-auth0-spa";
+
 
 
 class App extends Component {  

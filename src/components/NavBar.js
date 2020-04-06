@@ -1,10 +1,9 @@
 import React from "react";
 import { useAuth0 } from "../react-auth0-spa";
-import { Link } from "react-router-dom";
 import { withRouter } from 'react-router-dom'
 
 const NavBar = withRouter(({ history }) => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { isAuthenticated, logout } = useAuth0();
 
   return (
   	<div className="NavBar">
@@ -15,12 +14,9 @@ const NavBar = withRouter(({ history }) => {
 	</div>
 
     <div className="footer">
-      {isAuthenticated && <span className="logoutButton" onClick={() => logout()}>Log out</span>}
-      {isAuthenticated && (
-	    <span className="profileButton" onClick={() => { history.push('/profile') }}>  
-	      Profile
-	    </span>
-      )}    
+      {isAuthenticated && <span className="profileButton" onClick={() => { history.push('/profile') }}>Profile</span>}
+      {isAuthenticated && <span className="streamsButton" onClick={() => { history.push('/streams') }}>Streams</span>}
+      {isAuthenticated && <span className="logoutButton" onClick={() => logout()}>Log Out</span>}    
            
     </div>
     </div>

@@ -12,11 +12,11 @@ const Profile = () => {
 
 
   return (
-  <div>
+  <div className = "profile">
     <Fragment>
       <img src={user.picture} alt="Profile" />
 
-      <h2>{user.name}</h2>
+      <h2>Hi, {user.name}</h2>
       <p>{user.email}</p>
     </Fragment>
    <Link to="/streams">
