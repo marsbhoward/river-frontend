@@ -6,7 +6,7 @@ const HomePage = () => {
   const { loading, user } = useAuth0();
   let stlyes = {
     backgroundImage: "url('https://raw.githubusercontent.com/marsbhoward/river-frontend/master/src/streams_logos/streamsBackground.png')",
-    backgroundSize: "800px 100px",
+    backgroundSize: "360px 230px",
   }
 
 
