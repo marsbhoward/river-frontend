@@ -17,10 +17,10 @@ const Profile = () => {
       <img src={user.picture} alt="Profile" />
 
       <h2>Hi, {user.name}</h2>
-      <p>{user.email}</p>
+      <p>email: {user.email}</p>
     </Fragment>
    <Link to="/streams">
-    <button>My streams</button>
+    <button>Edit Streams</button>
   </Link>
   </div>
   );

@@ -6,7 +6,6 @@ const HomePage = () => {
   const { loading, user } = useAuth0();
   let stlyes = {
     backgroundImage: "url('https://raw.githubusercontent.com/marsbhoward/river-frontend/master/src/streams_logos/streamsBackground.png')",
-    backgroundSize: "360px 230px",
   }
 
 
@@ -16,26 +15,34 @@ const HomePage = () => {
 
  
     return (
-      <div className = "home" style={stlyes}>
-        <div className = "home-col"> 
-        </div>
-      {!isAuthenticated && (
-        <div className = "home-col-2"> 
-          <h1>Welcome to River</h1>
-          <h2> 
-            River is the pathway to all of your streaming platforms.
-            create an account and you will be able to browse your selected providers 
-            movie catalogs. Select a movie and you can get the trailer, ratings, and more! 
-          </h2>
-          <button onClick={() => loginWithRedirect({})}>Log in</button>
-        </div>
-        
-      )}
-       {isAuthenticated && (
+    <div>
+        <div className = "home" style={stlyes}>
+        {!isAuthenticated && (
+          <div className = "home-col"> 
+          </div>
+           )}
+           {!isAuthenticated && (
+          <div className = "home-col-2"> 
+            <h1>Welcome to River</h1>
+            <p> 
+              River is the pathway to all of your streaming platforms.
+              create an account and you will be able to browse your selected providers 
+              movie catalogs. Select a movie and you can get the trailer, ratings, and more! 
+            </p>
+            <button onClick={() => loginWithRedirect({})}>Log in</button>
+          </div>
+          
+        )}    
+      </div>
+      <div>
+         {isAuthenticated && (
        
-        <h2>Hi {user.name}</h2>
-       
-      )}     
+            <div className="greeting">
+            <h2> Hi {user.name}</h2>
+            </div>
+         
+        )}     
+      </div>
     </div>
     );
   }
