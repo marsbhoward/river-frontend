@@ -2,20 +2,25 @@ import React from 'react';
 import { useAuth0 } from "../react-auth0-spa";
 
 const HomePage = () => {  
-   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-  	  const { loading, user } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { loading, user } = useAuth0();
+  let stlyes = {
+    backgroundImage: "url('https://raw.githubusercontent.com/marsbhoward/river-frontend/master/src/streams_logos/streamsBackground.png')",
+    backgroundSize: "800px 100px",
+  }
 
 
   if (loading) {
     return <div className = "home">Loading...</div>;
   }
+
  
     return (
-      <div className = "home" style ={ { backgroundImage: "url('')" } }>
+      <div className = "home" style={stlyes}>
         <div className = "home-col"> 
         </div>
       {!isAuthenticated && (
-        <div className = "home-col"> 
+        <div className = "home-col-2"> 
           <h1>Welcome to River</h1>
           <h2> 
             River is the pathway to all of your streaming platforms.
