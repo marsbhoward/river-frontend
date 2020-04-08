@@ -23,11 +23,12 @@ const HomePage = () => {
            )}
            {!isAuthenticated && (
           <div className = "home-col-2"> 
-            <h1>Welcome to River</h1>
+            <h1>Find Your Streams</h1>
             <p> 
               River is the pathway to all of your streaming platforms.
               create an account and you will be able to browse your selected providers 
-              movie catalogs. Select a movie and you can get the trailer, ratings, and more! 
+              movie catalogs, or you can click the streams button to view all available platforms. 
+              <br/><br/>Select a movie and you can get the trailer, ratings, and more! 
             </p>
             <button onClick={() => loginWithRedirect({})}>Log in</button>
           </div>
