@@ -1,11 +1,18 @@
 import React from 'react';
 import { useAuth0 } from "../react-auth0-spa";
+import { useHistory } from "react-router-dom";
 
-const HomePage = () => {  
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+function HomePage() {  
+  const { isAuthenticated, loginWithRedirect} = useAuth0();
   const { loading, user } = useAuth0();
+  const history = useHistory();
   let stlyes = {
     backgroundImage: "url('https://raw.githubusercontent.com/marsbhoward/river-frontend/master/src/streams_logos/streamsBackground.png')",
+  }
+
+  function handleClick() {
+    history.push("/streams");
+    console.log('pushed');
   }
 
 
@@ -31,6 +38,7 @@ const HomePage = () => {
               <br/><br/>Select a movie and you can get the trailer, ratings, and more! 
             </p>
             <button onClick={() => loginWithRedirect({})}>Log in</button>
+            <button onClick={handleClick}>Streams</button>
           </div>
           
         )}    
