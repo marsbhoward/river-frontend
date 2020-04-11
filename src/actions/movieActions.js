@@ -1,5 +1,5 @@
 const PROXY = "https://cors-anywhere.herokuapp.com/";
-const streamsAPI = 'https://river-backend.herokuapp.com/streams'
+const streamsAPI = 'https://river-api.herokuapp.com/streams'
 const URL = PROXY + streamsAPI
 
 
