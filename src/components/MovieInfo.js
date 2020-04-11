@@ -18,7 +18,8 @@ class MovieInfo extends Component {
     return (
     	<div className = "show_Movie" >
         <img className= "selected_Movie" alt={currentMovie.Title} src={currentMovie.Poster}></img>
-          <h4> Rated: {currentMovie.Rated} </h4> 
+          <h4> Rated: {currentMovie.Rated}</h4>   
+          <h4> Year: {currentMovie.Year}</h4> 
           <h4> Genre: {currentMovie.Genre} </h4>
           <h5> Actors: {currentMovie.Actors} </h5>
           <h5> Director: {currentMovie.Director} </h5>
