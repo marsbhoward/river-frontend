@@ -12,7 +12,6 @@ function HomePage() {
 
   function handleClick() {
     history.push("/streams");
-    console.log('pushed');
   }
 
 
@@ -45,16 +44,29 @@ function HomePage() {
       </div>
       <div>
          {isAuthenticated && (
-       
+            adapter.createUser(user.email,user.name).then(res=> {
+            }),
             <div className="greeting">
-            <h2> Hi {user.name}</h2>
+              <h2> Hi {user.name} </h2>
             </div>
-         
         )}     
       </div>
     </div>
     );
   }
+
+  const adapter = {
+    createUser: (email,username) => {
+      return fetch(`https://cors-anywhere.herokuapp.com/https://river-api.herokuapp.com/users`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({email, username})
+      })
+    .then((res) => res.json())       
+    }
+  }
+
+
 
 export default HomePage
 

@@ -1,8 +1,8 @@
 const URLa = 'https://www.googleapis.com/youtube/v3/search?part=snippet%20&maxResults=1&order=relevance&q='
 const URLb = '%20trailer&key=AIzaSyBRpDAqSeCsDHlTlS7l8YHd2nOFgfTDtWM'
 
-export function fetchTrailers (movieTitle) {
-	let URL = `${URLa}${movieTitle}${URLb}`
+export function fetchTrailers (movieTitle,movieYear) {
+	let URL = `${URLa}${movieTitle}${movieYear}${URLb}`
 	return (dispatch) => {
 		dispatch({ type: 'LOADING_TRAILER'})
 		fetch(`${URL}`).then(response => {
