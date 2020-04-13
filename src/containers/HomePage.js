@@ -48,7 +48,7 @@ function HomePage() {
             }),
             <div className="greeting">
               <h2> Hi {user.name} </h2>
-            </div>
+            </div> 
         )}     
       </div>
     </div>
