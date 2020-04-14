@@ -36,6 +36,9 @@ const Profile = () => {
   ]
 
 
+  function handleClick() {
+    
+  }  
 
     const lists = streamsList.map((stream, index) => {
       return <img key={index} className= "stream2" alt={stream.name} src={stream.img}/>
@@ -51,7 +54,7 @@ const Profile = () => {
       <img src={user.picture} alt="Profile" />
       <h2>Hi, {user.name}</h2>
       <p>email: {user.email}</p>
-      <button>Edit Streams</button>
+      <button onClick={handleClick}>Edit Streams</button>
     </Fragment>
     <div className="streams-list">
       {lists}
