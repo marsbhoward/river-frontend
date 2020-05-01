@@ -56,7 +56,10 @@ class ProfilePage extends Component {
     for (let i = 0, len = streams.length; i < len; i++) {
       streams[i].style.borderStyle = 'none';
       streams[i].background = "white"; 
-    }  
+    }
+    this.setState({
+      streamEdit: false
+    })        
   }
 
   handleLoading = (id) => {
