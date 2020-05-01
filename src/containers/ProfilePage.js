@@ -8,14 +8,21 @@ import { Fragment } from "react";
 
 
 class ProfilePage extends Component {
- static contextType = Auth0Context;  
+ static contextType = Auth0Context; 
+
+  constructor(props){
+    super(props)
+    this.state = {
+      streamEdit: false
+    }
+  } 
   
   componentDidMount() {
-    console.log(this)
     this.props.fetchUserStreams(this.props.userId)
   }
 
   componentDidUpdate(prevProps){
+    console.log(this)
   }
 
   fetchUserStreams = (id) => {
@@ -25,7 +32,31 @@ class ProfilePage extends Component {
   }
 
   handleClick = () => {
+    let selectedStreams = document.getElementsByClassName("true");
+    let unSelectedStreams = document.getElementsByClassName("false");
 
+    for (let i = 0, len = selectedStreams.length; i < len; i++) {
+      selectedStreams[i].style.borderStyle = 'inset'
+    }
+
+    for (let i = 0, len = unSelectedStreams.length; i < len; i++) {
+      unSelectedStreams[i].style.borderStyle = 'outset';
+      unSelectedStreams[i].background = "lightgray"; 
+    }
+
+    this.setState({
+      streamEdit: true
+    })            
+
+  } 
+
+  handleDone = () => {
+    let streams = document.getElementsByClassName("stream")
+    
+    for (let i = 0, len = streams.length; i < len; i++) {
+      streams[i].style.borderStyle = 'none';
+      streams[i].background = "white"; 
+    }  
   }
 
   handleLoading = (id) => {
@@ -44,16 +75,29 @@ class ProfilePage extends Component {
       return <div>Loading...</div>;
     }
 
-    return ( 
-    	<div className= "profile">
-        <img src={user.picture} alt="Profile" />
-        <h2>Hi, {user.name}</h2>
-        <p>email: {user.email}</p>
-        <button onClick={this.handleClick}>Edit Streams</button>
-        {this.handleLoading(this.props.userId)}
-      </div>        
-			
- 	);
+    if (this.state.streamEdit == true){
+      return ( 
+        <div className= "profile">
+          <img src={user.picture} alt="Profile" />
+          <h2>Hi, {user.name}</h2>
+          <p>email: {user.email}</p>
+          <button onClick={this.handleClick}>Edit Streams</button>
+          {this.handleLoading(this.props.userId)}
+          <button className="done-button" onClick={this.handleDone}>Done</button>
+        </div>             
+      );
+    }
+    else{
+      return ( 
+        <div className= "profile">
+          <img src={user.picture} alt="Profile" />
+          <h2>Hi, {user.name}</h2>
+          <p>email: {user.email}</p>
+          <button onClick={this.handleClick}>Edit Streams</button>
+          {this.handleLoading(this.props.userId)}
+        </div>             
+      );
+    }
   }
 }
 

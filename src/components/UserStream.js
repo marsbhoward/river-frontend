@@ -160,12 +160,12 @@ export class UserStream extends Component {
     streamSrc = this.state.logo
       	if (this.props.stream.selected = true){
       		return (
-      			<img className= "stream" id={"true"} alt={this.state.streamName} src={streamSrc}></img>
+      			<img className= "stream true" id={this.props.stream_id} alt={this.state.streamName} src={streamSrc}></img>
       		)
       	}
       	else{
       		return (
-      			<img className= "stream" id={"false"} alt={this.state.streamName} src={streamSrc}></img>
+      			<img className="stream false" id={this.props.stream_id} alt={this.state.streamName} src={streamSrc}></img>
       		)
       	}
     

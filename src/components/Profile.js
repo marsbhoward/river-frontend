@@ -41,7 +41,7 @@ export class Profile extends Component {
     })
     
     return (
-      <div className="streams-list">
+      <div className="streams-list-2">
           {streamsList}
       </div>
     )
