@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { fetchStreams } from '../actions/streamActions'
 import StreamList from '../components/StreamList'
 
-
 class StreamsPage extends Component {   
   
   componentDidMount() {

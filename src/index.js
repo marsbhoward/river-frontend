@@ -12,6 +12,7 @@ import MoviesReducer from './reducers/moviesReducer';
 import TrailersReducer from './reducers/trailersReducer';
 
 
+
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';

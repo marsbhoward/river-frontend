@@ -4,7 +4,7 @@ import {
   Route
 } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import Profile from "./components/Profile";
+import ProfilePage from './containers/ProfilePage';
 import StreamsPage from './containers/StreamsPage';
 import MoviesPage from './containers/MoviesPage';
 import HomePage from './containers/HomePage';
@@ -33,6 +33,10 @@ class App extends Component {
       localStorage.setItem( 'currentStreamName', name )
     })
   }
+
+  UserID = (UserID) => {
+    localStorage.setItem('currentUserID', UserID)
+  }
   
   
   render() {
@@ -41,8 +45,8 @@ class App extends Component {
       <Router>
         <div className = "page">
           <Route path="/" render={() => <NavBar/> } />
-          <Route exact path="/" render={() => <HomePage/>} />
-          <Route exact path="/profile" render={() => <Profile/>} />
+          <Route exact path="/" render={() => <HomePage userID={this.UserID}/>} />
+          <Route exact path="/profile" render={() => <ProfilePage userId={localStorage.currentUserID}/>} />
           <Route exact path='/streams' render={() => <StreamsPage handler={this.handler} />}  />
           <Route exact path='/streams/:id/movies' render={() => <MoviesPage handler= {this.state.currentStream} streamName= {this.state.currentStreamName}/>} />
         </div>
