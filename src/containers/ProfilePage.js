@@ -22,7 +22,6 @@ class ProfilePage extends Component {
   }
 
   componentDidUpdate(prevProps){
-    console.log(this)
   }
 
   fetchUserStreams = (id) => {
@@ -66,7 +65,7 @@ class ProfilePage extends Component {
     if(this.props.loading) {
       return <div>Loading Streams...</div>
     } else {
-      return <Profile userID={id} userStreams={this.props.userStreams}/>
+      return <Profile userID={id} userStreams={this.props.userStreams} editClicked={this.state.streamEdit}/>
     }
   }
 

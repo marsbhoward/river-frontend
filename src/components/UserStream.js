@@ -22,7 +22,7 @@ import logo from'../logo.png'
 
 
 let streamSrc
-let streamName
+let editList = [] 
 export class UserStream extends Component {
 
     constructor(props){
@@ -35,6 +35,7 @@ export class UserStream extends Component {
   componentDidMount() {
 	  switch (this.props.stream.stream_id) {
       case 1:
+      	console.log(this)
         this.setState({
         	logo: netflix,
         	streamName: "netflix"
@@ -152,24 +153,39 @@ export class UserStream extends Component {
         this.setState({logo: logo})
         break;
     }
-
     
   }
+
+  handleClick = () => {
+  	editList.push(this.props.stream.id)
+	console.log(editList)
+  }      
      
   render() {
     streamSrc = this.state.logo
-      	if (this.props.stream.selected = true){
+    if (this.props.editClicked === true){
+        if (this.props.stream.selected === true){
       		return (
-      			<img className= "stream true" id={this.props.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+      			<img onClick={this.handleClick} className= "stream true" id={this.props.stream_id} alt={this.state.streamName} src={streamSrc}></img>
       		)
-      	}
+  		}
       	else{
       		return (
       			<img className="stream false" id={this.props.stream_id} alt={this.state.streamName} src={streamSrc}></img>
       		)
       	}
-    
-  }
+    }
+        if (this.props.stream.selected === true){
+          		return (
+          			<img className= "stream true" id={this.props.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+          		)
+          	}
+          	else{
+          		return (
+          			<img className="stream false" id={this.props.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+          		)
+          	}
+        }    
 
 }
 
