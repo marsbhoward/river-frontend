@@ -90,7 +90,8 @@ class ProfilePage extends Component {
       streamEdit: false
     }) 
 
-    //add method that edits backend here       
+    //add method that edits backend here
+
   }
 
   handleLoading = (id) => {
@@ -134,6 +135,18 @@ class ProfilePage extends Component {
     }
   }
 }
+
+  const adapter = {
+    editStream: (stream_id,selected,user_id) => {
+      return fetch(`https://cors-anywhere.herokuapp.com/https://river-api.herokuapp.com/users/{user_id}/user_streams/stream_id`, {
+        method: 'PATCH',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({stream_id, selected})
+      })
+    .then(res => res.json())       
+    }
+  }
+
 
 const mapDispatchToProps = state => {
   return {
