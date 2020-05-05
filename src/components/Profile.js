@@ -14,7 +14,7 @@ export class Profile extends Component {
   render() {    
     const streamsList = this.props.userStreams.map((stream,index) => {
 
-      return <UserStream key={index} stream={stream} editClicked={this.props.editClicked}/>
+      return <UserStream key={index} stream={stream} handleLists={this.props.handleLists} editClicked={this.props.editClicked}/>
     })
     
     return (

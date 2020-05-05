@@ -6,7 +6,7 @@ import { Auth0Context } from "../react-auth0-spa";
 import { Fragment } from "react";
 
 
-
+let editList = [] 
 class ProfilePage extends Component {
  static contextType = Auth0Context; 
 
@@ -30,6 +30,36 @@ class ProfilePage extends Component {
     })
   }
 
+  handleLists = (id) => {
+    let selectedStream = document.getElementById(id)
+    //adds stream id to list of values to be changed on api
+    if(editList.indexOf(id) === -1) {
+      editList.push(id)
+      //edits the button visual
+      if (selectedStream.className === "stream true"){
+        selectedStream.style.borderStyle = 'outset';
+        selectedStream.background = "lightgray"; 
+      }
+      else{
+        selectedStream.style.borderStyle = 'inset'
+        selectedStream.background = "white"; 
+      }
+    }
+    else{
+    //removes stream id from list of values if clicked again before done  
+      let index = editList.indexOf(id);
+      editList.splice(index,1);
+      //reverts button visual to default
+        if (selectedStream.className === "stream true"){
+          selectedStream.style.borderStyle = 'inset'
+          selectedStream.background = "white"; 
+        }
+        else{
+          selectedStream.style.borderStyle = 'outset';
+          selectedStream.background = "lightgray";
+        }
+      }
+  }
   handleClick = () => {
     let selectedStreams = document.getElementsByClassName("true");
     let unSelectedStreams = document.getElementsByClassName("false");
@@ -58,14 +88,16 @@ class ProfilePage extends Component {
     }
     this.setState({
       streamEdit: false
-    })        
+    }) 
+
+    //add method that edits backend here       
   }
 
   handleLoading = (id) => {
     if(this.props.loading) {
       return <div>Loading Streams...</div>
     } else {
-      return <Profile userID={id} userStreams={this.props.userStreams} editClicked={this.state.streamEdit}/>
+      return <Profile userID={id} userStreams={this.props.userStreams} handleLists={this.handleLists} editClicked={this.state.streamEdit}/>
     }
   }
 

@@ -22,7 +22,8 @@ import logo from'../logo.png'
 
 
 let streamSrc
-let editList = [] 
+//remove edit list, it is now in profile page
+
 export class UserStream extends Component {
 
     constructor(props){
@@ -154,35 +155,31 @@ export class UserStream extends Component {
         break;
     }
     
-  }
-
-  handleClick = () => {
-  	editList.push(this.props.stream.id)
-	console.log(editList)
-  }      
+  } 
      
   render() {
     streamSrc = this.state.logo
+    let streamId = this.props.stream.id
     if (this.props.editClicked === true){
         if (this.props.stream.selected === true){
       		return (
-      			<img onClick={this.handleClick} className= "stream true" id={this.props.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+      			<img onClick={() =>  {this.props.handleLists(streamId)} }className= "stream true" id={streamId} alt={this.state.streamName} src={streamSrc}></img>
       		)
   		}
       	else{
       		return (
-      			<img className="stream false" id={this.props.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+      			<img className="stream false" id={streamId} alt={this.state.streamName} src={streamSrc}></img>
       		)
       	}
     }
         if (this.props.stream.selected === true){
           		return (
-          			<img className= "stream true" id={this.props.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+          			<img className= "stream true" id={streamId} alt={this.state.streamName} src={streamSrc}></img>
           		)
           	}
           	else{
           		return (
-          			<img className="stream false" id={this.props.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+          			<img className="stream false" id={streamId} alt={this.state.streamName} src={streamSrc}></img>
           		)
           	}
         }    
