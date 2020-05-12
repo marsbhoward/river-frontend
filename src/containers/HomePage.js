@@ -78,7 +78,7 @@ function HomePage(props) {
 
   const adapter = {
     createUser: (email,username) => {
-      return fetch(`https://cors-anywhere.herokuapp.com/https://river-api.herokuapp.com/users`, {
+      return fetch(`https://cors-anywhere-dd.herokuapp.com/https://river-api.herokuapp.com/users`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({email, username})
@@ -87,7 +87,7 @@ function HomePage(props) {
     },
 
     createUserStream: (user_id,stream_id) => {
-      return fetch(`https://cors-anywhere.herokuapp.com/https://river-api.herokuapp.com/users/${user_id}/user_streams`, {
+      return fetch(`https://cors-anywhere-dd.herokuapp.com/https://river-api.herokuapp.com/users/${user_id}/user_streams`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({user_id, stream_id})

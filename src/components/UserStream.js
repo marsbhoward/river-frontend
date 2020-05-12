@@ -36,7 +36,6 @@ export class UserStream extends Component {
   componentDidMount() {
 	  switch (this.props.stream.stream_id) {
       case 1:
-      	console.log(this)
         this.setState({
         	logo: netflix,
         	streamName: "netflix"
@@ -159,27 +158,27 @@ export class UserStream extends Component {
      
   render() {
     streamSrc = this.state.logo
-    let streamId = this.props.stream.id
+    let streamId = this.props.stream
     if (this.props.editClicked === true){
         if (this.props.stream.selected === true){
       		return (
-      			<img onClick={() =>  {this.props.handleLists(streamId)} }className= "stream true" id={streamId} alt={this.state.streamName} src={streamSrc}></img>
+      			<img onClick={() =>  {this.props.handleLists(streamId)} }className= "stream true" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
       		)
   		}
       	else{
       		return (
-      			<img className="stream false" id={streamId} alt={this.state.streamName} src={streamSrc}></img>
+      			<img onClick={() =>  {this.props.handleLists(streamId)} }className= "stream false" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
       		)
       	}
     }
         if (this.props.stream.selected === true){
           		return (
-          			<img className= "stream true" id={streamId} alt={this.state.streamName} src={streamSrc}></img>
+          			<img className= "stream true" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
           		)
           	}
           	else{
           		return (
-          			<img className="stream false" id={streamId} alt={this.state.streamName} src={streamSrc}></img>
+          			<img className="stream false" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
           		)
           	}
         }    

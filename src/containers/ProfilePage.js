@@ -6,7 +6,8 @@ import { Auth0Context } from "../react-auth0-spa";
 import { Fragment } from "react";
 
 
-let editList = [] 
+let selectList = []
+let deselectList = [] 
 class ProfilePage extends Component {
  static contextType = Auth0Context; 
 
@@ -30,36 +31,43 @@ class ProfilePage extends Component {
     })
   }
 
-  handleLists = (id) => {
-    let selectedStream = document.getElementById(id)
-    //adds stream id to list of values to be changed on api
-    if(editList.indexOf(id) === -1) {
-      editList.push(id)
-      //edits the button visual
-      if (selectedStream.className === "stream true"){
-        selectedStream.style.borderStyle = 'outset';
-        selectedStream.background = "lightgray"; 
-      }
-      else{
-        selectedStream.style.borderStyle = 'inset'
-        selectedStream.background = "white"; 
-      }
+  handleSwitch = (dom,stream) => {
+    switch (stream.selected) {
+      case true:
+        dom.style.borderStyle = 'outset';
+        dom.style.background = "lightgray";
+
+        dom.className =  "stream false"
+        stream.selected = false; 
+        break;
+      case false:
+        dom.style.borderStyle = 'inset'
+        dom.style.background = "white";
+        
+        dom.className =  "stream true"        
+        stream.selected = true; 
+        break;
     }
-    else{
-    //removes stream id from list of values if clicked again before done  
-      let index = editList.indexOf(id);
-      editList.splice(index,1);
-      //reverts button visual to default
-        if (selectedStream.className === "stream true"){
-          selectedStream.style.borderStyle = 'inset'
-          selectedStream.background = "white"; 
-        }
-        else{
-          selectedStream.style.borderStyle = 'outset';
-          selectedStream.background = "lightgray";
-        }
-      }
   }
+
+  handleLists = (stream) => {
+    //can use stream.selected
+    let streamDom = document.getElementById(stream.stream_id)
+
+    this.handleSwitch(streamDom,stream)
+
+    if(selectList.indexOf(stream) === -1){
+      selectList.push(stream)
+      console.log(stream)
+    }
+    else {
+      let index = selectList.indexOf(stream);
+      selectList.splice(index,1);
+      console.log(selectList)
+    }            
+  }
+
+
   handleClick = () => {
     let selectedStreams = document.getElementsByClassName("true");
     let unSelectedStreams = document.getElementsByClassName("false");
@@ -70,7 +78,7 @@ class ProfilePage extends Component {
 
     for (let i = 0, len = unSelectedStreams.length; i < len; i++) {
       unSelectedStreams[i].style.borderStyle = 'outset';
-      unSelectedStreams[i].background = "lightgray"; 
+      unSelectedStreams[i].style.background = "lightgray"; 
     }
 
     this.setState({
@@ -84,14 +92,21 @@ class ProfilePage extends Component {
     
     for (let i = 0, len = streams.length; i < len; i++) {
       streams[i].style.borderStyle = 'none';
-      streams[i].background = "white"; 
+      streams[i].style.background = "white"; 
     }
     this.setState({
       streamEdit: false
     }) 
 
-    //add method that edits backend here
+    //can implement after a second list is made
+    // one for selected, one for unselected
 
+    //add method that edits backend here
+    selectList.forEach( stream =>{
+      adapter.editStream(stream.id,stream.selected,stream.user_id,stream.stream_id).then(data => console.log(data))
+    })
+
+    selectList = [];
   }
 
   handleLoading = (id) => {
@@ -137,22 +152,22 @@ class ProfilePage extends Component {
 }
 
   const adapter = {
-    editStream: (stream_id,selected,user_id) => {
-      return fetch(`https://cors-anywhere.herokuapp.com/https://river-api.herokuapp.com/users/{user_id}/user_streams/stream_id`, {
+    editStream: (usid,status,uid,sid) => {
+      return fetch(`https://cors-anywhere-dd.herokuapp.com/https://river-api.herokuapp.com/users/${uid}/user_streams/${usid}`, {
         method: 'PATCH',
+        body: JSON.stringify({usid,status,uid,sid}),
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({stream_id, selected})
+        
       })
     .then(res => res.json())       
-    }
+    },
   }
-
-
 const mapDispatchToProps = state => {
   return {
     userStreams: state.StreamsReducer.streams,
     loading: state.StreamsReducer.loading
   }
 }
+
 
 export default connect(mapDispatchToProps, {fetchUserStreams})(ProfilePage)

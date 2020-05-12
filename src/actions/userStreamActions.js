@@ -1,4 +1,4 @@
-const PROXY = "https://cors-anywhere.herokuapp.com/";
+const PROXY = "https://cors-anywhere-dd.herokuapp.com/";
 const userStreamsAPI = 'https://river-api.herokuapp.com/users/'
 
 export const fetchUserStreams = (userID) => {
