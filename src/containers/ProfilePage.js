@@ -58,7 +58,6 @@ class ProfilePage extends Component {
 
     if(selectList.indexOf(stream) === -1){
       selectList.push(stream)
-      console.log(stream)
     }
     else {
       let index = selectList.indexOf(stream);
@@ -103,9 +102,11 @@ class ProfilePage extends Component {
 
     //add method that edits backend here
     selectList.forEach( stream =>{
-      adapter.editStream(stream.id,stream.selected,stream.user_id,stream.stream_id).then(data => console.log(data))
+      adapter.editStream(stream.id,stream.selected,stream.user_id,stream.stream_id).then(data => data)
     })
-
+    if (selectList.length>0){
+        alert("changes saved")
+    }
     selectList = [];
   }
 
@@ -152,10 +153,10 @@ class ProfilePage extends Component {
 }
 
   const adapter = {
-    editStream: (usid,status,uid,sid) => {
-      return fetch(`https://cors-anywhere-dd.herokuapp.com/https://river-api.herokuapp.com/users/${uid}/user_streams/${usid}`, {
+    editStream: (id,selected,user_id,stream_id) => {
+      return fetch(`https://cors-anywhere-dd.herokuapp.com/https://river-api.herokuapp.com/users/${user_id}/user_streams/${id}`, {
         method: 'PATCH',
-        body: JSON.stringify({usid,status,uid,sid}),
+        body: JSON.stringify({id,selected,user_id,stream_id}),
         headers: { "Content-Type": "application/json" },
         
       })
