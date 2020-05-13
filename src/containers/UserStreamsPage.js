@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserStreams } from '../actions/userStreamActions'
-import StreamList from '../components/StreamList'
+import Profile from '../components/Profile';
 
 class UserStreamsPage extends Component {   
   
@@ -24,12 +24,12 @@ class UserStreamsPage extends Component {
     this.props.handler(id,name)
   }
   
-  handleLoading = () => {
+  handleLoading = (id) => {
     if(this.props.loading) {
       return <div>Loading Streams...</div>
     } else {
       
-      return <StreamList streamInfo={this.props.streamInfo} currentStream={this.props.currentStream} handler={this.handler}/>
+      return <Profile userID={id} userStreams={this.props.userStreams} handleLists={this.handleLists} editClicked={this.state.streamEdit}/>
     }
   }
 

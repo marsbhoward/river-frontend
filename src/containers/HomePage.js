@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth0 } from "../react-auth0-spa";
 import { useHistory } from "react-router-dom";
+import { withRouter } from 'react-router-dom'
 
   const streamsList = [
   {id: 1,name:"netflix"},{id: 2,name:"hulu"},{id: 3,name:"amazon"},
@@ -58,11 +59,12 @@ function HomePage(props) {
               user.id = res.id
               getUserStreams(user.id)
               props.userID(user.id)
-              alert("profile loaded")
             }),            
             <div className="greeting">
               <h2> Hi {user.name} </h2>
-            </div>
+              <h4> Please wait to be redirected </h4>
+            </div>,
+            history.push('/profile')
         )}     
       </div>
     </div>

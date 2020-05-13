@@ -15,7 +15,7 @@ const NavBar = withRouter(({ history }) => {
 
     <div className="footer">
       {isAuthenticated && <span className="profileButton" onClick={() => { history.push('/profile') }}>Profile</span>}
-      {isAuthenticated && <span className="streamsButton" onClick={() => { history.push('/streams') }}>Streams</span>}
+      {isAuthenticated && <span className="streamsButton" onClick={() => { history.push('/userstreams') }}>Streams</span>}
       {isAuthenticated && <span className="logoutButton" onClick={() => logout()}>Log Out</span>}    
            
     </div>
