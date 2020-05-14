@@ -49,7 +49,7 @@ class App extends Component {
           <Route exact path="/" render={() => <HomePage userID={this.UserID}/>} />
           <Route exact path="/profile" render={() => <ProfilePage userId={localStorage.currentUserID}/>} />
           <Route exact path='/streams' render={() => <StreamsPage handler={this.handler} />}  />
-          <Route exact path='/userstreams' render={() => <UserStreamsPage handler={this.handler} />}  />
+          <Route exact path='/userstreams' render={() => <UserStreamsPage handler={this.handler} userId={localStorage.currentUserID}/>}  />
           <Route exact path='/streams/:id/movies' render={() => <MoviesPage handler= {this.state.currentStream} streamName= {this.state.currentStreamName}/>} />
         </div>
       </Router>

@@ -28,15 +28,21 @@ class UserStreamsPage extends Component {
     if(this.props.loading) {
       return <div>Loading Streams...</div>
     } else {
-      
-      return <Profile userID={id} userStreams={this.props.userStreams} handleLists={this.handleLists} editClicked={this.state.streamEdit}/>
+      let selectedStreams = []
+      this.props.userStreams.forEach ( stream =>{
+	  	if (stream.selected === true){
+	  		selectedStreams.push(stream)
+	  	}
+
+      })  
+      return <Profile userID={id} userStreams={selectedStreams} handleLists={this.handleLists}/>
     }
   }
 
   render() {
     return (
       <div className="App">
-        {this.handleLoading()}
+        {this.handleLoading(this.props.userId)}
       </div>
     );
   }
@@ -46,9 +52,8 @@ class UserStreamsPage extends Component {
 const mapDispatchToProps = state => {
   return {
     userStreams: state.StreamsReducer.streams,
-    loading: state.StreamsReducer.loading,
-    currentStream: state.StreamsReducer.currentStream
+    loading: state.StreamsReducer.loading
   }
 }
 
-export default connect(mapDispatchToProps, { fetchUserStreams })(UserStreamsPage)
+export default connect(mapDispatchToProps, {fetchUserStreams})(UserStreamsPage)

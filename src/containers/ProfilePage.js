@@ -19,6 +19,7 @@ class ProfilePage extends Component {
   } 
   
   componentDidMount() {
+    console.log(this)
     this.props.fetchUserStreams(this.props.userId)
   }
 
