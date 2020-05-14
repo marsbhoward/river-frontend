@@ -19,6 +19,7 @@ import fx from'../streams_logos/fx.png'
 import syfy from'../streams_logos/syfy.png'
 import ifc from'../streams_logos/ifc.png'
 import logo from'../logo.png'
+import {Link} from 'react-router-dom'
 
 
 let streamSrc
@@ -159,30 +160,38 @@ export class UserStream extends Component {
   render() {
     streamSrc = this.state.logo
     let streamId = this.props.stream
-    if (this.props.editClicked === true){
-        if (this.props.stream.selected === true){
-      		return (
-      			<img onClick={() =>  {this.props.handleLists(streamId)} }className= "stream true" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
-      		)
-  		}
-      	else{
-      		return (
-      			<img onClick={() =>  {this.props.handleLists(streamId)} }className= "stream false" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
-      		)
-      	}
+    if (this.props.streamLinks === true){
+        return (
+        <Link to={`/streams/${this.props.stream.name}/movies`}>          
+          <img className= "stream" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+        </Link>          
+        )
     }
-        if (this.props.stream.selected === true){
-          		return (
-          			<img className= "stream true" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
-          		)
-          	}
-          	else{
-          		return (
-          			<img className="stream false" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
-          		)
-          	}
-        }    
-
+    else{
+      if (this.props.editClicked === true){
+          if (this.props.stream.selected === true){
+            return (
+              <img onClick={() =>  {this.props.handleLists(streamId)} }className= "stream true" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+            )
+        }
+          else{
+            return (
+              <img onClick={() =>  {this.props.handleLists(streamId)} }className= "stream false" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+            )
+          }
+      }
+      if (this.props.stream.selected === true){
+        return (
+          <img className= "stream true" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+        )
+      }
+      else{
+        return (
+        <img className="stream false" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+        )
+      }
+    }
+  }    
 }
 
 export default UserStream;

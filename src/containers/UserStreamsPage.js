@@ -7,7 +7,6 @@ class UserStreamsPage extends Component {
   
   componentDidMount() {
     this.props.fetchUserStreams(this.props.userId)
-    console.log(this)
   }
 //binds passed handler to StreamsPage handler
   constructor(props){
@@ -35,7 +34,7 @@ class UserStreamsPage extends Component {
 	  	}
 
       })  
-      return <Profile userID={id} userStreams={selectedStreams} handleLists={this.handleLists}/>
+      return <Profile userID={id} userStreams={selectedStreams} handleLists={this.handleLists} streamLinks={true}/>
     }
   }
 

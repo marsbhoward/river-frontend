@@ -1,5 +1,5 @@
 const URLa = 'https://www.googleapis.com/youtube/v3/search?part=snippet%20&maxResults=1&order=relevance&q='
-const URLb = '%20trailer&key=AIzaSyBRpDAqSeCsDHlTlS7l8YHd2nOFgfTDtWM'
+const URLb = '%20trailer&key=AIzaSyDJoamFx61luWHpVofetaLKwu_FacN1O18'
 
 export function fetchTrailers (movieTitle,movieYear) {
 	let URL = `${URLa}${movieTitle}${movieYear}${URLb}`
