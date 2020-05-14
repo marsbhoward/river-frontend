@@ -23,6 +23,8 @@ class UserStreamsPage extends Component {
     this.props.handler(id,name)
   }
   
+
+
   handleLoading = (id) => {
     if(this.props.loading) {
       return <div>Loading Streams...</div>
@@ -34,7 +36,7 @@ class UserStreamsPage extends Component {
 	  	}
 
       })  
-      return <Profile userID={id} userStreams={selectedStreams} handleLists={this.handleLists} streamLinks={true}/>
+      return <Profile userID={id} userStreams={selectedStreams} handleLists={this.handleLists} handler={this.handler} handler={this.handler} streamLinks={true}/>
     }
   }
 

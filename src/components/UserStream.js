@@ -37,6 +37,7 @@ export class UserStream extends Component {
   componentDidMount() {
 	  switch (this.props.stream.stream_id) {
       case 1:
+      console.log(this)
         this.setState({
         	logo: netflix,
         	streamName: "netflix"
@@ -153,17 +154,21 @@ export class UserStream extends Component {
       default:
         this.setState({logo: logo})
         break;
-    }
-    
+    }    
   } 
+
+    handleOnClick = () => {
+    //returns the selected Stream id to streamsList
+    this.props.handler(this.props.stream.stream_id,this.state.streamName)
+    }
      
   render() {
     streamSrc = this.state.logo
     let streamId = this.props.stream
     if (this.props.streamLinks === true){
         return (
-        <Link to={`/streams/${this.props.stream.name}/movies`}>          
-          <img className= "stream" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+        <Link to={`/streams/${this.state.streamName}/movies`}>          
+          <img onClick={this.handleOnClick} className= "stream" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
         </Link>          
         )
     }
