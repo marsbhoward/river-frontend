@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { useState} from 'react';
-import { useAuth0 } from "../react-auth0-spa";
 import UserStream from '../components/UserStream';
 
 

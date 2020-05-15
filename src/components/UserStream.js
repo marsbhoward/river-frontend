@@ -37,7 +37,6 @@ export class UserStream extends Component {
   componentDidMount() {
 	  switch (this.props.stream.stream_id) {
       case 1:
-      console.log(this)
         this.setState({
         	logo: netflix,
         	streamName: "netflix"
@@ -57,14 +56,14 @@ export class UserStream extends Component {
         break;
       case 4:
         this.setState({
-        	logo: disney,
-        	streamName: "disney"
+        	logo: hbo,
+        	streamName: "hbo"
         })
         break;
       case 5:
         this.setState({
-        	logo: hbo,
-        	streamName: "hbo"
+          logo: disney,
+          streamName: "disney"
         })
         break;         
       case 6:

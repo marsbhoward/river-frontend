@@ -8,7 +8,6 @@ class MoviesPage extends Component {
   componentDidMount() {
 
   this.props.fetchMovies(this.props.handler)
-  console.log(this)
 
   }
   

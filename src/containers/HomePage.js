@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAuth0 } from "../react-auth0-spa";
 import { useHistory } from "react-router-dom";
-import { withRouter } from 'react-router-dom'
 
   const streamsList = [
   {id: 1,name:"netflix"},{id: 2,name:"hulu"},{id: 3,name:"amazon"},

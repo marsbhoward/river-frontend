@@ -36,7 +36,7 @@ class UserStreamsPage extends Component {
 	  	}
 
       })  
-      return <Profile userID={id} userStreams={selectedStreams} handleLists={this.handleLists} handler={this.handler} handler={this.handler} streamLinks={true}/>
+      return <Profile userID={id} userStreams={selectedStreams} handleLists={this.handleLists} handler={this.handler} streamLinks={true}/>
     }
   }
 

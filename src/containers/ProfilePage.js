@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import { fetchUserStreams } from '../actions/userStreamActions'
 import Profile from '../components/Profile';
 import { Auth0Context } from "../react-auth0-spa";
-import { Fragment } from "react";
 
 
 let selectList = []
-let deselectList = [] 
 class ProfilePage extends Component {
  static contextType = Auth0Context; 
 
@@ -19,7 +17,6 @@ class ProfilePage extends Component {
   } 
   
   componentDidMount() {
-    console.log(this)
     this.props.fetchUserStreams(this.props.userId)
   }
 
@@ -41,7 +38,7 @@ class ProfilePage extends Component {
         dom.className =  "stream false"
         stream.selected = false; 
         break;
-      case false:
+      default:
         dom.style.borderStyle = 'inset'
         dom.style.background = "white";
         
@@ -121,13 +118,13 @@ class ProfilePage extends Component {
 
   render() {
     const { loading, user } = this.context;
-    const { isAuthenticated, loginWithRedirect} = this.context;
+    //const { isAuthenticated, loginWithRedirect} = this.context;
     
     if (loading || !user) {
       return <div>Loading...</div>;
     }
 
-    if (this.state.streamEdit == true){
+    if (this.state.streamEdit === true){
       return ( 
         <div className= "profile">
           <img src={user.picture} alt="Profile" />
