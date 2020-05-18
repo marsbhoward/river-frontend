@@ -21,7 +21,8 @@ function HomePage(props) {
   }
 
   function handleClick() {
-    history.push("/streams");
+    history.push("/streams");    
+    adapter.createUser(`user.email ${Date.now()} `,"guest").then(res=> {});
   }
 
 
