@@ -1,4 +1,6 @@
 import React from 'react';
+import 'semantic-ui-css/semantic.min.css'
+import { Button } from 'semantic-ui-react'
 import { useAuth0 } from "../react-auth0-spa";
 import { useHistory } from "react-router-dom";
 
@@ -47,8 +49,12 @@ function HomePage(props) {
               movie catalogs, or you can click the streams button to view all available platforms. 
               <br/><br/>Select a movie and you can get the trailer, ratings, and more! 
             </p>
-            <button onClick={() => loginWithRedirect({})}>Log in</button>
-            <button onClick={handleClick}>Streams</button>
+      
+            <Button.Group>
+              <Button primary onClick={() => loginWithRedirect({})}>Log In</Button>
+              <Button.Or />
+              <Button secondary onClick={handleClick}>See Streams</Button>
+            </Button.Group>            
           </div>
           
         )}    

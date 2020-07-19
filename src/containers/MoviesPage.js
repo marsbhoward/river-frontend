@@ -6,10 +6,14 @@ import MovieList from '../components/MovieList'
 class MoviesPage extends Component {   
   
   componentDidMount() {
-
   this.props.fetchMovies(this.props.handler)
-
   }
+
+  trailerID = (trailer) => { 
+    console.log(trailer);
+    //link trailer to backend
+  }
+
   
   handleLoading = () => {
     if(this.props.loading) {
@@ -17,7 +21,7 @@ class MoviesPage extends Component {
     } else {
       return (
       <div>
-      <MovieList movieCards={this.props.movieCards} currentStream={this.currentStream}/>
+      <MovieList movieCards={this.props.movieCards} trailerID={this.trailerID} currentStream={this.currentStream}/>
       </div>
       )
     }

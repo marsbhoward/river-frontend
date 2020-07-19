@@ -29,6 +29,10 @@ class MovieList extends React.Component {
     })   
   }
 
+  trailerID = (trailer) => { 
+    this.props.trailerID(trailer)
+  }
+
   render() {
     if (this.state.clicked !== true) {   
        moviesList = this.props.movieCards.map((movie, index) => {
@@ -43,11 +47,11 @@ class MovieList extends React.Component {
     }
     else
       showMovie = this.state.currentMovie
-      //moviesList to <MovieInfo currentMovie={this.props.currentMovie} trailer={this.props.trailer} handler={this.handler}/>
+      
       return(
       <div>
         <br/>
-        <InfoPage currentMovie={showMovie}/>
+        <InfoPage currentMovie={showMovie} trailerID={this.trailerID}/>
         <div className="movie-list">
             {moviesList}
         </div>

@@ -20,8 +20,9 @@ class InfoPage extends Component {
   	this.props.fetchTrailers(this.props.currentMovie.Title,this.props.currentMovie.Year)
   }
 
-  handler = () => {
-    this.props.fetchTrailers(this.props.currentMovie.Title)
+  handler = (trailer) => {
+    //pass to MovieList
+    this.props.trailerID(trailer)
   }
 
   handleLoading = () => {

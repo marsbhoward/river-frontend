@@ -31,6 +31,7 @@ export class UserStream extends Component {
     super(props)
     this.state = {
       logo: "",
+      ratings: 0,
     }
   }
 
@@ -160,15 +161,24 @@ export class UserStream extends Component {
     //returns the selected Stream id to streamsList
     this.props.handler(this.props.stream.stream_id,this.state.streamName)
     }
+
+    handleRatings = () => {
+      this.setState({ratings: this.state.ratings + 1 })
+      
+
+    }
      
   render() {
     streamSrc = this.state.logo
     let streamId = this.props.stream
     if (this.props.streamLinks === true){
         return (
-        <Link to={`/streams/${this.state.streamName}/movies`}>          
-          <img onClick={this.handleOnClick} className= "stream" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
-        </Link>          
+        <div>
+          <Link to={`/streams/${this.state.streamName}/movies`}>          
+            <img onClick={this.handleOnClick} className= "stream" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+          </Link>
+          <button onClick={this.handleRatings}> {this.state.ratings}</button>   
+        </div>
         )
     }
     else{
