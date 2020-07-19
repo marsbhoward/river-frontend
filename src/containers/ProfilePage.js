@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { fetchUserStreams } from '../actions/userStreamActions'
 import Profile from '../components/Profile';
 import { Auth0Context } from "../react-auth0-spa";
+import 'semantic-ui-css/semantic.min.css'
+import { Button } from 'semantic-ui-react'
 
 
 let selectList = []
@@ -15,10 +17,12 @@ class ProfilePage extends Component {
       streamEdit: false
     }
   } 
+
   
   componentDidMount() {
     this.props.fetchUserStreams(this.props.userId)
   }
+
 
   componentDidUpdate(prevProps){
   }
@@ -60,7 +64,6 @@ class ProfilePage extends Component {
     else {
       let index = selectList.indexOf(stream);
       selectList.splice(index,1);
-      console.log(selectList)
     }            
   }
 
@@ -93,12 +96,11 @@ class ProfilePage extends Component {
     }
     this.setState({
       streamEdit: false
-    }) 
+    },function () {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    })  
 
-    //can implement after a second list is made
-    // one for selected, one for unselected
-
-    //add method that edits backend here
     selectList.forEach( stream =>{
       adapter.editStream(stream.id,stream.selected,stream.user_id,stream.stream_id).then(data => data)
     })
@@ -106,7 +108,9 @@ class ProfilePage extends Component {
         alert("changes saved")
     }
     selectList = [];
+    
   }
+
 
   handleLoading = (id) => {
     if(this.props.loading) {
@@ -130,9 +134,12 @@ class ProfilePage extends Component {
           <img src={user.picture} alt="Profile" />
           <h2>Hi, {user.name}</h2>
           <p>email: {user.email}</p>
-          <button onClick={this.handleClick}>Edit Streams</button>
+          <Button basic loading>
+            Loading
+          </Button>
+          <p>click the buttons below to make changes, scroll to the bottom and click done when finished.</p>
           {this.handleLoading(this.props.userId)}
-          <button className="done-button" onClick={this.handleDone}>Done</button>
+          <Button className="done-button" onClick={this.handleDone} color='black'>Done</Button>
         </div>             
       );
     }
@@ -142,7 +149,7 @@ class ProfilePage extends Component {
           <img src={user.picture} alt="Profile" />
           <h2>Hi, {user.name}</h2>
           <p>email: {user.email}</p>
-          <button onClick={this.handleClick}>Edit Streams</button>
+          <Button onClick={this.handleClick} color='black'>Edit Streams</Button>
           {this.handleLoading(this.props.userId)}
         </div>             
       );
