@@ -28,6 +28,7 @@ export class Stream extends Component {
     super(props)
     this.state = {
       logo: "",
+      streamClass:"",
     }
   }
 
@@ -101,14 +102,25 @@ export class Stream extends Component {
     //returns the selected Stream id to streamsList
     this.props.handler(this.props.stream.id,this.props.stream.name)
     }
-     
+   
+     mouseEnter = () => {
+    this.setState({
+        streamClass: "highlight"
+      })
+    }
+
+    mouseExit = () => {
+      this.setState({
+          streamClass: ""
+        })
+    }         
 
   render() {
     streamSrc = this.state.logo
     if (this.props.stream.name){
       return (
-          <Link to={`/streams/${this.props.stream.name}/movies`}>
-            <img onClick={this.handleOnClick} className= "stream" id={this.props.stream.id} alt={this.props.stream.name} src={streamSrc}></img>
+          <Link to={`/streams/${this.props.stream.name}/movies`} className= {this.state.streamClass}  onMouseMove={this.mouseEnter} onMouseLeave={this.mouseExit}>
+            <img onClick={this.handleOnClick}  className= 'stream' id={this.props.stream.id} alt={this.props.stream.name} src={streamSrc}></img>
           </Link>
       );
     }

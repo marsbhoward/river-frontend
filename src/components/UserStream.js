@@ -31,7 +31,7 @@ export class UserStream extends Component {
     super(props)
     this.state = {
       logo: "",
-      ratings: 0,
+      streamClass: "",
     }
   }
 
@@ -162,13 +162,26 @@ export class UserStream extends Component {
     this.props.handler(this.props.stream.stream_id,this.state.streamName)
     }
 
+     mouseEnter = () => {
+    this.setState({
+        streamClass: "highlight"
+      })
+    }
+
+    mouseExit = () => {
+      this.setState({
+          streamClass: ""
+        })
+    }         
+    
+
      
   render() {
     streamSrc = this.state.logo
     let streamId = this.props.stream
     if (this.props.streamLinks === true){
         return (
-          <Link to={`/streams/${this.state.streamName}/movies`}>          
+          <Link to={`/streams/${this.state.streamName}/movies`} className= {this.state.streamClass}  onMouseMove={this.mouseEnter} onMouseLeave={this.mouseExit}>          
             <img onClick={this.handleOnClick} className= "stream" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
           </Link>
         )
