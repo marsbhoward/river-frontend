@@ -5,6 +5,11 @@ let title
 
 class Movie extends Component {
 
+constructor(props){
+  super(props)
+  this.state = {movieClass: "movie"}
+}  
+
 componentDidMount() {
   window.addEventListener("scroll", this.handeleScroll);
 }
@@ -26,7 +31,18 @@ handleOnClick = () => {
     })    
     
   }
-   
+ 
+  mouseEnter = () => {
+    this.setState({
+        movieClass: "movie highlight"
+      })
+  }
+
+  mouseExit = () => {
+    this.setState({
+        movieClass: "movie"
+      })
+  }    
 
 
 
@@ -35,7 +51,7 @@ handleOnClick = () => {
     title = this.props.movie.Title 
     if (title){   
       return (
-        <img onClick={this.handleOnClick}  className= "movie" id={this.props.movie.Title} alt={this.props.movie.Title} src={this.props.movie.Poster}>
+        <img  onClick={this.handleOnClick} onMouseMove={this.mouseEnter} onMouseLeave={this.mouseExit}  className= {this.state.movieClass} id={this.props.movie.Title} alt={this.props.movie.Title} src={this.props.movie.Poster}>
         </img>
       
       );

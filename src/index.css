@@ -150,7 +150,7 @@ code {
   object-fit: cover;
   width: 90%;
   text-align: center;
-  padding-left: 5%;
+  padding: 5%;
 }
 
 .profile {
@@ -239,6 +239,14 @@ code {
 .Card3d{
   width: 50%;
   margin: auto;  
+}
+.highlight{
+  box-shadow: 5px 5px transparent,
+  4px 4px transparent, 
+  3px 3px transparent, 
+  2px 2px transparent, 
+  1px 1px transparent,
+  6px 6px 6px gray;
 }
 
 /***************** mobile screen homepage *****************/
