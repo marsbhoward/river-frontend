@@ -236,6 +236,11 @@ code {
   position: fixed;
 }
 
+.Card3d{
+  width: 50%;
+  margin: auto;  
+}
+
 /***************** mobile screen homepage *****************/
 @media only screen 
   and (min-device-width: 320px) 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Video from './Video';
 
 class MovieInfo extends Component {
 
@@ -8,7 +9,7 @@ class MovieInfo extends Component {
   render() {
   	let currentMovie = this.props.currentMovie
     let videoId = this.props.trailer
-    let fullsrc = 'https://www.youtube.com/embed/' + videoId
+    let fullSrc = 'https://www.youtube.com/embed/' + this.props.trailer
     let errorMsg
 
     if (videoId === "kJQP7kiw5Fk"){
@@ -36,10 +37,7 @@ class MovieInfo extends Component {
         <ul style={{display: 'inline',margin: 40, listStyle: 'none'}}> {ratings} </ul>
           <h4> Plot</h4>
           <h5>{currentMovie.Plot} </h5>
-        <iframe title= "youtube" className="player" id= {videoId}  
-          src={fullsrc}
-          frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
-        </iframe>
+        <Video fullSrc= {fullSrc} videoID = {videoId}/>
         <p>{errorMsg}</p>        
       </div>
     )
