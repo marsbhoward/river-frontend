@@ -13,7 +13,7 @@ export function fetchMovies (id) {
     	}).then(responseJSON => {
     		Promise.all(
     			responseJSON.map(
-    				title => fetch(`https://www.omdbapi.com/?t=${title}+&apikey=6b46131b`)
+    				movie => fetch(`https://www.omdbapi.com/?t=${movie.title}&y=${movie.year}+&apikey=6b46131b`)
     				.then(resp => {
     					return resp.json()
     				})
