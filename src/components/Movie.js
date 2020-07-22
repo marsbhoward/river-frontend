@@ -25,7 +25,7 @@ handleOnClick = () => {
     currentMovie: this.props.movie,
     clicked: true
     },function () {
-    this.props.handler(this.state.currentMovie,this.state.clicked);
+    this.props.handler(this.state.currentMovie,this.state.clicked,this.props.movieID);
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
     })    

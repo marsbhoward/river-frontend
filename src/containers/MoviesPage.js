@@ -10,7 +10,6 @@ class MoviesPage extends Component {
   }
 
   trailerID = (trailer) => { 
-    console.log(trailer);
     //link trailer to backend
   }
 
@@ -21,7 +20,7 @@ class MoviesPage extends Component {
     } else {
       return (
       <div>
-      <MovieList movieCards={this.props.movieCards} trailerID={this.trailerID} currentStream={this.currentStream}/>
+      <MovieList streamID={this.props.handler} movieCards={this.props.movieCards} trailerID={this.trailerID} currentStream={this.currentStream}/>
       </div>
       )
     }

@@ -7,7 +7,6 @@ class StreamsPage extends Component {
   
   componentDidMount() {
     this.props.fetchStreams()
-    console.log(this)
   }
 //binds passed handler to StreamsPage handler
   constructor(props){

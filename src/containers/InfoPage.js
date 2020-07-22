@@ -3,17 +3,59 @@ import { connect } from 'react-redux';
 import { fetchTrailers } from '../actions/trailerActions'
 import MovieInfo from '../components/MovieInfo';
 
-class InfoPage extends Component {  
+class InfoPage extends Component { 
+
+  constructor(props){
+    super(props)
+    this.state = {selectedMovie: ""}
+
+  } 
   
   componentDidMount() {
-  	this.fetchTrailer()
+    //pass stream id and movie id in props
+    let apiMovieID = this.props.movieID + ((this.props.streamID-1)*41)    
+    adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
+
+    //if current movie does not have a youtube_id on the backend
+  	  
+    //else
+      //get trailer from backend 
+      //set this.props.trailer to that youtube_id
+      //** if this cant be done set up conditional render. setstate trailer: youtube_id. pass state to MovieInfo instead of trailer prop **
   }
 
   componentDidUpdate(prevProps){
+
   	if (this.props.currentMovie.Title !== prevProps.currentMovie.Title)
   	{
-  		this.fetchTrailer()
+      let apiMovieID = this.props.movieID + ((this.props.streamID-1)*41)    
+      adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
   	}
+  }
+
+  logMovie = (selectedMovie) => {
+      if(selectedMovie.youtube_id === null){
+        //if youtube_id on api is empty
+        this.setState({
+          selectedMovie: selectedMovie
+        })
+        console.log(this)
+        //not getting updated trailer here
+        this.fetchTrailer()
+      }
+      else {
+      
+      }
+  }
+
+  testFucntion = (selectedMovie) =>{
+    if (this.props.trailer !== 'kJQP7kiw5Fk' && this.props.trailer.length !==0){ 
+      adapter.updateYoutubeID(selectedMovie.stream_id,selectedMovie.id,this.props.trailer).then(data => data)
+      console.log('trailer updated on backend') 
+    }
+    else {
+      console.log('did not update backend because default trailer was loaded')
+    }
   }
 
   fetchTrailer = () => {
@@ -33,7 +75,7 @@ class InfoPage extends Component {
     else {
       return (
       	<div>
-      		<MovieInfo currentMovie={this.props.currentMovie} trailer={this.props.trailer} handler={this.handler}/>
+      		<MovieInfo test={this.testFucntion} selectedMovie = {this.state.selectedMovie} currentMovie={this.props.currentMovie} trailer={this.props.trailer} handler={this.handler}/>
       	</div>
       )
     }
@@ -55,5 +97,24 @@ const mapDispatchToProps = state => {
     loading: state.TrailersReducer.loading
   }
 }
+
+  const adapter = {
+    getYoutubeID: (stream_id, movie_id) => {
+      return fetch(`https://localhost:3000/streams/${stream_id}/movies/${movie_id}`, {
+      headers: { "Content-Type": "application/json" },
+    })
+    .then(resp => resp.json())     
+    },
+
+    updateYoutubeID: (stream_id, movie_id, youtube_id) => {
+      return fetch(`https://localhost:3000/streams/${stream_id}/movies/${movie_id}`, {
+        method: 'PATCH',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({stream_id, movie_id, youtube_id})
+      })
+    .then(resp => resp.json())       
+    }
+  }
+
 
 export default connect(mapDispatchToProps, {fetchTrailers})(InfoPage)
