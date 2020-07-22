@@ -100,14 +100,14 @@ const mapDispatchToProps = state => {
 
   const adapter = {
     getYoutubeID: (stream_id, movie_id) => {
-      return fetch(`https://localhost:3000/streams/${stream_id}/movies/${movie_id}`, {
+      return fetch(`https://cors-anywhere-dd.herokuapp.com/https://river-api.herokuapp.com/streams/${stream_id}/movies/${movie_id}`, {
       headers: { "Content-Type": "application/json" },
     })
     .then(resp => resp.json())     
     },
 
     updateYoutubeID: (stream_id, movie_id, youtube_id) => {
-      return fetch(`https://localhost:3000/streams/${stream_id}/movies/${movie_id}`, {
+      return fetch(`https://cors-anywhere-dd.herokuapp.com/https://river-api.herokuapp.com/streams/${stream_id}/movies/${movie_id}`, {
         method: 'PATCH',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({stream_id, movie_id, youtube_id})
