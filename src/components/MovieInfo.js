@@ -4,7 +4,7 @@ import Video from './Video';
 class MovieInfo extends Component {
 
   componentDidMount() {
-    this.props.test(this.props.selectedMovie)
+    this.props.path(this.props.selectedMovie)
     console.log(this)
   }
 

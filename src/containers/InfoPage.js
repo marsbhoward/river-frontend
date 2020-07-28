@@ -49,8 +49,8 @@ class InfoPage extends Component {
       }
   }
 
-  testFucntion = (selectedMovie) =>{
-    if (this.props.trailer !== 'kJQP7kiw5Fk' && this.props.trailer.length !==0){ 
+  trailerPath = (selectedMovie) =>{
+    if (this.props.trailer !== 'kJQP7kiw5Fk' && this.props.trailer === []){ 
       adapter.updateYoutubeID(selectedMovie.stream_id,selectedMovie.id,this.props.trailer).then(data => data)
       console.log('trailer updated on backend') 
     }
@@ -81,7 +81,7 @@ class InfoPage extends Component {
     else {
       return (
       	<div>
-      		<MovieInfo test={this.testFucntion} selectedMovie = {this.state.selectedMovie} currentMovie={this.props.currentMovie} trailer={this.props.trailer} handler={this.handler}/>
+      		<MovieInfo path={this.trailerPath} selectedMovie = {this.state.selectedMovie} currentMovie={this.props.currentMovie} trailer={this.props.trailer} handler={this.handler}/>
       	</div>
       )
     }
