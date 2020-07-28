@@ -50,12 +50,12 @@ class InfoPage extends Component {
   }
 
 
-  trailerPath = (selectedMovie) =>{
-    console.log(selectedMovie)
+  trailerPath = (passedMovie) =>{
+    console.log(passedMovie)
     console.log(this.props.trailer)
 
-    if (this.props.trailer !== "kJQP7kiw5Fk" && selectedMovie !== ""){ 
-      adapter.updateYoutubeID(selectedMovie.stream_id,selectedMovie.id,this.props.trailer).then(data => data)
+    if (this.props.trailer.length > 0 && this.props.trailer !== "kJQP7kiw5Fk" && passedMovie === ""){ 
+      adapter.updateYoutubeID(passedMovie.stream_id,passedMovie.id,this.props.trailer).then(data => data)
       console.log('trailer updated on backend') 
     }
     else if (this.props.trailer === 'kJQP7kiw5Fk') {
