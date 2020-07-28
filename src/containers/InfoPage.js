@@ -13,6 +13,7 @@ class InfoPage extends Component {
   
   componentDidMount() {
     //pass stream id and movie id in props
+    console.log(this)
     let apiMovieID = this.props.movieID + ((this.props.streamID-1)*41)    
     adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
 
@@ -49,8 +50,9 @@ class InfoPage extends Component {
       }
   }
 
+
   trailerPath = (selectedMovie) =>{
-    if (this.props.trailer !== 'kJQP7kiw5Fk' && this.props.trailer === []){ 
+    if (this.props.trailer !== 'kJQP7kiw5Fk' && selectedMovie !== ""){ 
       adapter.updateYoutubeID(selectedMovie.stream_id,selectedMovie.id,this.props.trailer).then(data => data)
       console.log('trailer updated on backend') 
     }

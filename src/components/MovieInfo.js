@@ -20,7 +20,6 @@ class MovieInfo extends Component {
     }
     let errorMsg
 
-    console.log(this.props.trailer)
     if (this.props.trailer === "kJQP7kiw5Fk"){
       errorMsg = "due to an issue with this sites connection to youtube the trailer can not be viewed at this time";
       this.props.handler("default")
