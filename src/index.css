@@ -147,6 +147,10 @@ code {
   height: 80%;
 }
 
+.hidden{
+  display: none;
+}
+
 .movie{
   object-fit: cover;
   width: 90%;
@@ -192,6 +196,19 @@ code {
 
 .true{
   width: 12vw;
+}
+
+.switch{
+  border-style: inset;
+  background: white;
+}
+
+.false{
+    width: 12vw;
+    border-style: outset;
+    background: lightgray;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
 }
 
 

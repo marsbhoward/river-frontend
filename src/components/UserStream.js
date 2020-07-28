@@ -190,12 +190,12 @@ export class UserStream extends Component {
       if (this.props.editClicked === true){
           if (this.props.stream.selected === true){
             return (
-              <img onClick={() =>  {this.props.handleLists(streamId)} }className= "stream true" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+              <img onClick={() =>  {this.props.handleLists(streamId)} }className= {'stream true switch ' + this.state.streamClass} onMouseMove={this.mouseEnter} onMouseLeave={this.mouseExit} id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
             )
         }
           else{
             return (
-              <img onClick={() =>  {this.props.handleLists(streamId)} }className= "stream false" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+              <img onClick={() =>  {this.props.handleLists(streamId)} }className= {'stream false ' + this.state.streamClass} onMouseMove={this.mouseEnter} onMouseLeave={this.mouseExit} id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
             )
           }
       }
@@ -206,7 +206,7 @@ export class UserStream extends Component {
       }
       else{
         return (
-        <img className="stream false" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
+        <img className="stream false hidden" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
         )
       }
     }
