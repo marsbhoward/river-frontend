@@ -28,6 +28,9 @@ class InfoPage extends Component {
 
   	if (this.props.currentMovie.Title !== prevProps.currentMovie.Title)
   	{
+      this.setState({
+        selectedMovie: ""
+      })
       let apiMovieID = this.props.movieID + ((this.props.streamID-1)*41)    
       adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
   	}
@@ -36,15 +39,13 @@ class InfoPage extends Component {
   logMovie = (selectedMovie) => {
       if(selectedMovie.youtube_id === null){
         //if youtube_id on api is empty
-        this.setState({
-          selectedMovie: selectedMovie
-        })
-        console.log(this)
         //not getting updated trailer here
         this.fetchTrailer()
       }
       else {
-      
+        this.setState({
+          selectedMovie: selectedMovie
+        })
       }
   }
 
@@ -53,8 +54,13 @@ class InfoPage extends Component {
       adapter.updateYoutubeID(selectedMovie.stream_id,selectedMovie.id,this.props.trailer).then(data => data)
       console.log('trailer updated on backend') 
     }
+    else if (this.props.trailer === 'kJQP7kiw5Fk') {
+      console.log('did not update backend')
+      console.log('error loading video from youtube')
+    }
     else {
-      console.log('did not update backend because default trailer was loaded')
+      console.log('did not update backend')
+      console.log('trailer was loaded from backend')
     }
   }
 

@@ -5,20 +5,29 @@ class MovieInfo extends Component {
 
   componentDidMount() {
     this.props.test(this.props.selectedMovie)
+    console.log(this)
   }
 
   render() {
   	let currentMovie = this.props.currentMovie
-    let videoId = this.props.trailer
-    let fullSrc = 'https://www.youtube.com/embed/' + this.props.trailer
-    let errorMsg
-
-    if (videoId === "kJQP7kiw5Fk"){
-      errorMsg = "due to an issue with this sites connection to youtube the trailer can not be viewed at this time";
-      this.props.handler("default")
+    let videoId 
+    let fullSrc
+    if (this.props.selectedMovie !== ""){
+      fullSrc = 'https://www.youtube.com/embed/' + this.props.selectedMovie.youtube_id
     }
     else{
-      this.props.handler(videoId)
+      fullSrc = 'https://www.youtube.com/embed/' + this.props.trailer
+    }
+    let errorMsg
+
+    console.log(this.props.trailer)
+    if (this.props.trailer === "kJQP7kiw5Fk"){
+      errorMsg = "due to an issue with this sites connection to youtube the trailer can not be viewed at this time";
+      this.props.handler("default")
+      videoId = this.props.trailer
+    }
+    else{
+      this.props.handler(this.props.trailer)
     }
 
   	const ratings = currentMovie.Ratings.map((rating, index) =>(
