@@ -8,15 +8,26 @@ class MovieInfo extends Component {
     console.log(this)
   }
 
+   componentDidUpdate(prevProps){
+
+    if (this.props.currentMovie.Title !== prevProps.currentMovie.Title && this.props.selectedMovie === "")
+    {
+      this.props.path(this.props.selectedMovie)
+    } 
+  }
+
   render() {
   	let currentMovie = this.props.currentMovie
     let videoId 
     let fullSrc
+
     if (this.props.selectedMovie !== ""){
       fullSrc = 'https://www.youtube.com/embed/' + this.props.selectedMovie.youtube_id
+      console.log('selectedMovie used')
     }
     else{
       fullSrc = 'https://www.youtube.com/embed/' + this.props.trailer
+      console.log('selectedMovie not used')
     }
     let errorMsg
 

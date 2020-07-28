@@ -52,6 +52,9 @@ class InfoPage extends Component {
 
 
   trailerPath = (selectedMovie) =>{
+    console.log(selectedMovie)
+    console.log(this.props.trailer)
+
     if (this.props.trailer !== 'kJQP7kiw5Fk' && selectedMovie !== ""){ 
       adapter.updateYoutubeID(selectedMovie.stream_id,selectedMovie.id,this.props.trailer).then(data => data)
       console.log('trailer updated on backend') 

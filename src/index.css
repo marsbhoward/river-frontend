@@ -124,6 +124,7 @@ code {
 }
 
 .stream {
+  margin: auto;
   margin-top: 45px;
   margin-bottom: 45px;
   object-fit: cover;
@@ -175,7 +176,6 @@ code {
 .streams-list-2 {
   text-align: center;
   display: grid;
-  margin-left: 5%;
   
   padding-right: 10vw;
   padding-left: 10vw;
