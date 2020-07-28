@@ -21,7 +21,7 @@ class MovieInfo extends Component {
     let videoId 
     let fullSrc
 
-    if (this.props.selectedMovie !== ""){
+    if (this.props.selectedMovie.youtube_id !== null){
       fullSrc = 'https://www.youtube.com/embed/' + this.props.selectedMovie.youtube_id
       console.log('selectedMovie used')
     }

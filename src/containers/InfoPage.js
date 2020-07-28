@@ -35,6 +35,9 @@ class InfoPage extends Component {
   }
 
   logMovie = (selectedMovie) => {
+        this.setState({
+          selectedMovie: selectedMovie
+        })
       if(selectedMovie.youtube_id === null){
         //if youtube_id on api is empty
         //not getting updated trailer here
@@ -43,18 +46,13 @@ class InfoPage extends Component {
       }
       else {
         console.log('youtube_id has value and state set')
-        this.setState({
-          selectedMovie: selectedMovie
-        })
       }
   }
 
 
   trailerPath = (passedMovie) =>{
-    console.log(passedMovie)
-    console.log(this.props.trailer)
 
-    if (this.props.trailer.length > 0 && this.props.trailer !== "kJQP7kiw5Fk" && passedMovie === ""){ 
+    if (this.props.trailer.length > 0 && this.props.trailer !== "kJQP7kiw5Fk" && passedMovie !== ""){ 
       adapter.updateYoutubeID(passedMovie.stream_id,passedMovie.id,this.props.trailer).then(data => data)
       console.log('trailer updated on backend') 
     }
