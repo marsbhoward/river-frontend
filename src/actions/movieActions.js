@@ -9,8 +9,7 @@ export function fetchMovies (id) {
 	return (dispatch) => {
 		dispatch({ type: 'LOADING_MOVIES'})
 		fetch(`${URL}/${id}/movies`).then(response => {
-      		return response.json()
-    	}).then(responseJSON => {
+      		return response.json()}).then(responseJSON => {
     		Promise.all(
     			responseJSON.map(
     				movie => fetch(`https://www.omdbapi.com/?t=${movie.title}&y=${movie.year}+&apikey=6b46131b`)
