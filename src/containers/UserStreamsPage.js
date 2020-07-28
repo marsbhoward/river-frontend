@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserStreams } from '../actions/userStreamActions'
 import Profile from '../components/Profile';
+import User from '../components/User';
 
 class UserStreamsPage extends Component {   
   
@@ -43,6 +44,7 @@ class UserStreamsPage extends Component {
   render() {
     return (
       <div className="App">
+        <User/>
         {this.handleLoading(this.props.userId)}
       </div>
     );
