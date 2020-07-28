@@ -38,9 +38,11 @@ class InfoPage extends Component {
       if(selectedMovie.youtube_id === null){
         //if youtube_id on api is empty
         //not getting updated trailer here
+        console.log('youtube_id null')
         this.fetchTrailer()
       }
       else {
+        console.log('youtube_id has value and state set')
         this.setState({
           selectedMovie: selectedMovie
         })
