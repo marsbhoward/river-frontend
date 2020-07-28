@@ -29,9 +29,6 @@ class InfoPage extends Component {
 
   	if (this.props.currentMovie.Title !== prevProps.currentMovie.Title)
   	{
-      this.setState({
-        selectedMovie: ""
-      })
       let apiMovieID = this.props.movieID + ((this.props.streamID-1)*41)    
       adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
   	}
