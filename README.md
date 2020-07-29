@@ -1,3 +1,14 @@
+River
+
+Welcome to River! Once you create a profile through email or facebook you can add games you play to your profile. You can see what games other users are looking for groups in and also search games that have been added to the database. You can then decide to look for groups in that game.
+
+River is the pathway to all of your streaming platforms. create an account and you will be able to browse your selected providers movie catalogs, or you can click the streams button to view all available platforms. 
+
+Contributing please forward any bug reports or suggestions to marsbhoward@icloud.com
+
+License This project is licensed under the MIT License.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
