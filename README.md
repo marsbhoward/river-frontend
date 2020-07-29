@@ -1,5 +1,7 @@
 River
 
+live site: https://river-app.herokuapp.com
+
 Welcome to River! Once you create a profile through email or facebook you can add games you play to your profile. You can see what games other users are looking for groups in and also search games that have been added to the database. You can then decide to look for groups in that game.
 
 River is the pathway to all of your streaming platforms. create an account and you will be able to browse your selected providers movie catalogs, or you can click the streams button to view all available platforms. 
