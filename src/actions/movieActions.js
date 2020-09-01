@@ -19,24 +19,30 @@ export function fetchMovies (id) {
                         return resp.json()
                     })
                 )
-                ).then(listOfMovies => {
-                    listOfMovies.map((movie, index) => {
-                        let stream_id = id 
-                        let movie_id = responseJSON[index].id
-                        let title = movie.Title                    
-                         fetch(`${URL}/${id}/movies/${responseJSON[index].id}?title=${title}`, {
+            ).then(listOfMovies => {
+                listOfMovies.map((movie, index) => {
+                    let stream_id = id 
+                    let movie_id = responseJSON[index].id
+                    let title = movie.Title
+                    if(responseJSON[index].title === null){   
+                        console.log(responseJSON[index])                
+                        fetch(`${URL}/${id}/movies/${responseJSON[index].id}?title=${title}`, {
                             method: 'PATCH',
                             headers: { "Content-Type": "application/json" },
                         }).then(response => {
-                            return response.json()
-                        }).then(data => data) 
-                    })
-                    dispatch({ type: 'ADD_MOVIES', movies: listOfMovies})   
+                            dispatch({ type: 'ADD_MOVIES', movies: listOfMovies})
+                        })
+                    }
+                    else {
+                        dispatch({ type: 'ADD_MOVIES', movies: listOfMovies})
+                    }  
                 })
-            
+            })
         })
     }
 }
+
+
 
 
 export function listMovies(){

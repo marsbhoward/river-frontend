@@ -26,6 +26,7 @@ class App extends Component {
   }
 // recieves id from passed handler and sets as state   
   handler = (id,name) => {
+    console.log("handler set ", name)
     this.setState({
       currentStream: id,
       currentStreamName: name

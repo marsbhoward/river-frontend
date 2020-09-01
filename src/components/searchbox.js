@@ -32,8 +32,7 @@ class Searchbox extends Component {
     else { 
       let movieList
       movieList = this.props.movieCards.filter((movie)=>{
-      if(this.state.search.length >= 3 && movie.title.toLowerCase().includes(this.state.search)){
-            console.log(movie.title)
+      if(this.state.search.length >= 3 ){
             return movie
       }
       else{

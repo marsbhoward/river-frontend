@@ -13,6 +13,7 @@ export class MoviesList extends React.Component {
   }
 
   render() {
+    if (this.props.movie.title!== null){
       if (this.props.movie.title.toLowerCase().includes(this.props.search)){
         return (
           <div className="moiveCard">
@@ -21,6 +22,12 @@ export class MoviesList extends React.Component {
         )
       }
       else{
+        return(
+          ""
+        )
+      }
+    }
+    else{
         return(
           ""
         )
