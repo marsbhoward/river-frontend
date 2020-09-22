@@ -38,7 +38,7 @@ class InfoPage extends Component {
         this.setState({
           selectedMovie: selectedMovie
         })
-      if(selectedMovie.youtube_id === null){
+      if(selectedMovie === null){
         //if youtube_id on api is empty
         //not getting updated trailer here
         console.log('youtube_id null')
@@ -77,6 +77,7 @@ class InfoPage extends Component {
   }
 
   handleLoading = () => {
+    console.log(this.state.selectedMovie)
     if(this.props.loading) 
     {
       return <div>Loading Movies...</div>

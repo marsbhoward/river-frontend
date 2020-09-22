@@ -25,7 +25,7 @@ export function fetchMovies (id) {
                     let movie_id = responseJSON[index].id
                     let title = movie.Title
                     if(responseJSON[index].title === null){   
-                        console.log(responseJSON[index])                
+                        
                         fetch(`${URL}/${id}/movies/${responseJSON[index].id}?title=${title}`, {
                             method: 'PATCH',
                             headers: { "Content-Type": "application/json" },
