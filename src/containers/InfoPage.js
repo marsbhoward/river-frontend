@@ -7,13 +7,12 @@ class InfoPage extends Component {
 
   constructor(props){
     super(props)
-    this.state = {selectedMovie: ""}
+    this.state = {selectedMovie: null}
 
   } 
   
   componentDidMount() {
     //pass stream id and movie id in props
-    console.log(this)
     let apiMovieID = this.props.movieID + ((this.props.streamID-1)*41)    
     adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
 
@@ -30,14 +29,14 @@ class InfoPage extends Component {
   	if (this.props.currentMovie.Title !== prevProps.currentMovie.Title)
   	{
       let apiMovieID = this.props.movieID + ((this.props.streamID-1)*41)    
-      adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
+      adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => console.log(movie))
   	}
   }
 
   logMovie = (selectedMovie) => {
         this.setState({
           selectedMovie: selectedMovie
-        })
+        })       
       if(selectedMovie === null){
         //if youtube_id on api is empty
         //not getting updated trailer here
@@ -52,17 +51,16 @@ class InfoPage extends Component {
 
   trailerPath = (passedMovie) =>{
 
-    if (this.props.trailer.length > 0 && this.props.trailer !== "kJQP7kiw5Fk" && passedMovie !== null){ 
+    console.log(this.state.selectedMovie)
+    if (this.props.trailer.length > 0 && this.props.trailer !== "kJQP7kiw5Fk" && passedMovie === null){ 
       console.log(passedMovie)
       adapter.updateYoutubeID(passedMovie.stream_id,passedMovie.id,this.props.trailer).then(data => data)
       console.log('trailer updated on backend') 
     }
     else if (this.props.trailer === 'kJQP7kiw5Fk') {
-      console.log('did not update backend')
       console.log('error loading video from youtube')
     }
     else {
-      console.log('did not update backend')
       console.log('trailer was loaded from backend')
     }
   }
