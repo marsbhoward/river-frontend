@@ -7,13 +7,18 @@ class InfoPage extends Component {
 
   constructor(props){
     super(props)
-    this.state = {selectedMovie: null}
+    this.state = {
+      selectedMovie: null,
+      youtube: null
+    }
 
   } 
   
   componentDidMount() {
     //pass stream id and movie id in props
-    let apiMovieID = this.props.movieID + ((this.props.streamID-1)*41)    
+    // only works with db complete reset
+    let apiMovieID = this.props.movieIds[this.props.movieID-1]
+
     adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
 
     //if current movie does not have a youtube_id on the backend
@@ -28,31 +33,39 @@ class InfoPage extends Component {
 
   	if (this.props.currentMovie.Title !== prevProps.currentMovie.Title)
   	{
-      let apiMovieID = this.props.movieID + ((this.props.streamID-1)*41)    
-      adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => console.log(movie))
+      let apiMovieID = this.props.movieIds[this.props.movieID-1] 
+      adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
   	}
   }
 
   logMovie = (selectedMovie) => {
         this.setState({
           selectedMovie: selectedMovie
-        })       
-      if(selectedMovie === null){
-        //if youtube_id on api is empty
-        //not getting updated trailer here
-        console.log('youtube_id null')
-        this.fetchTrailer()
+        })
+
+      if (selectedMovie === null) {
+        console.log('component did not update')
       }
-      else {
-        console.log('youtube_id has value and state set')
+      else{
+        if(selectedMovie.youtube_id === null){
+          //if youtube_id on api is empty
+          //not getting updated trailer here
+          console.log('youtube_id null')
+          this.fetchTrailer()
+          this.setState({youtube: null})
+        }
+        else {
+          console.log('youtube_id has value and state set')
+          this.setState({youtube: "yes"})
+        }        
       }
   }
 
 
   trailerPath = (passedMovie) =>{
 
-    console.log(this.state.selectedMovie)
-    if (this.props.trailer.length > 0 && this.props.trailer !== "kJQP7kiw5Fk" && passedMovie === null){ 
+    
+    if (this.props.trailer.length > 0 && this.props.trailer !== "kJQP7kiw5Fk" && passedMovie.youtube_id === null){ 
       console.log(passedMovie)
       adapter.updateYoutubeID(passedMovie.stream_id,passedMovie.id,this.props.trailer).then(data => data)
       console.log('trailer updated on backend') 
@@ -75,7 +88,6 @@ class InfoPage extends Component {
   }
 
   handleLoading = () => {
-    console.log(this.state.selectedMovie)
     if(this.props.loading) 
     {
       return <div>Loading Movies...</div>
@@ -83,7 +95,7 @@ class InfoPage extends Component {
     else {
       return (
       	<div>
-      		<MovieInfo path={this.trailerPath} selectedMovie = {this.state.selectedMovie} currentMovie={this.props.currentMovie} trailer={this.props.trailer} handler={this.handler}/>
+      		<MovieInfo youtube={this.state.youtube} path={this.trailerPath} selectedMovie = {this.state.selectedMovie} currentMovie={this.props.currentMovie} trailer={this.props.trailer} handler={this.handler}/>
       	</div>
       )
     }
@@ -115,7 +127,7 @@ const mapDispatchToProps = state => {
     },
 
     updateYoutubeID: (stream_id, movie_id, youtube_id) => {
-      return fetch(`https://cors-anywhere-dd.herokuapp.com/https://river-api.herokuapp.com/streams/${stream_id}/movies/${movie_id}`, {
+      return fetch(`https://cors-anywhere-dd.herokuapp.com/https://river-api.herokuapp.com/streams/${stream_id}/movies/${movie_id}`, {  
         method: 'PATCH',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({stream_id, movie_id, youtube_id})

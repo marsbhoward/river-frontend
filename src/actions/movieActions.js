@@ -6,6 +6,7 @@ const URL = PROXY + streamsAPI
 //	fetch(`http://www.omdbapi.com/?t=${movie}+&apikey=6b46131b`).then(response => {
 
 export function fetchMovies (id) {
+    let listOfMovieIds = []
     return (dispatch) => {
         dispatch({ type: 'LOADING_MOVIES'})
         fetch(`${URL}/${id}/movies`).then(response => {
@@ -25,16 +26,22 @@ export function fetchMovies (id) {
                     let movie_id = responseJSON[index].id
                     let title = movie.Title
                     if(responseJSON[index].title === null){   
-                        
-                        fetch(`${URL}/${id}/movies/${responseJSON[index].id}?title=${title}`, {
+                        /*fetch(`${URL}/${id}/movies/${responseJSON[index].id}?title=${title}`, {
                             method: 'PATCH',
                             headers: { "Content-Type": "application/json" },
                         }).then(response => {
-                            dispatch({ type: 'ADD_MOVIES', movies: listOfMovies})
+                            dispatch({ type: 'ADD_MOVIES', movies: listOfMovies, ids: listOfMovieIds})
                         })
+                        */
                     }
                     else {
-                        dispatch({ type: 'ADD_MOVIES', movies: listOfMovies})
+                        listOfMovieIds.push(movie_id)
+                        try {
+                            dispatch({ type: 'ADD_MOVIES', movies: listOfMovies, ids: listOfMovieIds})
+                        }
+                        catch(error){
+                            console.log(error)
+                        }
                     }  
                 })
             })

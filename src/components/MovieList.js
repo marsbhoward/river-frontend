@@ -52,7 +52,7 @@ class MovieList extends React.Component {
       return(
       <div>
         <br/>
-        <InfoPage streamID={this.props.streamID} movieID={this.state.movieID} currentMovie={showMovie} trailerID={this.trailerID}/>
+        <InfoPage movieIds={this.props.movieIds} streamID={this.props.streamID} movieID={this.state.movieID} currentMovie={showMovie} trailerID={this.trailerID}/>
         <div className="movie-list">
             {moviesList}
         </div>

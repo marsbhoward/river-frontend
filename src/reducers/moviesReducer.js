@@ -1,4 +1,4 @@
-const moviesReducer = (state = { movies: [], loading: false }, action) => {
+const moviesReducer = (state = { movies: [], ids:[], loading: false }, action) => {
    switch(action.type) {
     case 'LOADING_MOVIES':
       return {
@@ -10,6 +10,7 @@ const moviesReducer = (state = { movies: [], loading: false }, action) => {
       return {
         ...state,
         movies: action.movies,
+        ids:  action.ids,
         loading: false
       }    
       

@@ -20,7 +20,7 @@ class MoviesPage extends Component {
     } else {
       return (
       <div>
-      <MovieList streamID={this.props.handler} movieCards={this.props.movieCards} trailerID={this.trailerID} currentStream={this.currentStream}/>
+      <MovieList streamID={this.props.handler} movieCards={this.props.movieCards} movieIds={this.props.movieIds} trailerID={this.trailerID} currentStream={this.currentStream}/>
       </div>
       )
     }
@@ -41,6 +41,7 @@ class MoviesPage extends Component {
 const mapDispatchToProps = state => {
   return {
     movieCards: state.MoviesReducer.movies,
+    movieIds: state.MoviesReducer.ids,
     loading: state.MoviesReducer.loading
   }
 }
