@@ -26,13 +26,18 @@ export function fetchMovies (id) {
                     let movie_id = responseJSON[index].id
                     let title = movie.Title
                     if(responseJSON[index].title === null){   
-                        /*fetch(`${URL}/${id}/movies/${responseJSON[index].id}?title=${title}`, {
+                        fetch(`${URL}/${id}/movies/${responseJSON[index].id}?title=${title}`, {
                             method: 'PATCH',
                             headers: { "Content-Type": "application/json" },
                         }).then(response => {
+                            listOfMovieIds.push(movie_id)
+                        try {
                             dispatch({ type: 'ADD_MOVIES', movies: listOfMovies, ids: listOfMovieIds})
-                        })
-                        */
+                        }
+                        catch(error){
+                            console.log(error)
+                        }
+                    })
                     }
                     else {
                         listOfMovieIds.push(movie_id)

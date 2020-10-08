@@ -40,7 +40,7 @@ class MoviesPage extends Component {
 
 const mapDispatchToProps = state => {
   return {
-    movieCards: state.MoviesReducer.movies,
+    movieCards: state.MoviesReducer.movies.sort(),
     movieIds: state.MoviesReducer.ids,
     loading: state.MoviesReducer.loading
   }

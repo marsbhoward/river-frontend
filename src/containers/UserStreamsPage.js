@@ -54,7 +54,7 @@ class UserStreamsPage extends Component {
 
 const mapDispatchToProps = state => {
   return {
-    userStreams: state.StreamsReducer.streams,
+    userStreams: state.StreamsReducer.streams.sort(),
     loading: state.StreamsReducer.loading
   }
 }
