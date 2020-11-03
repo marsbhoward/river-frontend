@@ -6,6 +6,8 @@ import StreamList from '../components/StreamList'
 class StreamsPage extends Component {   
   
   componentDidMount() {
+    localStorage.setItem('currentStream', '');
+    localStorage.setItem('currentStreamName', '');
     this.props.fetchStreams()
   }
 //binds passed handler to StreamsPage handler
@@ -15,6 +17,7 @@ class StreamsPage extends Component {
   }
 // recieves id from passed handler
   handler = (id,name) => {
+    console.log('stream set')
     this.setState({
       currentStream: id,
       currentStreamName: name

@@ -242,9 +242,101 @@ code {
   border-width: .5px;
   border-color: darkgray;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
+
+  display: grid;  
 
 }
+
+.title{
+  font-size: 1.5em;
+}
+
+.stream-name{
+  
+}
+
+
+/*  streaming backgrounds  */
+
+.netflix{
+  background: #e50916;
+  opacity: 90%
+}
+.hulu{
+ background: #19e784;
+ opacity: 90% 
+}
+.hbo{
+  background: #9319e5;
+  opacity: 90%
+}
+.disney{
+  background: #0f4d9b;
+  opacity: 90%
+}
+.showtime{
+  background: #ff0102;
+  opacity: 90%
+}
+.prime{
+  background: #00a9e2;
+  opacity: 90%
+}
+.apple{
+  background: silver;
+  opacity: 90%
+}
+.epix{
+  background: #cbae63;
+  opacity: 90%
+}
+.starz{
+  background: black;
+  color: white;
+  opacity: 90%
+}
+.max{
+  background: #fab80f;
+  opacity: 90%
+}
+.dc{
+  background: #017af0;
+  opacity: 90%
+}
+.cbs{
+  background: #ff0102;
+  opacity: 90%
+}
+.tnt{
+  background: #ff0102;
+  opacity: 90%
+}
+.tbs{
+  background: #ff0102;
+  opacity: 90%
+}
+.amc{
+  background: #ff0102;
+  opacity: 90%
+}
+.shudder{
+  background: #ff0102;
+  opacity: 90%
+}
+.fx{
+  background: #ff0102;
+  opacity: 90%
+}
+.ifc{
+  background: #ff0102;
+  opacity: 90%
+}
+.syfy{
+  background: #ff0102;
+  opacity: 90%
+}
+/*  streaming backgrounds  */
 
 .show_Movie {
   text-align: center;
