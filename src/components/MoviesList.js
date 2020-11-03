@@ -15,9 +15,12 @@ export class MoviesList extends React.Component {
   render() {
     if (this.props.movie.title!== null){
       if (this.props.movie.title.toLowerCase().includes(this.props.search)){
+        console.log(this)
+        //return stream name from stream id using a switch
         return (
-          <div className="moiveCard">
+          <div className="movie-card">
             <h1> {this.props.movie.title} </h1>
+            <h3> {this.props.movie.stream_id}</h3>
           </div>
         )
       }
