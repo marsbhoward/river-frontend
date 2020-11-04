@@ -1,4 +1,6 @@
 import React from 'react';
+import InfoPage from '../containers/InfoPage'
+import {Link} from 'react-router-dom'
 
 
 
@@ -119,15 +121,30 @@ export class MoviesList extends React.Component {
     }
   }
 
+  handleOnClick = () => {
+    this.setState({
+    currentMovie: this.props.movie,
+    clicked: true
+    },function () {
+    this.props.handler(this.state.currentMovie,this.state.clicked,this.props.movieID);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    })    
+    
+  }
+
+
   render() {
     if (this.props.movie.title!== null){
       if (this.props.movie.title.toLowerCase().includes(this.props.search)){
-        console.log(this)
-        //return stream name from stream id using a switch
+        //onclick route to stream address ex: http://localhost:3000/streams/hbo/movies
+        //also render movie as if it was clicked on the movies page
         return (
           <div className= {this.state.style}>
             <p className= 'title'> {this.props.movie.title} </p>
-            <p className= 'stream-name'> {this.state.streamName}</p>
+            <Link to={`/streams/${this.state.streamName.toLowerCase()}/movies`}>
+              <p className= 'stream-name'> {this.state.streamName}</p>
+            </Link>
           </div>
         )
       }

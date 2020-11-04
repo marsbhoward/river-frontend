@@ -19,7 +19,8 @@ componentWillUnmount() {
 }
 
 
-
+//refactor to use session storage to grab current movie 
+//this will also help search be implemented
 handleOnClick = () => {
     this.setState({
     currentMovie: this.props.movie,
