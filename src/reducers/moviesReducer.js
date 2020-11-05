@@ -6,13 +6,13 @@ const moviesReducer = (state = { movies: [], ids:[], loading: false }, action) =
         movies: [...state.movies],
         loading: true
       }
-    case 'ADD_MOVIES':
+    case 'ADD_MOVIES':  
       return {
         ...state,
         movies: action.movies,
         ids:  action.ids,
         loading: false
-      }    
+      }  
       
     default:
       return state;

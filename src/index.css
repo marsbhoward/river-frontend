@@ -251,20 +251,21 @@ code {
 }
 
 .title{
+  position: static;
   font-size: 1.3em;
+  background: white;
+  height: 100%;
+  margin-top: 15% !important;
+  margin: 7%;
 }
 
 .stream-name{
+  display: block;
   background: inherit;
-  filter: brightness(12 5%);
   width: 100%;
   height: 100%;
+  color: black !important;
 }
-
-.stream-name:after{
-    background-color: rgba(0,0,0,0.2);  
-}
-
 
 /*  streaming backgrounds  */
 
@@ -279,7 +280,7 @@ code {
   background: #9319e5;
 }
 .disney{
-  background: #0f4d9b;
+  background: #9aedf6;
 }
 .showtime{
   background: #ff0102;

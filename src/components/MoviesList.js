@@ -135,15 +135,22 @@ export class MoviesList extends React.Component {
 
 
   render() {
-    if (this.props.movie.title!== null){
-      if (this.props.movie.title.toLowerCase().includes(this.props.search)){
+      const regex = /-/g;
+      let unslug = this.props.movie.slug.replace(regex, ' ')
+      unslug = unslug.toLowerCase()
+      if (unslug.includes(this.props.search)){
         //onclick route to stream address ex: http://localhost:3000/streams/hbo/movies
         //also render movie as if it was clicked on the movies page
+
+
+        //movie sends info to movieList and MovieList renders Infopage
+        //<InfoPage movieIds={this.props.movieIds} streamID={this.props.streamID} movieID={this.state.movieID} currentMovie={showMovie} trailerID={this.trailerID}/>
+
         return (
           <div className= {this.state.style}>
-            <p className= 'title'> {this.props.movie.title} </p>
+            <p className= 'title'> {unslug} </p>
             <Link to={`/streams/${this.state.streamName.toLowerCase()}/movies`}>
-              <p className= 'stream-name'> {this.state.streamName}</p>
+              <span className= 'stream-name'> {this.state.streamName}</span>
             </Link>
           </div>
         )
@@ -154,12 +161,6 @@ export class MoviesList extends React.Component {
         )
       }
     }
-    else{
-        return(
-          ""
-        )
-      }
-  }
 
 }
 

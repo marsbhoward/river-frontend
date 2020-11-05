@@ -2,7 +2,7 @@ import React from 'react';
 import '../index.css';
 import Movie from './Movie';
 import InfoPage from '../containers/InfoPage'
-import {withRouter} from 'react-router-dom';
+
 
 let showMovie
 let moviesList
@@ -61,4 +61,4 @@ class MovieList extends React.Component {
   }
 }
 
-export default withRouter(MovieList);
+export default (MovieList);

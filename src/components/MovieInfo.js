@@ -5,7 +5,6 @@ class MovieInfo extends Component {
 
   componentDidMount() {
     this.props.path(this.props.selectedMovie)
-    console.log(this)
   }
 
    componentDidUpdate(prevProps){

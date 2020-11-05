@@ -15,6 +15,7 @@ class InfoPage extends Component {
   } 
   
   componentDidMount() {
+    console.log(this)
     //pass stream id and movie id in props
     // only works with db complete reset
     let apiMovieID = this.props.movieIds[this.props.movieID-1]
@@ -120,14 +121,14 @@ const mapDispatchToProps = state => {
 
   const adapter = {
     getYoutubeID: (stream_id, movie_id) => {
-      return fetch(`https://cors-anywhere-dd.herokuapp.com/https://river-api.herokuapp.com/streams/${stream_id}/movies/${movie_id}`, {
+      return fetch(`https://river-api.herokuapp.com/streams/${stream_id}/movies/${movie_id}`, {
       headers: { "Content-Type": "application/json" },
     })
     .then(resp => resp.json())     
     },
 
     updateYoutubeID: (stream_id, movie_id, youtube_id) => {
-      return fetch(`https://cors-anywhere-dd.herokuapp.com/https://river-api.herokuapp.com/streams/${stream_id}/movies/${movie_id}`, {  
+      return fetch(`https://river-api.herokuapp.com/streams/${stream_id}/movies/${movie_id}`, {  
         method: 'PATCH',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({stream_id, movie_id, youtube_id})

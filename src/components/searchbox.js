@@ -16,6 +16,7 @@ class Searchbox extends Component {
   }
 
   componentDidMount() {
+    console.log(this)
     this.props.listMovies()
   }
 
@@ -31,9 +32,11 @@ class Searchbox extends Component {
     } 
     else { 
       let movieList
-      movieList = this.props.movieCards.filter((movie)=>{
+    
+
+      movieList = this.props.movieCards.filter(movieCard=>{
       if(this.state.search.length >= 3 ){
-            return movie
+            return movieCard
       }
       else{
         moviesList = ''

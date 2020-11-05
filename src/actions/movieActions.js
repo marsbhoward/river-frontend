@@ -60,7 +60,7 @@ export function fetchMovies (id) {
 export function listMovies(){
     return (dispatch) => {
         dispatch({ type: 'LOADING_MOVIES'})
-        fetch(`${PROXY}https://river-api.herokuapp.com/movies`).then(response => {
+        fetch(`https://river-api.herokuapp.com/movies`).then(response => {
             return response.json()
         }).then(responseJSON => {
             dispatch({ type: 'ADD_MOVIES', movies: responseJSON})
