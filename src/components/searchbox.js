@@ -16,7 +16,6 @@ class Searchbox extends Component {
   }
 
   componentDidMount() {
-    console.log(this)
     this.props.listMovies()
   }
 

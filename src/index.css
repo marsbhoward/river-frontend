@@ -264,7 +264,7 @@ code {
   background: inherit;
   width: 100%;
   height: 100%;
-  color: black !important;
+  color: white;
 }
 
 /*  streaming backgrounds  */
@@ -296,7 +296,6 @@ code {
 }
 .starz{
   background: black;
-  color: white;
 }
 .max{
   background: #fab80f;

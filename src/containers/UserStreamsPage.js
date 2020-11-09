@@ -7,8 +7,6 @@ import User from '../components/User';
 class UserStreamsPage extends Component {   
   
   componentDidMount() {
-    localStorage.setItem('currentStream', '');
-    localStorage.setItem('currentStreamName', '');
     this.props.fetchUserStreams(this.props.userId)
   }
 //binds passed handler to StreamsPage handler

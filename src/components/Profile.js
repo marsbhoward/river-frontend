@@ -16,6 +16,7 @@ export class Profile extends Component {
 
 // recieves id from passed handler
   handler = (id,name) => {
+    console.log(name)
     this.setState({
       currentStream: id,
       currentStreamName:name

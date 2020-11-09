@@ -6,7 +6,7 @@ import MovieList from '../components/MovieList'
 class MoviesPage extends Component {   
   
   componentDidMount() {
-  this.props.fetchMovies(this.props.handler)
+  this.props.fetchMovies(localStorage.currentStream)
   }
 
   trailerID = (trailer) => { 
@@ -29,7 +29,7 @@ class MoviesPage extends Component {
   render() {
     return (
       <div className="App">
-        <div className="banner-2">{this.props.streamName.toUpperCase()}</div>
+        <div className="banner-2">{localStorage.currentStreamName.toUpperCase()}</div>
         {this.handleLoading()}
       </div>
     );

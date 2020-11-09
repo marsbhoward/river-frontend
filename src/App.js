@@ -24,6 +24,11 @@ class App extends Component {
     }
   
   }
+
+componentDidMount() {
+  console.log(localStorage.currentStream)
+  console.log(localStorage.currentStreamName)
+}  
 // recieves id from passed handler and sets as state   
   handler = (id,name) => {
     console.log("handler set ", name)
@@ -31,9 +36,10 @@ class App extends Component {
       currentStream: id,
       currentStreamName: name
     }, function () {
-      localStorage.setItem( 'currentStream', id )
+     /* localStorage.setItem( 'currentStream', id )
       localStorage.setItem( 'currentStreamName', name )
-    })
+
+    */})
   }
 
   UserID = (UserID) => {
@@ -51,7 +57,7 @@ class App extends Component {
           <Route exact path="/profile" render={() => <ProfilePage userId={localStorage.currentUserID}/>} />
           <Route exact path='/streams' render={() => <StreamsPage handler={this.handler} />}  />
           <Route exact path='/userstreams' render={() => <UserStreamsPage handler={this.handler} userId={localStorage.currentUserID}/>}  />
-          <Route exact path='/streams/:id/movies' render={() => <MoviesPage handler= {this.state.currentStream} streamName= {this.state.currentStreamName}/>} />
+          <Route exact path='/streams/:id/movies' render={() => <MoviesPage handler= {localStorage.currentStream} streamName= {localStorage.currentStreamName}/>} />
         </div>
       </Router>
     );

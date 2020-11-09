@@ -17,7 +17,9 @@ class MovieList extends React.Component {
   constructor(props){
     super(props)
     this.handler = this.handler.bind(this);
-    this.state = {clicked: false}
+    this.state = {
+      clicked: ''
+    }
 
   }
 

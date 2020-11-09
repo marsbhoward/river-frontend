@@ -1,144 +1,187 @@
-import React from 'react';
+import React,{ useState, useEffect } from 'react';
 import InfoPage from '../containers/InfoPage'
 import {Link} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 
 
-
-export class MoviesList extends React.Component {
+function MoviesList (props){
+  const history = useHistory();
 //binds passed handler to StreamsList handler
-  constructor(props){
-    super(props)
+  const [streamName, setStreamName] = useState('');
+  const [streamId, setStreamId] = useState('');
+  const [streamSlug, setStreamSlug] = useState('');
+  const [style, setStyle] = useState('');
+       
 
-    this.state={
-      streamName:'',
-      style:''
-    };    
-  }
 
-  componentDidMount() {
-    switch (this.props.movie.stream_id) {
+  useEffect(() => {
+    
+    switch (props.movie.stream_id) {
       case 1:
         // statements_1
-        this.setState({streamName:"Netflix"})
-        this.setState({style:"movie-card netflix"})
+        setStreamName('Netflix')
+        setStyle('movie-card netflix')
+        setStreamSlug('netflix');
+        setStreamId(1);
         break;
       case 2:
         // statements_1
-        this.setState({streamName:"Hulu"})
-        this.setState({style:"movie-card hulu"})
+        setStreamName("Hulu")
+        setStyle("movie-card hulu")
+        setStreamId (2);
+        setStreamSlug ('hulu');                
         break;
       case 3:
         // statements_1
-        this.setState({streamName:"Amazon"})
-        this.setState({style:"movie-card prime"})
+        setStreamName("Amazon")
+        setStyle("movie-card prime")
+        setStreamId(3);
+        setStreamSlug('amazon');                  
         break;
       case 4:
         // statements_1
-        this.setState({streamName:"HBO Max"})
-        this.setState({style:"movie-card hbo"})
+        setStreamName("HBO Max")
+        setStyle("movie-card hbo")
+        setStreamId (4);
+        setStreamSlug ('hbo');                  
         break;
       case 5:
         // statements_1
-        this.setState({streamName:"Disney+"})
-        this.setState({style:"movie-card disney"})
+        setStreamName("Disney+")
+        setStyle("movie-card disney")
+        setStreamId (5);
+        setStreamSlug ('disney');                  
         break;
       case 6:
         // statements_1
-        this.setState({streamName:"Showtime"})
-        this.setState({style:"movie-card showtime"})
+        setStreamName("Showtime")
+        setStyle("movie-card showtime")
+        setStreamId (6);
+        setStreamSlug ('showtime');                  
         break;
       case 7:
         // statements_1
-        this.setState({streamName:"Starz"})
-        this.setState({style:"movie-card starz"})
+        setStreamName("Starz")
+        setStyle("movie-card starz")
+        setStreamId (7);
+        setStreamSlug ('starz');                  
         break;
       case 8:
         // statements_1
-        this.setState({streamName:"Cinimax"})
-        this.setState({style:"movie-card max"})
+        setStreamName("Cinimax")
+        setStyle("movie-card max")
+        setStreamId (8);
+        setStreamSlug ('cinimax');                  
         break;
       case 9:
         // statements_1
-        this.setState({streamName:"DC Universe"})
-        this.setState({style:"movie-card dc"})
+        setStreamName("DC Universe")
+        setStyle("movie-card dc")
+        setStreamId (9);
+        setStreamSlug ('dc');                  
         break;
       case 10:
         // statements_1
-        this.setState({streamName:"Apple TV"})
-        this.setState({style:"movie-card apple"})
+        setStreamName("Apple TV")
+        setStyle("movie-card apple")
+        setStreamId (10);
+        setStreamSlug ('apple');                  
         break;
       case 11:
         // statements_1
-        this.setState({streamName:"Epix"})
-        this.setState({style:"movie-card epix"})
+        setStreamName("Epix")
+        setStyle("movie-card epix")
+        setStreamId (11);
+        setStreamSlug ('epix');                  
         break;
       case 12:
         // statements_1
-        this.setState({streamName:"CBS"})
-        this.setState({style:"movie-card cbs"})
+        setStreamName("CBS")
+        setStyle("movie-card cbs")
+        setStreamId (12);
+        setStreamSlug ('cbs');                  
         break;
       case 13:
         // statements_1
-        this.setState({streamName:"TBS"})
-        this.setState({style:"movie-card tbs"})
+        setStreamName("TBS")
+        setStyle("movie-card tbs")
+        setStreamId (13);
+        setStreamSlug ('tbs');                  
         break;
       case 14:
         // statements_1
-        this.setState({streamName:"TNT"})
-        this.setState({style:"movie-card tnt"})
+        setStreamName("TNT")
+        setStyle("movie-card tnt")
+        setStreamId (14);
+        setStreamSlug ('tnt');                  
         break;
       case 15:
         // statements_1
-        this.setState({streamName:"Shudder"})
-        this.setState({style:"movie-card shudder"})
+        setStreamName("Shudder")
+        setStyle("movie-card shudder")
+        setStreamId (15);
+        setStreamSlug ('shudder');                  
         break;
       case 16:
         // statements_1
-        this.setState({streamName:"AMC"})
-        this.setState({style:"movie-card amc"})
+        setStreamName("AMC")
+        setStyle("movie-card amc")
+        setStreamId (16);
+        setStreamSlug ('amc');                  
         break;
       case 17:
         // statements_1
-        this.setState({streamName:"FX"})
-        this.setState({style:"movie-card fx"})
+        setStreamName("FX")
+        setStyle("movie-card fx")
+        setStreamId (17);
+        setStreamSlug ('fx');                  
         break;
       case 18:
         // statements_1
-        this.setState({streamName:"SYFY"})
-        this.setState({style:"movie-card stfy"})
+        setStreamName("SYFY")
+        setStyle("movie-card stfy")
+        setStreamId (18);
+        setStreamSlug ('syfy');                  
         break;
       case 19:
         // statements_1
-        this.setState({streamName:"IFC"})
-        this.setState({style:"movie-card ifc"})
+        setStreamName("IFC")
+        setStyle("movie-card ifc")
+        setStreamId (19);
+        setStreamSlug ('ifc');                          
         break;                                                                                                
       default:
         // statements_def
-        this.setState({streamName:""})
-        this.setState({style:"movie-card"})
+        setStreamName("")
+        setStyle("movie-card")          
         break;
-    }
+      }
+    });
+
+  function handleMovie() {
+    history.push({
+      pathname: `/streams/${streamName.toLowerCase()}/movies`,
+      state: { clicked: true }    
+    })
   }
 
-  handleOnClick = () => {
-    this.setState({
-    currentMovie: this.props.movie,
-    clicked: true
-    },function () {
-    this.props.handler(this.state.currentMovie,this.state.clicked,this.props.movieID);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+  function handleStream() {
+    history.push({
+      pathname: `/streams/${currentStream.toLowerCase()}/movies`,   
     })    
-    
-  }
+    localStorage.setItem('currentStream', streamId);
+    localStorage.setItem('currentStreamName', streamSlug);                  
+  }  
 
 
-  render() {
+
+
       const regex = /-/g;
-      let unslug = this.props.movie.slug.replace(regex, ' ')
+      let unslug = props.movie.slug.replace(regex, ' ')
+      let currentStream = streamName
       unslug = unslug.toLowerCase()
-      if (unslug.includes(this.props.search)){
+      if (unslug.includes(props.search)){
         //onclick route to stream address ex: http://localhost:3000/streams/hbo/movies
         //also render movie as if it was clicked on the movies page
 
@@ -146,12 +189,21 @@ export class MoviesList extends React.Component {
         //movie sends info to movieList and MovieList renders Infopage
         //<InfoPage movieIds={this.props.movieIds} streamID={this.props.streamID} movieID={this.state.movieID} currentMovie={showMovie} trailerID={this.trailerID}/>
 
+
+      /* alternative
+      this.props.history.push({
+        pathname: '/',
+        state: {
+          successMessage: this.generateSuccessMessage(payload)
+        }
+      });      
+
+       */
         return (
-          <div className= {this.state.style}>
-            <p className= 'title'> {unslug} </p>
-            <Link to={`/streams/${this.state.streamName.toLowerCase()}/movies`}>
-              <span className= 'stream-name'> {this.state.streamName}</span>
-            </Link>
+          <div className= {style}>
+              <p onClick= {handleMovie} className= 'title'> {unslug} </p>
+            
+              <span onClick= {handleStream} className= 'stream-name'> {streamName}</span>
           </div>
         )
       }
@@ -161,7 +213,6 @@ export class MoviesList extends React.Component {
         )
       }
     }
-
-}
+ 
 
 export default MoviesList;
