@@ -159,7 +159,8 @@ export class UserStream extends Component {
 
     handleOnClick = () => {
     //returns the selected Stream id to streamsList
-    console.log(this)
+    console.log('clicked')
+    console.log(this.state.streamName)
     //this.props.handler(this.props.stream.stream_id, this.props.stream.name)
     localStorage.setItem('currentStream',  this.props.stream.stream_id)
     localStorage.setItem('currentStreamName', this.state.streamName)

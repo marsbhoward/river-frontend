@@ -9,7 +9,7 @@ export function fetchMovies (id) {
     let listOfMovieIds = []
     return (dispatch) => {
         dispatch({ type: 'LOADING_MOVIES'})
-        fetch(`${URL}/${id}/movies`).then(response => {
+        fetch(`${streamsAPI}/${id}/movies`).then(response => {
             return response.json()
         }).then(responseJSON => {
             Promise.all(
@@ -66,4 +66,22 @@ export function listMovies(){
             dispatch({ type: 'ADD_MOVIES', movies: responseJSON})
         })
     }
+}
+
+//send specific movie to omdb and retrieve all the data
+// for use with movie search
+export function fetchTitle(movieInfo){
+    return (dispatch) => {
+            dispatch({ type: 'LOADING_MOVIES'})
+            fetch(`https://www.omdbapi.com/?t=${movieInfo.slug}&y=${movieInfo.year}+&apikey=6b46131b`).then(response => {
+                return response.json()
+            }).then(responseJSON => {
+                            try {
+                                dispatch({ type: 'ADD_MOVIES', currentTitle: responseJSON, ids: movieInfo.id})
+                            }
+                            catch(error){
+                                console.log(error)
+                            }
+                        })
+        }
 }

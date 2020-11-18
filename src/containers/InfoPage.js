@@ -15,11 +15,10 @@ class InfoPage extends Component {
   } 
   
   componentDidMount() {
-    console.log(this)
     //pass stream id and movie id in props
     // only works with db complete reset
-    let apiMovieID = this.props.movieIds[this.props.movieID-1]
-
+    let apiMovieID = localStorage.currentMovie 
+    console.log('getting youtube id')
     adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
 
     //if current movie does not have a youtube_id on the backend
@@ -31,10 +30,9 @@ class InfoPage extends Component {
   }
 
   componentDidUpdate(prevProps){
-
   	if (this.props.currentMovie.Title !== prevProps.currentMovie.Title)
   	{
-      let apiMovieID = this.props.movieIds[this.props.movieID-1] 
+      let apiMovieID = localStorage.currentMovie 
       adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
   	}
   }
@@ -43,6 +41,8 @@ class InfoPage extends Component {
         this.setState({
           selectedMovie: selectedMovie
         })
+
+        //localStorage.setItem('currentMovie',selectedMovie)
 
       if (selectedMovie === null) {
         console.log('component did not update')
@@ -56,7 +56,6 @@ class InfoPage extends Component {
           this.setState({youtube: null})
         }
         else {
-          console.log('youtube_id has value and state set')
           this.setState({youtube: "yes"})
         }        
       }
@@ -67,7 +66,6 @@ class InfoPage extends Component {
 
     
     if (this.props.trailer.length > 0 && this.props.trailer !== "kJQP7kiw5Fk" && passedMovie.youtube_id === null){ 
-      console.log(passedMovie)
       adapter.updateYoutubeID(passedMovie.stream_id,passedMovie.id,this.props.trailer).then(data => data)
       console.log('trailer updated on backend') 
     }
@@ -75,7 +73,7 @@ class InfoPage extends Component {
       console.log('error loading video from youtube')
     }
     else {
-      console.log('trailer was loaded from backend')
+      console.log('trailer was loaded from backend') 
     }
   }
 

@@ -22,10 +22,11 @@ componentWillUnmount() {
 //refactor to use session storage to grab current movie 
 //this will also help search be implemented
 handleOnClick = () => {
+    console.log(this)
     this.setState({
     currentMovie: this.props.movie,
     clicked: true
-    },function () {
+    },function () {      
     this.props.handler(this.state.currentMovie,this.state.clicked,this.props.movieID);
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;

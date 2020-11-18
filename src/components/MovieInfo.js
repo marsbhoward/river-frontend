@@ -4,13 +4,14 @@ import Video from './Video';
 class MovieInfo extends Component {
 
   componentDidMount() {
-    this.props.path(this.props.selectedMovie)
+    this.props.path(this.props.currentMovie)
   }
 
    componentDidUpdate(prevProps){
 
     if (this.props.currentMovie.Title !== prevProps.currentMovie.Title && this.props.selectedMovie === "")
     {
+      console.log('different title')
       this.props.path(this.props.selectedMovie)
     } 
   }
@@ -22,11 +23,11 @@ class MovieInfo extends Component {
 
     if (this.props.youtube !== null && this.props.selectedMovie !== null){
       fullSrc = 'https://www.youtube.com/embed/' + this.props.selectedMovie.youtube_id
-      console.log('selectedMovie used')
+      console.log('trailer was not fetched from youtube because it youtube id is present')
     }
     else{
       fullSrc = 'https://www.youtube.com/embed/' + this.props.trailer
-      console.log('selectedMovie not used')
+      console.log('trailer fetched from youtube')
     }
     let errorMsg
 

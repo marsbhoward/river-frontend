@@ -1,11 +1,11 @@
 import React,{ useState, useEffect } from 'react';
 import InfoPage from '../containers/InfoPage'
-import {Link} from 'react-router-dom'
-import { useHistory } from "react-router-dom";
+import { useHistory, Link, useLocation } from "react-router-dom";
 
 
 
 function MoviesList (props){
+  const location = useLocation();
   const history = useHistory();
 //binds passed handler to StreamsList handler
   const [streamName, setStreamName] = useState('');
@@ -160,10 +160,21 @@ function MoviesList (props){
     });
 
   function handleMovie() {
-    history.push({
+//need to set current movie for info page
+    localStorage.setItem('currentStream', streamId);
+    localStorage.setItem('currentStreamName', streamSlug);
+    localStorage.setItem('currentMovie', props.movie.id)
+
+    /*
+      history.push({
       pathname: `/streams/${streamName.toLowerCase()}/movies`,
-      state: { clicked: true }    
+      state: { clicked: true }
     })
+    */
+    
+    //  window.history.pushState({ 'clicked': true },'',`/streams/${streamName.toLowerCase()}/movies`)
+    //  window.location.reload();
+
   }
 
   function handleStream() {
@@ -201,7 +212,17 @@ function MoviesList (props){
        */
         return (
           <div className= {style}>
+              <Link to = {
+                {
+                  pathname: '/streams/${streamName.toLowerCase()}/movies',
+                  state: {
+                    clicked: true,
+                    currentMovie: props.movie 
+                  }
+                }
+              }>
               <p onClick= {handleMovie} className= 'title'> {unslug} </p>
+              </Link>
             
               <span onClick= {handleStream} className= 'stream-name'> {streamName}</span>
           </div>

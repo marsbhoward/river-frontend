@@ -29,7 +29,10 @@ class Searchbox extends Component {
     if(this.props.loading) {
       return <div>Loading Titles...</div>
     } 
-    else { 
+    else {
+      if (this.props.movieCards === undefined){
+        window.location.reload();
+      } 
       let movieList
     
 

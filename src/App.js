@@ -26,8 +26,6 @@ class App extends Component {
   }
 
 componentDidMount() {
-  console.log(localStorage.currentStream)
-  console.log(localStorage.currentStreamName)
 }  
 // recieves id from passed handler and sets as state   
   handler = (id,name) => {
