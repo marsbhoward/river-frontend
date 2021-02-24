@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { listMovies } from '../actions/movieActions'
 import MoviesList from './MoviesList';
+import { Auth0Context } from "../react-auth0-spa";
 
 let  moviesList
 
@@ -11,12 +12,18 @@ class Searchbox extends Component {
 
     this.state={
       search:'',
-      MoiveData: ""
+      MoiveData: "",
+      open: false
     };
   }
 
   componentDidMount() {
     this.props.listMovies()
+  }
+
+  handleClick=()=>{
+    this.setState({open:true})
+    console.log('true')
   }
 
   searchMovie=(event)=>{
@@ -52,9 +59,16 @@ class Searchbox extends Component {
   }
 
   render(){
+    let searchState=''
+    if (this.state.open == false){
+      searchState = <p className={'searchBar'} onClick={this.handleClick}> Search </p>
+    } 
+    else{
+      searchState = <input type="text" id='name-input' className="searchBar" placeholder="Search by title" onChange={(e)=>this.searchMovie(e)} />
+    }
   	return(
   		<div>
-  			<input type="text" id='name-input' className="input" placeholder="Search by title"  onChange={(e)=>this.searchMovie(e)} />
+  			{searchState}
   			{this.handleLoading()}
         <div className="movie-list">
             {moviesList}

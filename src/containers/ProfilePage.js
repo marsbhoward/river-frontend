@@ -151,7 +151,7 @@ class ProfilePage extends Component {
           <h2>Hi, {user.name}</h2>
           <p>email: {user.email}</p>
           <div className= "search">
-            <Searchbox/>
+            
           </div>
           <Button onClick={this.handleClick} color='black'>Edit Streams</Button>
           {this.handleLoading(this.props.userId)}

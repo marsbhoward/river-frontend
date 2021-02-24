@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth0 } from "../react-auth0-spa";
 import { withRouter } from 'react-router-dom'
+import Searchbox from '../components/searchbox'
 
 const NavBar = withRouter(({ history }) => {
   const { isAuthenticated, logout } = useAuth0();
@@ -10,7 +11,8 @@ const NavBar = withRouter(({ history }) => {
 	<div className="banner">
 	    <span className="homeButton" onClick={() => { history.push('/') }}>  
 	      RIVER
-	    </span> 	
+	    </span>
+      <Searchbox/>
 	</div>
 
     <div className="footer">

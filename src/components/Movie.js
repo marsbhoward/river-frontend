@@ -10,28 +10,32 @@ constructor(props){
   this.state = {movieClass: "movie"}
 }  
 
-componentDidMount() {
-  window.addEventListener("scroll", this.handeleScroll);
+componentDidUpdate() {
+window.scrollTo(0, 0);   
 }
 
 componentWillUnmount() {
-    window.removeEventListener("scroll", this.handeleScroll);
+    
 }
 
 
 //refactor to use session storage to grab current movie 
 //this will also help search be implemented
-handleOnClick = () => {
-    console.log(this)
+  handleOnClick = () => {
     this.setState({
     currentMovie: this.props.movie,
     clicked: true
     },function () {      
     this.props.handler(this.state.currentMovie,this.state.clicked,this.props.movieID);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    this.scrollToTop()
     })    
     
+  }
+
+
+  scrollToTop = () => {
+    console.log('to the top')
+    window.scrollTo(0, 0);    
   }
  
   mouseEnter = () => {
