@@ -4,6 +4,7 @@ import {
   Route
 } from 'react-router-dom';
 import NavBar from './components/NavBar';
+import HomeBar from './components/HomeBar';
 import ProfilePage from './containers/ProfilePage';
 import StreamsPage from './containers/StreamsPage';
 import UserStreamsPage from './containers/UserStreamsPage';
@@ -50,12 +51,11 @@ componentDidMount() {
     return (
       <Router>
         <div className = "page">
-          <Route path="/" render={() => <NavBar/> } />
-          <Route exact path="/" render={() => <HomePage userID={this.UserID}/>} />
-          <Route exact path="/profile" render={() => <ProfilePage userId={localStorage.currentUserID}/>} />
-          <Route exact path='/streams' render={() => <StreamsPage handler={this.handler} />}  />
-          <Route exact path='/userstreams' render={() => <UserStreamsPage handler={this.handler} userId={localStorage.currentUserID}/>}  />
-          <Route exact path='/streams/:id/movies' render={() => <MoviesPage handler= {localStorage.currentStream} streamName= {localStorage.currentStreamName}/>} />
+          <Route exact path="/" render={() => <div><HomeBar/> <HomePage userID={this.UserID}/> </div>} />
+          <Route exact path="/profile" render={() => <div><NavBar/> <ProfilePage userId={localStorage.currentUserID}/> </div>}  />
+          <Route exact path='/streams' render={() => <div><NavBar/> <StreamsPage handler={this.handler} />} </div>} />
+          <Route exact path='/userstreams' render={() => <div><NavBar/> <UserStreamsPage handler={this.handler} userId={localStorage.currentUserID}/> </div>}  />
+          <Route exact path='/streams/:id/movies' render={() => <div><NavBar/> <MoviesPage handler= {localStorage.currentStream} streamName= {localStorage.currentStreamName}/> </div>} />
         </div>
       </Router>
     );

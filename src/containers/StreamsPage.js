@@ -10,6 +10,11 @@ class StreamsPage extends Component {
     localStorage.setItem('currentStreamName', '');
     this.props.fetchStreams()
   }
+
+  componentDidUpdate(){
+    localStorage.setItem('currentStream', '');
+    localStorage.setItem('currentStreamName', '');    
+  }
 //binds passed handler to StreamsPage handler
   constructor(props){
     super(props)

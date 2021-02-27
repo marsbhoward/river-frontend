@@ -26,6 +26,8 @@ class ProfilePage extends Component {
 
 
   componentDidUpdate(prevProps){
+    localStorage.setItem('currentStream', ' ');
+    localStorage.setItem('currentStreamName', ' ');
   }
 
   fetchUserStreams = (id) => {

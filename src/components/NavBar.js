@@ -6,18 +6,24 @@ import Searchbox from '../components/searchbox'
 const NavBar = withRouter(({ history }) => {
   const { isAuthenticated, logout } = useAuth0();
 
+  function clearStream(){
+    localStorage.setItem('currentStream', ' ');
+    localStorage.setItem('currentStreamName', ' '); 
+  }
+
   return (
   	<div className="NavBar">
-	<div className="banner">
-	    <span className="homeButton" onClick={() => { history.push('/') }}>  
+	<div className="bannerBar">
+	    <div className="homeButton" onClick={() => {clearStream(); history.push('/') }}>  
 	      RIVER
-	    </span>
-      <Searchbox/>
+	    </div>
+      <div>{localStorage.currentStreamName.toUpperCase()}</div>
+      <Searchbox/>      
 	</div>
 
     <div className="footer">
-      {isAuthenticated && <span className="profileButton" onClick={() => { history.push('/profile') }}>Profile</span>}
-      {isAuthenticated && <span className="streamsButton" onClick={() => { history.push('/userstreams') }}>Streams</span>}
+      {isAuthenticated && <span className="profileButton" onClick={() => {clearStream(); history.push('/profile') }}>Profile</span>}
+      {isAuthenticated && <span className="streamsButton" onClick={() => {clearStream(); history.push('/userstreams') }}>Streams</span>}
       {isAuthenticated && <span className="logoutButton" onClick={() => logout()}>Log Out</span>}    
            
     </div>

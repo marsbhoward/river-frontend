@@ -82,7 +82,7 @@ const MoviesPage = (props) => {
   
     return (
       <div className="App">
-        <div className="banner-2">{localStorage.currentStreamName.toUpperCase()}</div>
+        
         {handleLoading()}
       </div>
     );
