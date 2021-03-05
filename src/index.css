@@ -60,7 +60,7 @@ code {
 }
 
 .searchBar{
-  margin-top: 10%;
+  margin-top: 6vh !important;
 }
 
 .bannerBar > div{
@@ -245,6 +245,25 @@ code {
 .done-button{
   margin-bottom: 5% !important;
 }
+.searchBackground{
+  width: inherit;
+  position: fixed;
+  background: linear-gradient(
+45deg
+, black, transparent);
+  right: 0;
+  height: 85%;
+}
+.search-list {
+  overflow: auto;
+  position: fixed;
+  text-align: center;
+  display: grid;
+  right: 0;
+  max-height: 85%;
+  grid-template-columns: auto auto auto;
+  justify-content: center;
+}
 
 .movie-list {
   text-align: center;
@@ -265,13 +284,16 @@ code {
   margin: 0%;
   text-align: center;
   background: gainsboro;
-  height: 200px;
+  min-height: 200px;
+  max-height: 200px;
   width: 120px;
   border-style: solid;
   border-width: .5px;
   border-color: darkgray;
   justify-content: center;
   align-items: center;
+  height: -webkit-fill-available;
+  overflow: hidden;
 
   display: grid;
   grid-template-rows: 80% 20%;
@@ -289,7 +311,7 @@ code {
 }
 
 .stream-name{
-  display: block;
+  display: table;
   background: inherit;
   width: 100%;
   height: 100%;

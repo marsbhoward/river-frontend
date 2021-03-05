@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import UserStream from '../components/UserStream';
-
+//needs user check with redirect
 
 export class Profile extends Component {
   

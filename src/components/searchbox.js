@@ -17,8 +17,16 @@ class Searchbox extends Component {
     };
   }
 
+
   componentDidMount() {
     this.props.listMovies()
+  }
+
+  loseFocus=()=>{
+    this.setState({
+      search:'',
+      open: false
+    })  
   }
 
   handleClick=()=>{
@@ -34,7 +42,7 @@ class Searchbox extends Component {
 
   handleLoading = () => {
     if(this.props.loading) {
-      return <div>Loading Titles...</div>
+      return ' '
     } 
     else {
       if (this.props.movieCards === undefined){
@@ -52,7 +60,8 @@ class Searchbox extends Component {
       }        
       }).map((movie,index)=>{
         moviesList = this.props.movieCards.map((movie, index) => {
-          return <MoviesList key={index} search={this.state.search}  movie={movie} movieID={(index+1)}/>
+          return <MoviesList key={index} search={this.state.search}  movie={movie} movieID={(index+1)} cardStyle='height: -webkit-fill-available;
+          overflow: hidden;'/>
         })
       })
     }
@@ -60,18 +69,23 @@ class Searchbox extends Component {
 
   render(){
     let searchState=''
-    if (this.state.open == false){
+    let setClass = ''
+    if (this.state.open === false){
       searchState = <p className={'searchBar'} onClick={this.handleClick}> Search </p>
+      setClass= ''
     } 
     else{
-      searchState = <input type="text" id='name-input' className="searchBar" placeholder="Search by title" onChange={(e)=>this.searchMovie(e)} />
+      searchState = <input type="text" id='name-input' className="searchBar" placeholder="Search by title" onBlur={this.loseFocus} onChange={(e)=>this.searchMovie(e)} />
+      setClass = 'searchBackground'
     }
   	return(
   		<div>
   			{searchState}
   			{this.handleLoading()}
-        <div className="movie-list">
-            {moviesList}
+        <div className={setClass}>
+          <div className="search-list">
+              {moviesList}
+          </div>
         </div>
   		</div>
   	)

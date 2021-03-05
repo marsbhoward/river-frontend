@@ -10,6 +10,7 @@ let moviesList
 
 class MovieList extends React.Component {
   componentDidMount() {
+    console.log(this)
     if (this.props.passedMovie !== undefined){
       this.setCurrentMovieState()
     }
