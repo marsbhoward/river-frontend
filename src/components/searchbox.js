@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import { listMovies } from '../actions/movieActions'
 import MoviesList from './MoviesList';
 import { Auth0Context } from "../react-auth0-spa";
+import { findDOMNode } from 'react-dom';
+import $ from 'jquery'; 
 
 let  moviesList
+//close sereach area if input box lose fousand input box is empty
 
 class Searchbox extends Component {
  constructor(){
@@ -15,23 +18,26 @@ class Searchbox extends Component {
       MoiveData: "",
       open: false
     };
-  }
 
+  this.loseFocus = this.loseFocus.bind(this)
+  }
 
   componentDidMount() {
     this.props.listMovies()
   }
 
+
   loseFocus=()=>{
+    console.log('done')
     this.setState({
       search:'',
       open: false
-    })  
+    })      
+
   }
 
   handleClick=()=>{
     this.setState({open:true})
-    console.log('true')
   }
 
   searchMovie=(event)=>{
@@ -70,19 +76,22 @@ class Searchbox extends Component {
   render(){
     let searchState=''
     let setClass = ''
+    
     if (this.state.open === false){
       searchState = <p className={'searchBar'} onClick={this.handleClick}> Search </p>
       setClass= ''
     } 
     else{
-      searchState = <input type="text" id='name-input' className="searchBar" placeholder="Search by title" onBlur={this.loseFocus} onChange={(e)=>this.searchMovie(e)} />
+      searchState = <input type="text" id='name-input' className="searchBar" placeholder="Search by title"  onChange={(e)=>this.searchMovie(e)} />
+      
       setClass = 'searchBackground'
     }
   	return(
-  		<div>
+      /*onBlur={this.loseFocus}> */
+  		<div >
   			{searchState}
   			{this.handleLoading()}
-        <div className={setClass}>
+        <div className={setClass} >
           <div className="search-list">
               {moviesList}
           </div>

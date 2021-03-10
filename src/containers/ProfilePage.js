@@ -6,6 +6,7 @@ import Searchbox from '../components/searchbox'
 import { Auth0Context } from "../react-auth0-spa";
 import 'semantic-ui-css/semantic.min.css'
 import { Button } from 'semantic-ui-react'
+import $ from 'jquery'; 
 
 
 let selectList = []
@@ -35,6 +36,11 @@ class ProfilePage extends Component {
       userID: id
     })
   }
+
+  findTarget = (e) => {
+    // access to e.target here
+    console.log($(e.currentTarget)[0].className);
+}
 
   handleSwitch = (dom,stream) => {
     switch (stream.selected) {
@@ -148,7 +154,7 @@ class ProfilePage extends Component {
     }
     else{
       return ( 
-        <div className= "profile">
+        <div className= "profile" >
           <img src={user.picture} alt="Profile" />
           <h2>Hi, {user.name}</h2>
           <p>email: {user.email}</p>
