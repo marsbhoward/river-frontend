@@ -7,16 +7,17 @@ import { findDOMNode } from 'react-dom';
 import $ from 'jquery'; 
 
 let  moviesList
+let count = 0
 //close sereach area if input box lose fousand input box is empty
 
 class Searchbox extends Component {
- constructor(){
-    super();
+ constructor(props){
+    super(props);
 
     this.state={
       search:'',
       MoiveData: "",
-      open: false
+      open: this.props.sBoxOpenState
     };
 
   this.loseFocus = this.loseFocus.bind(this)
@@ -24,17 +25,18 @@ class Searchbox extends Component {
 
   componentDidMount() {
     this.props.listMovies()
+    console.log(this.props.sBoxOpenState)
+  }
+
+  componentDidUpdate(){
+    
   }
 
 
-  loseFocus=()=>{
-    console.log('done')
-    this.setState({
-      search:'',
-      open: false
-    })      
+  loseFocus=(target)=>{
 
   }
+
 
   handleClick=()=>{
     this.setState({open:true})
@@ -82,17 +84,18 @@ class Searchbox extends Component {
       setClass= ''
     } 
     else{
-      searchState = <input type="text" id='name-input' className="searchBar" placeholder="Search by title"  onChange={(e)=>this.searchMovie(e)} />
+      searchState = <input type="text" id='name-input' className="searchBar" placeholder="Search by title" onClick={this.props.pointer} onChange={(e)=>this.searchMovie(e)} />
       
       setClass = 'searchBackground'
     }
+
   	return(
-      /*onBlur={this.loseFocus}> */
-  		<div >
+      /* onClick={() => this.loseFocus(this.props.target)} */
+  		<div onBlur= {() => this.loseFocus(this.props.target)}>
   			{searchState}
   			{this.handleLoading()}
         <div className={setClass} >
-          <div className="search-list">
+          <div className="search-list" onClick={this.props.pointer} >
               {moviesList}
           </div>
         </div>

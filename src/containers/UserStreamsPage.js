@@ -52,7 +52,7 @@ class UserStreamsPage extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App" onClick={this.props.pointer}>
         <User/>
         {this.handleLoading(this.props.userId)}
       </div>

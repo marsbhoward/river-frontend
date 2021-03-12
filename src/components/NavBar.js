@@ -3,24 +3,23 @@ import { useAuth0 } from "../react-auth0-spa";
 import { withRouter } from 'react-router-dom'
 import Searchbox from '../components/searchbox'
 
-const NavBar = withRouter (({ history, props}) => {
+const NavBar  = withRouter (({ history, ...props}) => {
   const { isAuthenticated, logout } = useAuth0();
 
   function clearStream(){
     localStorage.setItem('currentStream', ' ');
     localStorage.setItem('currentStreamName', ' '); 
-    //where is handler?
-    console.log(props)
   }
 
+
   return (
-  	<div className="NavBar">
+  	<div className="NavBar" >
 	<div className="bannerBar">
 	    <div className="homeButton" onClick={() => {clearStream(); history.push('/') }}>  
 	      RIVER
 	    </div>
       <div>{localStorage.currentStreamName.toUpperCase()}</div>
-      <Searchbox />      
+      <Searchbox sBoxOpenState={props.sBoxOpenState} pointer={props.pointer}/>    
 	</div>
 
     <div className="footer">

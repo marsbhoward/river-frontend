@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserStreams } from '../actions/userStreamActions'
 import Profile from '../components/Profile';
-import Searchbox from '../components/searchbox'
 import { Auth0Context } from "../react-auth0-spa";
 import 'semantic-ui-css/semantic.min.css'
 import { Button } from 'semantic-ui-react'
@@ -139,7 +138,7 @@ class ProfilePage extends Component {
 
     if (this.state.streamEdit === true){
       return ( 
-        <div className= "profile">
+        <div className= "profile" onClick={this.props.pointer}>
           <img src={user.picture} alt="Profile" />
           <h2>Hi, {user.name}</h2>
           <p>email: {user.email}</p>
@@ -154,7 +153,7 @@ class ProfilePage extends Component {
     }
     else{
       return ( 
-        <div className= "profile" >
+        <div className= "profile" onClick={this.props.pointer}>
           <img src={user.picture} alt="Profile" />
           <h2>Hi, {user.name}</h2>
           <p>email: {user.email}</p>

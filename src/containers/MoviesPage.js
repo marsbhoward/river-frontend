@@ -81,7 +81,7 @@ const MoviesPage = (props) => {
 
   
     return (
-      <div className="App">
+      <div className="App" onClick={props.pointer}>
         
         {handleLoading()}
       </div>
