@@ -78,7 +78,6 @@ class ProfilePage extends Component {
   handleFunctions = (e) =>{
     this.props.pointer(e)
     this.props.resetCount()
-    console.log('fun handled')
   }
 
 

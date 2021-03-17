@@ -50,9 +50,14 @@ class UserStreamsPage extends Component {
     }
   }
 
+  handleFunctions = (e) =>{
+    this.props.pointer(e)
+    this.props.resetCount()
+  }
+
   render() {
     return (
-      <div className="App" onClick={this.props.pointer}>
+      <div className="App" onClick={this.handleFunctions}>
         <User/>
         {this.handleLoading(this.props.userId)}
       </div>

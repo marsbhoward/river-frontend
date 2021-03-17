@@ -47,6 +47,11 @@ const MoviesPage = (props) => {
     }
   }
 
+  function handleFunctions(e){
+    props.pointer(e)
+    props.resetCount()
+  }
+
 
 
   //<MovieList streamID={props.handler} movieCards={props.movieCards} movieIds={props.movieIds} trailerID={props.trailerID} currentStream={props.currentStream}/>
@@ -81,7 +86,7 @@ const MoviesPage = (props) => {
 
   
     return (
-      <div className="App" onClick={props.pointer}>
+      <div className="App" onClick={handleFunctions}>
         
         {handleLoading()}
       </div>

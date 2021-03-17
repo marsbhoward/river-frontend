@@ -51,7 +51,6 @@ class Searchbox extends Component {
   }
 
   componentDidUpdate(){
-    console.log(this.props.sBoxCount)
     if (this.props.sBoxCount < 1){
       this.handleStuff()
       this.props.addCount()

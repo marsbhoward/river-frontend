@@ -37,8 +37,8 @@ class App extends Component {
   }
 
 componentDidMount() {
-  console.log(this.state)
 }  
+
 // recieves id from passed handler and sets as state   
   handler = (id,name) => {
     console.log("handler set ", name)
@@ -88,15 +88,12 @@ componentDidMount() {
       this.setState({
         sBoxCount: 0
       })
-      
-      console.log("count reset")
   }
 
   addCount(){
     this.setState({
       sBoxCount: this.state.sBoxCount+1
     })
-    console.log('count + 1')
 }
   
   render() {
