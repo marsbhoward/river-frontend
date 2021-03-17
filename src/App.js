@@ -21,16 +21,23 @@ class App extends Component {
     super(props)
     //binds passed handler to App handler
     this.handler = this.handler.bind(this)
+    this.closeSBox = this.closeSBox.bind(this)
+    this.openSBox= this.openSBox.bind(this)
+    this.addCount=this.addCount.bind(this)
+    this.resetCount=this.resetCount.bind(this)
+    
     this.state = {
       currentStream: localStorage.currentStream,
       currentStreamName: localStorage.currentStreamName,
       target: "",
-      sBoxOpenState: false
+      sBoxOpenState: false,
+      sBoxCount: 0
     }
-  
+    
   }
 
 componentDidMount() {
+  console.log(this.state)
 }  
 // recieves id from passed handler and sets as state   
   handler = (id,name) => {
@@ -54,28 +61,43 @@ componentDidMount() {
   findTarget = (e) => {
     // access to e.target here
     let target = $(e.currentTarget)[0].className
-
+    
     if (target.toString() === "searchBar" || target === "search-list"){
-      console.log('open')
       this.openSBox()
     }
     else{
-      console.log('closed')
       this.closeSBox()
     }
   }
 
-  closeSBox = () =>{
-    this.setState({
+  closeSBox() {
+    
+    this.setState(state =>({
       sBoxOpenState: false
-    })
+    }))
   }
 
-  openSBox = () =>{
-    this.setState({
+  openSBox() {
+    
+    this.setState(state =>({
       sBoxOpenState: true
-    })
+    }))
   }
+
+  resetCount(){
+      this.setState({
+        sBoxCount: 0
+      })
+      
+      console.log("count reset")
+  }
+
+  addCount(){
+    this.setState({
+      sBoxCount: this.state.sBoxCount+1
+    })
+    console.log('count + 1')
+}
   
   render() {
     //const { isAuthenticated } = this.props.auth;
@@ -83,10 +105,10 @@ componentDidMount() {
       <Router>
         <div className = "page">
           <Route exact path="/" render={() => <div><HomeBar/> <HomePage userID={this.UserID}/> </div>} />
-          <Route exact path="/profile" render={() => <div ><NavBar sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <ProfilePage pointer={this.findTarget} userId={localStorage.currentUserID}/> </div>}  />
-          <Route exact path='/streams' render={() => <div><NavBar sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <StreamsPage pointer={this.findTarget} handler={this.handler} /> </div>} />
-          <Route exact path='/userstreams' render={() => <div><NavBar sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <UserStreamsPage pointer={this.findTarget} handler={this.handler} userId={localStorage.currentUserID}/> </div>}  />
-          <Route exact path='/streams/:id/movies' render={() => <div><NavBar sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <MoviesPage pointer={this.findTarget} handler= {localStorage.currentStream} streamName= {localStorage.currentStreamName}/> </div>} />
+          <Route exact path="/profile" render={() => <div ><NavBar addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <ProfilePage resetCount={this.resetCount} pointer={this.findTarget} userId={localStorage.currentUserID}/> </div>}  />
+          <Route exact path='/streams' render={() => <div><NavBar addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <StreamsPage resetCount={this.resetCount} pointer={this.findTarget} handler={this.handler} /> </div>} />
+          <Route exact path='/userstreams' render={() => <div><NavBar addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <UserStreamsPage resetCount={this.resetCount} pointer={this.findTarget} handler={this.handler} userId={localStorage.currentUserID}/> </div>}  />
+          <Route exact path='/streams/:id/movies' render={() => <div><NavBar addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <MoviesPage resetCount={this.resetCount} pointer={this.findTarget} handler= {localStorage.currentStream} streamName= {localStorage.currentStreamName}/> </div>} />
         </div>
       </Router>
     );

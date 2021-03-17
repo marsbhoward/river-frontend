@@ -7,8 +7,7 @@ import { findDOMNode } from 'react-dom';
 import $ from 'jquery'; 
 
 let  moviesList
-let count = 0
-//close sereach area if input box lose fousand input box is empty
+
 
 class Searchbox extends Component {
  constructor(props){
@@ -17,29 +16,53 @@ class Searchbox extends Component {
     this.state={
       search:'',
       MoiveData: "",
-      open: this.props.sBoxOpenState
+      searchState: '',
+      setClass: '',
+      
     };
+  }
 
-  this.loseFocus = this.loseFocus.bind(this)
+  getStuff=()=>{
+    let theSearchState =''
+    let theSetClass = ''
+    if (this.props.sBoxOpenState === false){
+      theSearchState= <p className={"searchBar"} onClick={this.handleClick}> Search </p>
+      this.setState({search: ''})
+      } 
+    else{
+      theSearchState= <input type="text" id="name-input" className="searchBar" placeholder="Search by title" onClick={this.props.pointer} onChange={(e)=>this.searchMovie(e)} />
+      theSetClass= 'searchBackground'
+      }
+    return [theSearchState, theSetClass]
+  }
+
+  handleStuff(){
+    let results = this.getStuff()
+    this.setState({
+      searchState: results[0],
+      setClass: results[1]
+    }) 
   }
 
   componentDidMount() {
+    
     this.props.listMovies()
-    console.log(this.props.sBoxOpenState)
+    this.handleStuff()
   }
 
   componentDidUpdate(){
-    
-  }
-
-
-  loseFocus=(target)=>{
-
+    console.log(this.props.sBoxCount)
+    if (this.props.sBoxCount < 1){
+      this.handleStuff()
+      this.props.addCount()
+    }
   }
 
 
   handleClick=()=>{
-    this.setState({open:true})
+    this.props.resetCount()
+    //this.setState({open:true})
+    //console.log(this.state.open)
   }
 
   searchMovie=(event)=>{
@@ -76,26 +99,14 @@ class Searchbox extends Component {
   }
 
   render(){
-    let searchState=''
-    let setClass = ''
-    
-    if (this.state.open === false){
-      searchState = <p className={'searchBar'} onClick={this.handleClick}> Search </p>
-      setClass= ''
-    } 
-    else{
-      searchState = <input type="text" id='name-input' className="searchBar" placeholder="Search by title" onClick={this.props.pointer} onChange={(e)=>this.searchMovie(e)} />
-      
-      setClass = 'searchBackground'
-    }
-
   	return(
       /* onClick={() => this.loseFocus(this.props.target)} */
-  		<div onBlur= {() => this.loseFocus(this.props.target)}>
-  			{searchState}
+      /* need to find faster way to clear search state. possibly render only if not blank*/
+  		<div className="searchBar" onClick={this.props.pointer} >  
+  			{this.state.searchState}
   			{this.handleLoading()}
-        <div className={setClass} >
-          <div className="search-list" onClick={this.props.pointer} >
+        <div onClick={this.props.pointer} onClick={this.handleClick}  className={this.state.setClass} >
+          <div className="search-list" onClick={this.props.pointer}>
               {moviesList}
           </div>
         </div>

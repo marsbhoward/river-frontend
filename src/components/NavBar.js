@@ -19,7 +19,7 @@ const NavBar  = withRouter (({ history, ...props}) => {
 	      RIVER
 	    </div>
       <div>{localStorage.currentStreamName.toUpperCase()}</div>
-      <Searchbox sBoxOpenState={props.sBoxOpenState} pointer={props.pointer}/>    
+      <Searchbox addCount={props.addCount} resetCount={props.resetCount} sBoxCount={props.sBoxCount} sBoxOpenState={props.sBoxOpenState} pointer={props.pointer}/>    
 	</div>
 
     <div className="footer">

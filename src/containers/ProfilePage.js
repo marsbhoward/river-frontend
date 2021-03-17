@@ -75,6 +75,12 @@ class ProfilePage extends Component {
     }            
   }
 
+  handleFunctions = (e) =>{
+    this.props.pointer(e)
+    this.props.resetCount()
+    console.log('fun handled')
+  }
+
 
   handleClick = () => {
     let selectedStreams = document.getElementsByClassName("true");
@@ -138,7 +144,7 @@ class ProfilePage extends Component {
 
     if (this.state.streamEdit === true){
       return ( 
-        <div className= "profile" onClick={this.props.pointer}>
+        <div className= "profile" onClick={this.handleFunctions}>
           <img src={user.picture} alt="Profile" />
           <h2>Hi, {user.name}</h2>
           <p>email: {user.email}</p>
@@ -153,7 +159,7 @@ class ProfilePage extends Component {
     }
     else{
       return ( 
-        <div className= "profile" onClick={this.props.pointer}>
+        <div className= "profile" onClick={this.handleFunctions}>
           <img src={user.picture} alt="Profile" />
           <h2>Hi, {user.name}</h2>
           <p>email: {user.email}</p>
