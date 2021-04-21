@@ -1,10 +1,16 @@
-import React from "react";
+import React,{ useState, useEffect } from 'react';
 import { useAuth0 } from "../react-auth0-spa";
 import { withRouter } from 'react-router-dom'
 import Searchbox from '../components/searchbox'
 
 const NavBar  = withRouter (({ history, ...props}) => {
   const { isAuthenticated, logout } = useAuth0();
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    //used to update state when using back button
+    setCount(count + 1)
+  },[]);
+
 
   function clearStream(){
     localStorage.setItem('currentStream', ' ');

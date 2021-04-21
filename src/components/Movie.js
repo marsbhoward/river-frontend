@@ -10,6 +10,9 @@ constructor(props){
   this.state = {movieClass: "movie"}
 }  
 
+componentDidMount(){
+}
+
 componentDidUpdate() {
 window.scrollTo(0, 0);   
 }

@@ -5,8 +5,10 @@ import MoviesList from './MoviesList';
 import { Auth0Context } from "../react-auth0-spa";
 import { findDOMNode } from 'react-dom';
 import $ from 'jquery'; 
+import MovieList from './MovieList';
 
 let  moviesList
+let listM = []
 
 
 class Searchbox extends Component {
@@ -20,6 +22,19 @@ class Searchbox extends Component {
       setClass: '',
       
     };
+  }
+
+
+  componentDidMount() {
+    this.props.listMovies()
+    this.handleStuff()
+  }
+
+  componentDidUpdate(){
+    if (this.props.sBoxCount < 1){
+      this.handleStuff()
+      this.props.addCount()
+    }
   }
 
   getStuff=()=>{
@@ -44,19 +59,6 @@ class Searchbox extends Component {
     }) 
   }
 
-  componentDidMount() {
-    
-    this.props.listMovies()
-    this.handleStuff()
-  }
-
-  componentDidUpdate(){
-    if (this.props.sBoxCount < 1){
-      this.handleStuff()
-      this.props.addCount()
-    }
-  }
-
 
   handleClick=()=>{
     this.props.resetCount()
@@ -78,21 +80,25 @@ class Searchbox extends Component {
       if (this.props.movieCards === undefined){
         window.location.reload();
       } 
-      let movieList
     
 
-      movieList = this.props.movieCards.filter(movieCard=>{
-      if(this.state.search.length >= 3 ){
-            return movieCard
-      }
+      this.props.movieCards.filter(movieCard=> {
+          if(this.state.search.length >= 3 ){
+            if (movieCard.slug.includes(this.state.search)){
+            listM.push(movieCard)
+            moviesList = this.props.movieCards.map((movie, index) => {
+              return <div>movie.slug</div>
+            })
+          }
+        }
+        if(this.state.search.length >= 3 ){
+          moviesList = this.props.movieCards.map((movie, index) => {
+            return <MoviesList key={index} search={this.state.search}  movie={movie} movieID={(movie.id)} cardStyle='height: -webkit-fill-available;
+            overflow: hidden;'/>})
+        } 
       else{
         moviesList = ''
       }        
-      }).map((movie,index)=>{
-        moviesList = this.props.movieCards.map((movie, index) => {
-          return <MoviesList key={index} search={this.state.search}  movie={movie} movieID={(index+1)} cardStyle='height: -webkit-fill-available;
-          overflow: hidden;'/>
-        })
       })
     }
   }

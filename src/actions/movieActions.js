@@ -7,6 +7,7 @@ const URL = PROXY + streamsAPI
 
 export function fetchMovies (id) {
     let listOfMovieIds = []
+    console.log(id)
     return (dispatch) => {
         dispatch({ type: 'LOADING_MOVIES'})
         fetch(`${streamsAPI}/${id}/movies`).then(response => {
@@ -22,7 +23,6 @@ export function fetchMovies (id) {
                 )
             ).then(listOfMovies => {
                 listOfMovies.map((movie, index) => {
-                    let stream_id = id 
                     let movie_id = responseJSON[index].id
                     let title = movie.Title
                     if(responseJSON[index].title === null){   
@@ -70,18 +70,24 @@ export function listMovies(){
 
 //send specific movie to omdb and retrieve all the data
 // for use with movie search
-export function fetchTitle(movieInfo){
+export function fetchTitle (movieInfo){
     return (dispatch) => {
             dispatch({ type: 'LOADING_MOVIES'})
             fetch(`https://www.omdbapi.com/?t=${movieInfo.slug}&y=${movieInfo.year}+&apikey=6b46131b`).then(response => {
                 return response.json()
             }).then(responseJSON => {
+                            if(responseJSON.Title !== null){ 
                             try {
-                                dispatch({ type: 'ADD_MOVIES', currentTitle: responseJSON, ids: movieInfo.id})
+                                dispatch({ type: 'ADD_MOVIES', movies: [], ids: [], currentTitle: responseJSON})
                             }
                             catch(error){
                                 console.log(error)
                             }
+                        }
+                        else{
+                            console.log('didnt have a title')
+                            console.log(responseJSON)
+                        }
                         })
         }
 }

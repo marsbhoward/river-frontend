@@ -12,18 +12,23 @@ const MoviesPage = (props) => {
   const location = useLocation();
   const [clicked, setCliked] = useState('');
   const [movieDataArray,setMovieDataArray] = useState([]); 
-  const [currentMovie, setCurrentMovie] = useState('');  
+  const [currentTitle, setCurrentTitle] = useState([]);  
 
   useEffect(() => {
-      if (location.state !== undefined){
-        dispatch(fetchTitle(location.state.currentMovie))
-        setCliked(location.state.clicked)
-        CurrentMovie(movieData)
+      if (typeof location.state !== "undefined"){
+        console.log(location.state)
+        setCliked(true)
+        getTitleData()
+       
+        
+        
+       // CurrentMovie(movieData)
+        
 
       }
       else{
         getMoviesArray()
-      }        
+      }       
     }, []);
     //dispatch({type: 'LOADING_MOVIES'})
     //props.fetchMovies(localStorage.currentStream)
@@ -40,42 +45,47 @@ const MoviesPage = (props) => {
     dispatch(fetchMovies(localStorage.currentStream));
     setMovieDataArray(movieData.movies)  
   }
-
-  function CurrentMovie(data){
-    if (data.currentTitle !== undefined){
-      setCurrentMovie(data.currentTitle)
-    }
+  function getTitleData(){
+    dispatch(fetchTitle(location.state.state.currentMovie))
+    //dispatch(fetchTitle(Promise.resolve(location.state).then(location.state.state.currentMovie)))
+    //dispatch(fetchTitle(location.state.state.currentMovie))
+    setCurrentTitle(movieData.currentTitle)
   }
 
-  function handleFunctions(e){
+
+  function handleFunctions (e){
     props.pointer(e)
     props.resetCount()
   }
 
 
-
   //<MovieList streamID={props.handler} movieCards={props.movieCards} movieIds={props.movieIds} trailerID={props.trailerID} currentStream={props.currentStream}/>
   function handleLoading (){
+    
     if(movieData.loading) {
       return <div>Loading Movies...</div>
     } 
     else {
-      if (location.state !== undefined){
-        if (movieData.currentTitle !== undefined){
+      if (typeof location.state !== "undefined"){
+        if (typeof movieData.currentTitle !== "undefined"){
           return(
-          <div>
+          <div onClick={handleFunctions}>
             <MovieList passedMovie={movieData.currentTitle} streamID={localStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={localStorage.currentStreamName}/>                  
           </div>
           )
         }
         else
+        getTitleData()
           return(
-            <h1>{location.state.currentMovie.slug}</h1>
+            <div onClick={handleFunctions}>
+              <MovieList passedMovie={movieData.currentTitle} streamID={localStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={localStorage.currentStreamName}/>                  
+            </div>
           )
       }
         else{
+          //getMoviesArray()
             return (
-              <div>
+              <div onClick={handleFunctions}>
                   <MovieList streamID={localStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={localStorage.currentStreamName}/>                  
               </div>
             )
@@ -86,8 +96,7 @@ const MoviesPage = (props) => {
 
   
     return (
-      <div className="App" onClick={handleFunctions}>
-        
+      <div className="App">
         {handleLoading()}
       </div>
     );

@@ -3,16 +3,16 @@ import '../index.css';
 import Movie from './Movie';
 import InfoPage from '../containers/InfoPage'
 
-
-let showMovie
 let moviesList
 
 
 class MovieList extends React.Component {
   componentDidMount() {
-    console.log(this)
-    if (this.props.passedMovie !== undefined){
-      this.setCurrentMovieState()
+    if (typeof this.props.passedMovie !== "undefined"){
+      //this.setCurrentMovieState()
+    }
+    else{
+      
     }
    }
 
@@ -37,7 +37,6 @@ class MovieList extends React.Component {
   handler = (movie, clicked, movieID) => {
     localStorage.setItem('currentMovie', this.props.movieIds[(movieID-1)])
     console.log('updated current movie id')
-    console.log(movie) 
     this.setState({
       currentMovie: movie,
       clicked: true,
@@ -51,30 +50,35 @@ class MovieList extends React.Component {
 
   render() {
     //addition if to make sure passed movie is in
+    moviesList = this.props.movieCards.map((movie, index) => {
+      return <Movie key={index} movie={movie} handler={this.handler} movieID={(index+1)}/>
+    })
+
     if (this.state.clicked !== true) {   
-       moviesList = this.props.movieCards.map((movie, index) => {
-        return <Movie key={index} movie={movie} handler={this.handler} movieID={(index+1)}/>
-      })
-      
-      return (
-        <div className="movie-list">
-            {moviesList}
-        </div>
-      )
-    }
+     return (
+       <div className= "NotClicked">
+         <br/>
+       <div className="movie-list">
+           {moviesList}
+       </div>
+       </div>
+     )
+   }
     else
-      if (this.props.passedMovie !== undefined){
+      if (typeof this.props.passedMovie !== "undefined"){
         return(
           <div>
             <br/>
             <InfoPage movieIds={this.props.movieIds} streamID={this.props.streamID} movieID={parseInt(localStorage.currentMovie)} currentMovie={this.props.passedMovie} trailerID={this.trailerID}/>
             <div className="movie-list">
                 {moviesList}
+                <br/>
             </div>
           </div>
         )
       }
       else{
+        console.log(this.state.currentMovie)
         return(
           <div>
             <br/>

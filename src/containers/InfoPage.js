@@ -18,7 +18,6 @@ class InfoPage extends Component {
     //pass stream id and movie id in props
     // only works with db complete reset
     let apiMovieID = localStorage.currentMovie 
-    console.log('getting youtube id')
     adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
 
     //if current movie does not have a youtube_id on the backend

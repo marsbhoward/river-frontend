@@ -304,6 +304,7 @@ code {
 }
 
 .title{
+  color:black;
   position: static;
   font-size: 1.3em;
   background: white;

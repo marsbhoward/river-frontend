@@ -12,11 +12,10 @@ function MoviesList (props){
   const [streamId, setStreamId] = useState('');
   const [streamSlug, setStreamSlug] = useState('');
   const [style, setStyle] = useState('');
-       
+  const [movieName, setMovieName] =useState('');
 
 
   useEffect(() => {
-    
     switch (props.movie.stream_id) {
       case 1:
         // statements_1
@@ -157,32 +156,36 @@ function MoviesList (props){
         setStyle("movie-card")          
         break;
       }
+      setMovieName(props.movie.id)
     });
 
   function handleMovie() {
 //need to set current movie for info page
-    localStorage.setItem('currentStream', streamId);
-    localStorage.setItem('currentStreamName', streamSlug);
-    localStorage.setItem('currentMovie', props.movie.id)
-
-    /*
-      history.push({
-      pathname: `/streams/${streamName.toLowerCase()}/movies`,
-      state: { clicked: true }
-    })
-    */
-    
+      console.log(streamSlug)
+      console.log(props.movie)
+      history.push(`/streams/${currentStream.toLowerCase()}/movies`,
+        {state: { 
+          clicked: true, 
+          currentMovie: props.movie
+        }}
+      )
+      
+      
+      localStorage.setItem('currentStream', streamId);
+      localStorage.setItem('currentStreamName', streamSlug);
+      localStorage.setItem('currentMovie', props.movie.id)  
     //  window.history.pushState({ 'clicked': true },'',`/streams/${streamName.toLowerCase()}/movies`)
     //  window.location.reload();
 
   }
 
   function handleStream() {
+    console.log(props)
     history.push({
       pathname: `/streams/${currentStream.toLowerCase()}/movies`,   
     })    
     localStorage.setItem('currentStream', streamId);
-    localStorage.setItem('currentStreamName', streamSlug);                  
+    localStorage.setItem('currentStreamName', streamSlug);             
   }  
 
 
@@ -212,17 +215,9 @@ function MoviesList (props){
        */
         return (
           <div className= {style}>
-              <Link to = {
-                {
-                  pathname: '/streams/${streamName.toLowerCase()}/movies',
-                  state: {
-                    clicked: true,
-                    currentMovie: props.movie 
-                  }
-                }
-              }>
+              
               <p onClick= {handleMovie} className= 'title'> {unslug} </p>
-              </Link>
+              
             
               <span onClick= {handleStream} className= 'stream-name'> {streamName}</span>
           </div>
