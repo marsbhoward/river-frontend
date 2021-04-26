@@ -47,7 +47,7 @@ function MoviesList (props){
         break;
       case 5:
         // statements_1
-        setStreamName("Disney+")
+        setStreamName("Disney +")
         setStyle("movie-card disney")
         setStreamId (5);
         setStreamSlug ('disney');                  
@@ -149,7 +149,21 @@ function MoviesList (props){
         setStyle("movie-card ifc")
         setStreamId (19);
         setStreamSlug ('ifc');                          
-        break;                                                                                                
+        break;
+      case 20:
+        // statements_1
+        setStreamName("Peacock")
+        setStyle("movie-card peacock")
+        setStreamId (20);
+        setStreamSlug ('peacock');                  
+        break;
+      case 21:
+        // statements_1
+        setStreamName("Paramount +")
+        setStyle("movie-card paramount")
+        setStreamId (21);
+        setStreamSlug ('paramount');                  
+        break;        
       default:
         // statements_def
         setStreamName("")

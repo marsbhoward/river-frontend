@@ -381,6 +381,14 @@ code {
 .syfy{
   background: #502370;
 }
+.peacock{
+  background: linear-gradient(90deg,#f4b111,#ec6d1f, #114590,#615da5,
+  #0385c9,#0dab48);
+}
+.paramount{
+  background: #114590;
+}
+
 /*  streaming backgrounds  */
 
 .show_Movie {
