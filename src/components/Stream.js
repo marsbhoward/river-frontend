@@ -18,6 +18,8 @@ import amc from'../streams_logos/amc.png'
 import fx from'../streams_logos/fx.png'
 import syfy from'../streams_logos/syfy.png'
 import ifc from'../streams_logos/ifc.png'
+import peacock from'../streams_logos/peacock.png'
+import paramount from'../streams_logos/paramount.png'
 import logo from'../logo.png'
 import {Link} from 'react-router-dom'
 
@@ -90,7 +92,13 @@ export class Stream extends Component {
         break;
       case "ifc":
         this.setState({logo: ifc})
-        break;                                                                                                                      
+        break;
+      case "peacock":
+        this.setState({logo: peacock})
+        break;
+      case "paramount":
+        this.setState({logo: paramount})
+        break;                                                                                                                                      
       default:
         this.setState({logo: logo})
         break;
