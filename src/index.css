@@ -209,7 +209,7 @@ code {
 .streams-list-2 {
   text-align: center;
   display: grid;
-  height: 88vh;
+  height: auto;
   padding-right: 10vw;
   padding-left: 10vw;
   top: 0;

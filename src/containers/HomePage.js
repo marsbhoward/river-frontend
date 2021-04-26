@@ -10,7 +10,8 @@ import { useHistory } from "react-router-dom";
   {id: 7,name:"starz"},{id: 8,name:"cinimax"},{id: 9,name:"dc"},
   {id: 10,name:"apple"},{id: 11,name:"epix"},{id: 12,name:"cbs"},
   {id: 13,name:"tbs"},{id: 14,name:"tnt"},{id: 15,name:"shudder"},
-  {id: 16,name:"amc"},{id: 17,name:"fx"},{id: 18,name:"syfy"},{id: 19,name:"ifc"}
+  {id: 16,name:"amc"},{id: 17,name:"fx"},{id: 18,name:"syfy"},{id: 19,name:"ifc"},
+  {id: 20, name:"peacock"},{id: 21, name:"paramount"}
   ]
 
 function HomePage(props) {  
