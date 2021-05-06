@@ -7,9 +7,7 @@ const URL = PROXY + streamsAPI
 
 export function fetchMovies (id) {
     let listOfMovieIds = []
-    console.log('I was ran ' +id)
     return (dispatch) => {
-        console.log('test')
         dispatch({ type: 'LOADING_MOVIES'})
         fetch(`${streamsAPI}/${id}/movies`).then(response => {
             return response.json()
@@ -24,7 +22,7 @@ export function fetchMovies (id) {
                     if (movie.poster !== "null" && movie.poster !== "N/A"){
                         poster = movie.poster
                     }
-                    if(responseJSON[index].title === 'undefined' || responseJSON[index].poster === "null"){   
+                    if(responseJSON[index].title === 'undefined' || responseJSON[index].poster === null){   
                         if (movie.slug=== 'skylin3s'){
                             movie.slug = 'skylines'
                         }
@@ -67,6 +65,21 @@ export function fetchMovies (id) {
                         else if (movie.slug=== 'police-story-3-supercop'){
                             movie.slug = "supercop"
                         }
+                        else if (movie.slug=== 'new-gods-nezha-reborn'){
+                            movie.slug = "nezha-reborn"
+                        }
+                        else if (movie.slug=== 'w-lesie-dzis-nie-zasnie-nikt'){
+                            movie.slug = "Nobody-Sleeps-in-the-Woods-Tonight"
+                        }
+                        else if (movie.slug=== 'strange-dastanas'){
+                            movie.slug = "Ajeeb Daastaans"
+                        }
+                        else if (movie.slug=== 'strange-dastanas'){
+                            movie.slug = "Ajeeb Daastaans"
+                        }
+                        else if (movie.slug=== 'connected'){
+                            movie.slug = "The-Mitchells-vs-the-Machines "
+                        }
                         
                         
                         
@@ -85,13 +98,14 @@ export function fetchMovies (id) {
                             }
                             else{
                                 let newReturn = Promise.resolve(getNewData(movieInfo,movie))
-                                //console.log(newReturn)
+                                
                                 return newReturn 
                             }
                             }).then(newmovieInfo=>{
                             let year = newmovieInfo.Year    
                             title = newmovieInfo.Title
                             poster = newmovieInfo.Poster
+                            console.log(title + " written to backend")
                             fetch(`${URL}/${id}/movies/${movie_id}?poster=${poster}&title=${title}&year=${year}&slug=${movie.slug}`, {
                                 method: 'PATCH',
                                 headers: { "Content-Type": "application/json" },
