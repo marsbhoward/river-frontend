@@ -34,7 +34,48 @@ export function fetchMovies (id) {
                         else if(movie.slug=== 'charlies-angels'){
                             movie.slug = "charlie's-angels"
                         }
+                        else if (movie.slug=== 'spy-kids-2-the-island-of-lost-dreams'){
+                            movie.slug = "spy-kids-2"
+                        }
+                        else if (movie.slug=== 'cher-the-loneliest-elephant'){
+                            movie.slug = "cher"
+                        }
+                        else if (movie.slug=== 'lemony-snickets-a-series-of-unfortunate-events'){
+                            movie.slug = "a-series-of-unfortunate-events"
+                        }
+                        else if (movie.slug=== 'shes-out-of-my-league'){
+                            movie.slug = "she's-out-of-my-league"
+                        }
+                        else if (movie.slug=== 'shes-out-of-my-league'){
+                            movie.slug = "she's-out-of-my-league"
+                        }
+                        else if (movie.slug=== 'the-wild-thornberrys-movie'){
+                            movie.slug = "the-wild-thornberrys"
+                        }
+                        else if (movie.slug=== 'jackass-25'){
+                            movie.slug = "jackass 2.5"
+                        }
+                        else if (movie.slug=== 'jackass-35'){
+                            movie.slug = "jackass 3.5"
+                        }
+                        else if (movie.slug=== 'the-wild-thornberrys-movie'){
+                            movie.slug = "the-wild-thornberrys"
+                        }
+                        else if (movie.slug=== 'the-naked-gun-212-the-smell-of-fear'){
+                            movie.slug = "the-naked-gun"
+                        }
+                        else if (movie.slug=== 'police-story-3-supercop'){
+                            movie.slug = "supercop"
+                        }
+                        
+                        
+                        
+                        
                         fetch(`https://www.omdbapi.com/?t=${movie.slug}&y=${movie.year}&type=movie+&apikey=6b46131b`).then(response=>{return response.json()}).then(moreInfo =>{
+                            //mars fixed year movies cause error when rendered
+                            //should be writting fixed year to backend
+                            //might be fixed on reset
+                            //error also cause when clicking a movie that can not be found on ombdapi
                             title = moreInfo.Title
                             poster = moreInfo.Poster
                             return moreInfo

@@ -23,6 +23,7 @@ class UserStreamsPage extends Component {
     this.handler = this.handler.bind(this)
   }
 // recieves id from passed handler
+//mars error occuring where stream id and name are not being sent correctly
   handler = (id,name) => {
     console.log('stream set')
     this.setState({

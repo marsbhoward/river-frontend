@@ -68,17 +68,20 @@ class InfoPage extends Component {
   trailerPath = (passedMovie) =>{
     let newMovieList = JSON.parse(localStorage.currentMovieList)
     
-    if (this.props.trailer.length > 0 && this.props.trailer !== "kJQP7kiw5Fk" && passedMovie.youtube_id === null){ 
-      adapter.updateYoutubeID(passedMovie.stream_id,passedMovie.id,this.props.trailer).then(data => data)
-      passedMovie.youtube_id = this.props.trailer
-      localStorage.setItem('currentMovieList',JSON.stringify(newMovieList)) 
-      console.log('trailer updated on backend') 
-    }
-    else if (this.props.trailer === 'kJQP7kiw5Fk') {
-      console.log('error loading video from youtube')
-    }
-    else {
-      console.log('trailer was loaded from backend') 
+    //mars passed movie is coming back null on occation
+    if (passedMovie){
+      if (this.props.trailer.length > 0 && this.props.trailer !== "kJQP7kiw5Fk" && passedMovie.youtube_id === null){ 
+        adapter.updateYoutubeID(passedMovie.stream_id,passedMovie.id,this.props.trailer).then(data => data)
+        passedMovie.youtube_id = this.props.trailer
+        localStorage.setItem('currentMovieList',JSON.stringify(newMovieList)) 
+        console.log('trailer updated on backend') 
+      }
+      else if (this.props.trailer === 'kJQP7kiw5Fk') {
+        console.log('error loading video from youtube')
+      }
+      else {
+        console.log('trailer was loaded from backend') 
+      }
     }
   }
 
@@ -107,6 +110,7 @@ class InfoPage extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
     <div className= "Info">
     	<div className="banner-3">{this.props.currentMovie.Title.toUpperCase()}</div>
