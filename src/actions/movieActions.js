@@ -7,53 +7,90 @@ const URL = PROXY + streamsAPI
 
 export function fetchMovies (id) {
     let listOfMovieIds = []
-    console.log(id)
+    console.log('I was ran ' +id)
     return (dispatch) => {
+        console.log('test')
         dispatch({ type: 'LOADING_MOVIES'})
         fetch(`${streamsAPI}/${id}/movies`).then(response => {
             return response.json()
         }).then(responseJSON => {
             Promise.all(
-                responseJSON.map(
-                    movie => fetch(`https://www.omdbapi.com/?t=${movie.slug}&y=${movie.year}+&apikey=6b46131b`)
-                    .then(resp => {
-                        //write movie title to backend
-                        return resp.json()
-                    })
-                )
-            ).then(listOfMovies => {
-                listOfMovies.map((movie, index) => {
-                    let movie_id = responseJSON[index].id
-                    let title = movie.Title
-                    if(responseJSON[index].title === null){   
-                        fetch(`${URL}/${id}/movies/${responseJSON[index].id}?title=${title}`, {
-                            method: 'PATCH',
-                            headers: { "Content-Type": "application/json" },
-                        }).then(response => {
-                            listOfMovieIds.push(movie_id)
-                        try {
-                            dispatch({ type: 'ADD_MOVIES', movies: listOfMovies, ids: listOfMovieIds})
-                        }
-                        catch(error){
-                            console.log(error)
-                        }
-                    })
+            responseJSON.map((movie, index) => {
+                    let movie_id = movie.id
+                    
+
+                    let title
+                    let poster = null
+                    if (movie.poster !== "null" && movie.poster !== "N/A"){
+                        poster = movie.poster
                     }
-                    else {
-                        listOfMovieIds.push(movie_id)
-                        try {
-                            dispatch({ type: 'ADD_MOVIES', movies: listOfMovies, ids: listOfMovieIds})
+                    if(responseJSON[index].title === 'undefined' || responseJSON[index].poster === "null"){   
+                        if (movie.slug=== 'skylin3s'){
+                            movie.slug = 'skylines'
                         }
-                        catch(error){
-                            console.log(error)
+                        else if(movie.slug=== 'the-sputnik'){
+                            movie.slug = 'Sputnik'
                         }
-                    }  
+                        else if(movie.slug=== 'charlies-angels'){
+                            movie.slug = "charlie's-angels"
+                        }
+                        fetch(`https://www.omdbapi.com/?t=${movie.slug}&y=${movie.year}&type=movie+&apikey=6b46131b`).then(response=>{return response.json()}).then(moreInfo =>{
+                            title = moreInfo.Title
+                            poster = moreInfo.Poster
+                            return moreInfo
+                        }).then(movieInfo=>{
+                            if (movieInfo.Response !== "False"){
+                                return movieInfo
+                            }
+                            else{
+                                let newReturn = Promise.resolve(getNewData(movieInfo,movie))
+                                //console.log(newReturn)
+                                return newReturn 
+                            }
+                            }).then(newmovieInfo=>{
+                            let year = newmovieInfo.Year    
+                            title = newmovieInfo.Title
+                            poster = newmovieInfo.Poster
+                            fetch(`${URL}/${id}/movies/${movie_id}?poster=${poster}&title=${title}&year=${year}&slug=${movie.slug}`, {
+                                method: 'PATCH',
+                                headers: { "Content-Type": "application/json" },
+                            })                            
+                        })
+                    }
+                    listOfMovieIds.push(movie_id)
+                })
+                ).then(response => {
+                    try {
+                        localStorage.setItem ('currentMovieList', JSON.stringify(responseJSON))
+                        localStorage.setItem ('listOfMovieIds', JSON.stringify(listOfMovieIds))
+                        dispatch({ type: 'ADD_MOVIES', movies: responseJSON, currentMovieList: responseJSON,ids: listOfMovieIds})
+                    }
+                    catch(error){
+                        console.log(error)
+                    }
                 })
             })
-        })
+        }
+}
+
+function returnValue(info,original){
+    if (info.Title !== undefined){
+        return  info
+    }
+    else{
+        return original
     }
 }
 
+
+async function getNewData(dataResponce,movie){
+        let x =Promise.resolve(
+            fetch(`https://www.omdbapi.com/?t=${movie.slug}&type=movie+&apikey=6b46131b`).then(response=>{
+                return response.json()}).then(passInfo =>{
+                    return returnValue(passInfo,dataResponce)
+                }))
+        return x
+}
 
 
 
@@ -78,6 +115,7 @@ export function fetchTitle (movieInfo){
             }).then(responseJSON => {
                             if(responseJSON.Title !== null){ 
                             try {
+                                localStorage.setItem('selectedMovie',JSON.stringify(responseJSON))
                                 dispatch({ type: 'ADD_MOVIES', movies: [], ids: [], currentTitle: responseJSON})
                             }
                             catch(error){
@@ -85,8 +123,6 @@ export function fetchTitle (movieInfo){
                             }
                         }
                         else{
-                            console.log('didnt have a title')
-                            console.log(responseJSON)
                         }
                         })
         }

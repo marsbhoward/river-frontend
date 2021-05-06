@@ -8,11 +8,13 @@ export function fetchTrailers (movieTitle,movieYear) {
 		fetch(`${URL}`).then(response => {
       		return response.json()
     	}).then(responseJSON => {
+			try{
       		dispatch({ type: 'LOAD_TRAILER', trailer: responseJSON.items[0].id.videoId})
+			}
+			catch(error){
+				console.error('Error:', error);
+				dispatch({ type: 'LOAD_TRAILER', trailer: 'kJQP7kiw5Fk'})
+		  }
     	})
-    	.catch((error) => {
-  			console.error('Error:', error);
-  			dispatch({ type: 'LOAD_TRAILER', trailer: 'kJQP7kiw5Fk'})
-		})
 	}
 }

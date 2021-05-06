@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+//import { fetchMovies } from '../actions/movieActions'
+import { connect } from 'react-redux';
+
 import netflix from'../streams_logos/netflix.png';
 import hulu from'../streams_logos/hulu.png';
 import amazon from'../streams_logos/amazon.png';
@@ -168,17 +171,19 @@ export class UserStream extends Component {
       default:
         this.setState({logo: logo})
         break;
-    }    
+    }
+   // this.props.fetchMovies(this.props.stream.stream_id)    
   } 
 
     handleOnClick = () => {
     //returns the selected Stream id to streamsList
     console.log('clicked')
-    console.log(this.state.streamName)
-    console.log(this.props.stream)
-    //this.props.handler(this.props.stream.stream_id, this.props.stream.name)
+    console.log(this.props.stream.stream_id)
+    this.props.handler(this.props.stream.stream_id, this.state.streamName)
     localStorage.setItem('currentStream',  this.props.stream.stream_id)
     localStorage.setItem('currentStreamName', this.state.streamName)
+    localStorage.setItem('currentMovieList', " ")
+    localStorage.setItem('selectedMovie', " ")
     }
 
      mouseEnter = () => {
@@ -232,4 +237,14 @@ export class UserStream extends Component {
   }    
 }
 
-export default UserStream;
+/*const mapDispatchToProps = state => {
+  return {
+    streamInfo: state.StreamsReducer.streams.sort(),
+    loading: state.StreamsReducer.loading,
+    currentStream: state.StreamsReducer.currentStream
+  }
+}
+
+export default connect(mapDispatchToProps, { fetchMovies })(UserStream)
+*/
+export default UserStream

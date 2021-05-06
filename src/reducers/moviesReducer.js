@@ -2,7 +2,8 @@ export const initialState = {
   movies : [],
   ids: [],
   loading: false,
-  currentTitle: []
+  currentTitle: [],
+  currentMovieList: []
 };
 
 export const moviesReducer = (state = initialState, action) => {
@@ -11,12 +12,14 @@ export const moviesReducer = (state = initialState, action) => {
       return {
         ...state,
         movies: [...state.movies],
+        currentMovieList: [...state.movies],
         loading: true
       }
     case 'ADD_MOVIES':  
       return {
         ...state,
         movies: action.movies ,
+        currentMovieList: action.currentMovieList ,
         ids:  action.ids,
         currentTitle: action.currentTitle,
         loading: false

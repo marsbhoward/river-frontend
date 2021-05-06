@@ -26,6 +26,7 @@ class Searchbox extends Component {
 
 
   componentDidMount() {
+    //interfe
     this.props.listMovies()
     this.handleStuff()
   }
@@ -49,6 +50,10 @@ class Searchbox extends Component {
       theSetClass= 'searchBackground'
       }
     return [theSearchState, theSetClass]
+  }
+
+  refresh(){
+    console.log(this)
   }
 
   handleStuff(){
@@ -84,6 +89,7 @@ class Searchbox extends Component {
 
       this.props.movieCards.filter(movieCard=> {
           if(this.state.search.length >= 3 ){
+            
             if (movieCard.slug.includes(this.state.search)){
             listM.push(movieCard)
             moviesList = this.props.movieCards.map((movie, index) => {
@@ -110,7 +116,7 @@ class Searchbox extends Component {
   		<div className="searchBar" onClick={this.props.pointer} >  
   			{this.state.searchState}
   			{this.handleLoading()}
-        <div onClick={this.props.pointer} onClick={this.handleClick}  className={this.state.setClass} >
+        <div onClick={this.handleClick}  className={this.state.setClass} >
           <div className="search-list" onClick={this.props.pointer}>
               {moviesList}
           </div>

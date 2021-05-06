@@ -1,11 +1,16 @@
 import React,{ useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchMovies } from '../actions/movieActions'
 import InfoPage from '../containers/InfoPage'
 import { useHistory, Link, useLocation } from "react-router-dom";
+import { useSelector, useDispatch, useStore } from 'react-redux'
 
 
 
 function MoviesList (props){
   const location = useLocation();
+  const dispatch = useDispatch();
+  const [movieDataArray,setMovieDataArray] = useState([]); 
   const history = useHistory();
 //binds passed handler to StreamsList handler
   const [streamName, setStreamName] = useState('');
@@ -173,10 +178,21 @@ function MoviesList (props){
       setMovieName(props.movie.id)
     });
 
+  function handleCollection(handleMovie){
+    fetchMovies(streamId);
+    handleMovie();
+  }
+
+  function handleClick(){
+    handleCollection(handleMovie, console.log('finished'));
+  }
+
+
   function handleMovie() {
 //need to set current movie for info page
       console.log(streamSlug)
-      console.log(props.movie)
+      
+      //localStorage.setItem('currentMovieList', JSON.stringify(props.movie))
       history.push(`/streams/${currentStream.toLowerCase()}/movies`,
         {state: { 
           clicked: true, 
@@ -230,7 +246,8 @@ function MoviesList (props){
         return (
           <div className= {style}>
               
-              <p onClick= {handleMovie} className= 'title'> {unslug} </p>
+              <img className= "title" onClick= {handleClick} alt= {unslug} src={props.movie.poster}></img>
+              
               
             
               <span onClick= {handleStream} className= 'stream-name'> {streamName}</span>
@@ -244,5 +261,11 @@ function MoviesList (props){
       }
     }
  
+const mapDispatchToProps = state => {
+  return {
+    movieCards: state.MoviesReducer.movies,
+    loading: state.MoviesReducer.loading
+  }
+}
 
-export default MoviesList;
+export default connect(mapDispatchToProps, {fetchMovies})(MoviesList)

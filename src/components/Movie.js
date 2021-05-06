@@ -1,75 +1,54 @@
-import React, { Component } from 'react';
+import React,{ useState, useEffect } from 'react';
+import { useHistory, Link, useLocation } from "react-router-dom";
+
+function Movie (props) {
+  const history = useHistory();
+  const [movieClass, setMovieClass] = useState('movie');
 
 
-let title
-
-class Movie extends Component {
-
-constructor(props){
-  super(props)
-  this.state = {movieClass: "movie"}
-}  
-
-componentDidMount(){
-}
-
-componentDidUpdate() {
-window.scrollTo(0, 0);   
-}
-
-componentWillUnmount() {
-    
-}
+useEffect(() => {
+  window.scrollTo(0, 0); 
+})
 
 
 //refactor to use session storage to grab current movie 
 //this will also help search be implemented
-  handleOnClick = () => {
-    this.setState({
-    currentMovie: this.props.movie,
-    clicked: true
-    },function () {      
-    this.props.handler(this.state.currentMovie,this.state.clicked,this.props.movieID);
-    this.scrollToTop()
-    })    
+function handleOnClick(){
+  localStorage.setItem('currentMovie',props.movie.id)
+  localStorage.setItem('selectedMovie',JSON.stringify( props.movie))
+  props.handler(props.movie,true,props.movieID);
+  
+    history.push(`/streams/${localStorage.currentStreamName}/movies`,
+    {state: { 
+      clicked: true, 
+      currentMovie: props.movie
+    }}
+  ) 
     
-  }
+}
 
-
-  scrollToTop = () => {
-    console.log('to the top')
-    window.scrollTo(0, 0);    
-  }
  
-  mouseEnter = () => {
-    this.setState({
-        movieClass: "movie highlight"
-      })
-  }
+function mouseEnter(){
+  setMovieClass ("movie highlight")
+}
 
-  mouseExit = () => {
-    this.setState({
-        movieClass: "movie"
-      })
-  }    
+function mouseExit(){
+  setMovieClass ("movie")
+}
 
 
 
-
-  render() {
-    title = this.props.movie.Title 
-    if (title){   
+  if (props.movie.title){   
       return (
-        <img  onClick={this.handleOnClick} onMouseMove={this.mouseEnter} onMouseLeave={this.mouseExit}  className= {this.state.movieClass} id={this.props.movie.Title} alt={this.props.movie.Title} src={this.props.movie.Poster}>
+        <img  onClick={handleOnClick} onMouseMove={mouseEnter} onMouseLeave={mouseExit}  className= {movieClass} id={props.movie.title} alt={props.movie.slug} src={props.movie.poster}>
         </img>
       
       );
     }
+    else{
     return (
     ""
-    )
-  }
-
-};
+    )}
+}
 
 export default Movie;

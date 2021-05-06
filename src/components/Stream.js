@@ -38,6 +38,7 @@ export class Stream extends Component {
     switch (this.props.stream.name) {
       case "netflix":
         this.setState({logo: netflix})
+        console.log(this.props.stream)
         break;
       case "hulu":
         this.setState({logo: hulu})

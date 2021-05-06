@@ -7,6 +7,7 @@ class InfoPage extends Component {
 
   constructor(props){
     super(props)
+    this.trailerPath = this.trailerPath.bind(this)
     this.state = {
       selectedMovie: null,
       youtube: null
@@ -17,8 +18,10 @@ class InfoPage extends Component {
   componentDidMount() {
     //pass stream id and movie id in props
     // only works with db complete reset
-    let apiMovieID = localStorage.currentMovie 
-    adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
+    let apiMovieID = parseInt(localStorage.currentMovie )
+    adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => {
+      this.logMovie(movie)
+    })
 
     //if current movie does not have a youtube_id on the backend
   	  
@@ -36,7 +39,10 @@ class InfoPage extends Component {
   	}
   }
 
-  logMovie = (selectedMovie) => {
+  logMovie = (selectedMovie) => {    
+    if (this.state.youtube === null){
+      this.setState({youtube: selectedMovie.youtube_id})
+    }
         this.setState({
           selectedMovie: selectedMovie
         })
@@ -44,28 +50,28 @@ class InfoPage extends Component {
         //localStorage.setItem('currentMovie',selectedMovie)
 
       if (selectedMovie === null) {
-        console.log('component did not update')
       }
       else{
         if(selectedMovie.youtube_id === null){
           //if youtube_id on api is empty
           //not getting updated trailer here
-          console.log('youtube_id null')
           this.fetchTrailer()
           this.setState({youtube: null})
         }
         else {
-          this.setState({youtube: "yes"})
+          //this.setState({youtube: "yes"})
         }        
       }
   }
 
 
   trailerPath = (passedMovie) =>{
-
+    let newMovieList = JSON.parse(localStorage.currentMovieList)
     
     if (this.props.trailer.length > 0 && this.props.trailer !== "kJQP7kiw5Fk" && passedMovie.youtube_id === null){ 
       adapter.updateYoutubeID(passedMovie.stream_id,passedMovie.id,this.props.trailer).then(data => data)
+      passedMovie.youtube_id = this.props.trailer
+      localStorage.setItem('currentMovieList',JSON.stringify(newMovieList)) 
       console.log('trailer updated on backend') 
     }
     else if (this.props.trailer === 'kJQP7kiw5Fk') {
@@ -91,9 +97,10 @@ class InfoPage extends Component {
       return <div>Loading Movies...</div>
     } 
     else {
+      // change selected movie to backend movie
       return (
       	<div>
-      		<MovieInfo youtube={this.state.youtube} path={this.trailerPath} selectedMovie = {this.state.selectedMovie} currentMovie={this.props.currentMovie} trailer={this.props.trailer} handler={this.handler}/>
+      		<MovieInfo youtube={this.state.youtube} path={this.trailerPath} selectedMovie ={this.state.selectedMovie} currentMovie={this.props.currentMovie} trailer={this.props.trailer} handler={this.handler}/>
       	</div>
       )
     }

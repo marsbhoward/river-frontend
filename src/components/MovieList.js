@@ -8,15 +8,16 @@ let moviesList
 
 class MovieList extends React.Component {
   componentDidMount() {
+    
     if (typeof this.props.passedMovie !== "undefined"){
-      //this.setCurrentMovieState()
+      this.setCurrentMovieState()
     }
     else{
       
     }
    }
 
-//binds passed handler to StreamsList handler
+//binds passed handler to MoviesPage handler
   constructor(props){
     super(props)
     this.handler = this.handler.bind(this);
@@ -27,6 +28,7 @@ class MovieList extends React.Component {
   }
 
   setCurrentMovieState = () =>{
+    console.log('set new movie state')
     this.setState({
         currentMovie: this.props.passedMovie
     })
@@ -35,8 +37,9 @@ class MovieList extends React.Component {
 
 // recieves id from passed handler
   handler = (movie, clicked, movieID) => {
-    localStorage.setItem('currentMovie', this.props.movieIds[(movieID-1)])
-    console.log('updated current movie id')
+    //localStorage.setItem('currentMovie', this.props.movieIds[(movieID-1)])
+    
+    this.props.handler()
     this.setState({
       currentMovie: movie,
       clicked: true,
@@ -50,11 +53,18 @@ class MovieList extends React.Component {
 
   render() {
     //addition if to make sure passed movie is in
-    moviesList = this.props.movieCards.map((movie, index) => {
-      return <Movie key={index} movie={movie} handler={this.handler} movieID={(index+1)}/>
-    })
+    if (localStorage.currentMovieList !== " "){
+      moviesList = JSON.parse(localStorage.currentMovieList).map((movie, index) => {
+        return <Movie key={index} movie={movie} passGetData={this.props.passGetData} handler={this.handler} movieID={(index+1)}/>
+      })
+    }
+    else{
+      moviesList = this.props.movieCards.map((movie, index) => {
+        return <Movie key={index} movie={movie} passGetData={this.props.passGetData} handler={this.handler} movieID={(index+1)}/>
+      })  
+    }
 
-    if (this.state.clicked !== true) {   
+    if (this.state.clicked !== true) {  
      return (
        <div className= "NotClicked">
          <br/>
@@ -66,10 +76,11 @@ class MovieList extends React.Component {
    }
     else
       if (typeof this.props.passedMovie !== "undefined"){
+        
         return(
-          <div>
+          <div className = "WasClicked">
             <br/>
-            <InfoPage movieIds={this.props.movieIds} streamID={this.props.streamID} movieID={parseInt(localStorage.currentMovie)} currentMovie={this.props.passedMovie} trailerID={this.trailerID}/>
+            <InfoPage movieIds={this.props.movieIds} streamID={this.props.streamID} movieID={parseInt(localStorage.currentMovie)} currentBackend={this.props.movieBackend} currentMovie={this.props.passedMovie} trailerID={this.trailerID}/>
             <div className="movie-list">
                 {moviesList}
                 <br/>
@@ -78,11 +89,12 @@ class MovieList extends React.Component {
         )
       }
       else{
-        console.log(this.state.currentMovie)
+        
+        // get omdb movie
         return(
           <div>
             <br/>
-            <InfoPage movieIds={this.props.movieIds} streamID={this.props.streamID} movieID={parseInt(localStorage.currentMovie)} currentMovie={this.state.currentMovie} trailerID={this.trailerID}/>
+            <InfoPage movieIds={this.props.movieIds} streamID={this.props.streamID} movieID={parseInt(localStorage.currentMovie)} currentMovie={JSON.parse(localStorage.selectedMovie)} trailerID={this.trailerID}/>
             <div className="movie-list">
                 {moviesList}
             </div>
