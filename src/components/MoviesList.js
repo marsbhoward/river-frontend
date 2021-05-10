@@ -179,6 +179,7 @@ function MoviesList (props){
     });
 
   function handleCollection(handleMovie){
+    //dispatch(fetchMovies(streamId));
     fetchMovies(streamId);
     handleMovie();
   }

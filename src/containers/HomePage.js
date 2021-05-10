@@ -1,8 +1,12 @@
-import React from 'react';
+import React,{ useState, useEffect } from 'react';
 import 'semantic-ui-css/semantic.min.css'
+import { connect } from 'react-redux';
+import { fetchMovies } from '../actions/movieActions'
+import { useSelector, useDispatch, useStore } from 'react-redux'
 import { Button } from 'semantic-ui-react'
 import { useAuth0 } from "../react-auth0-spa";
 import { useHistory } from "react-router-dom";
+import { each } from 'jquery';
 
   const streamsList = [
   {id: 1,name:"netflix"},{id: 2,name:"hulu"},{id: 3,name:"amazon"},
@@ -15,9 +19,23 @@ import { useHistory } from "react-router-dom";
   ]
 
 function HomePage(props) {  
+  const dispatch = useDispatch();
   const { isAuthenticated, loginWithRedirect} = useAuth0();
   const { loading, user } = useAuth0();
   const history = useHistory();
+  const [movieDataArray,setMovieDataArray] = useState([]); 
+
+  useEffect(() => {
+    if (props.homeCount <= 0){
+      console.log('done')
+      console.log(props.homeCount)
+      props.addHomeCount()
+      streamsList.forEach(stream =>{
+        dispatch(fetchMovies(stream.id));
+      })
+    }
+  },[])
+
 
   let stlyes = {
     backgroundImage: "url('https://raw.githubusercontent.com/marsbhoward/river-frontend/master/src/streams_logos/streamsBackground.png')",
@@ -107,6 +125,11 @@ function HomePage(props) {
   }
 
 
+  const mapDispatchToProps = state => {
+    return {
+      loading: state.MoviesReducer.loading
+    }
+  }
 
-export default HomePage
 
+export default connect(mapDispatchToProps, {fetchMovies})(HomePage)
