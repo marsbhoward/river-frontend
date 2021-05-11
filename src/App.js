@@ -39,6 +39,8 @@ class App extends Component {
   }
 
 componentDidMount() {
+  console.log('app.js loaded')
+  localStorage.setItem ('AllMovies', 'not loaded')
 }  
 
 // recieves id from passed handler and sets as state   

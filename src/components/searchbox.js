@@ -8,7 +8,6 @@ import $ from 'jquery';
 import MovieList from './MovieList';
 
 let  moviesList
-let listM = []
 
 
 class Searchbox extends Component {
@@ -83,29 +82,28 @@ class Searchbox extends Component {
     } 
     else {
       if (this.props.movieCards === undefined){
-        window.location.reload();
-      } 
-    
-
-      this.props.movieCards.filter(movieCard=> {
+        console.log('no movie card')
+        //window.location.reload();
+      }
+      if (localStorage.AllMovies !== 'not loaded'){
+        let listM = JSON.parse(localStorage.AllMovies)
+        listM.filter(movieCard=> {
           if(this.state.search.length >= 3 ){
-            
             if (movieCard.slug.includes(this.state.search)){
-            listM.push(movieCard)
-            moviesList = this.props.movieCards.map((movie, index) => {
-              return <div>movie.slug</div>
-            })
-          }
-        }
-        if(this.state.search.length >= 3 ){
-          moviesList = this.props.movieCards.map((movie, index) => {
-            return <MoviesList key={index} search={this.state.search}  movie={movie} movieID={(movie.id)} cardStyle='height: -webkit-fill-available;
-            overflow: hidden;'/>})
-        } 
+                moviesList = JSON.parse(localStorage.AllMovies).map((movie, index) => {
+                  return <MoviesList key={index} search={this.state.search}  movie={movie} movieID={(movie.id)} cardStyle='height: -webkit-fill-available;
+                  overflow: hidden;'/>
+                })
+              }
+            }
+            else{
+              moviesList = ''
+            }        
+          })
+      }
       else{
-        moviesList = ''
-      }        
-      })
+        this.props.listMovies()
+      }
     }
   }
 

@@ -22,181 +22,186 @@ export function fetchMovies (id) {
                     
 
                     let title
+                    let year = 0
                     let poster = null
+                    let newSlug = ''
                     if (movie.poster !== "null" && movie.poster !== "N/A"){
                         poster = movie.poster
                     }
                     if(responseJSON[index].title === 'undefined' || responseJSON[index].poster === null){   
                         if (movie.slug=== 'skylin3s'){
-                            movie.slug = 'skylines'
+                            newSlug = "skylines"
                         }
                         else if(movie.slug=== 'the-sputnik'){
-                            movie.slug = 'Sputnik'
+                            newSlug = "Sputnik"
                         }
                         else if(movie.slug=== 'charlies-angels'){
-                            movie.slug = "charlie's-angels"
+                            newSlug = "charlie's-angels"
                         }
                         else if (movie.slug=== 'spy-kids-2-the-island-of-lost-dreams'){
-                            movie.slug = "spy-kids-2"
+                            newSlug = "spy-kids-2"
                         }
                         else if (movie.slug=== 'cher-the-loneliest-elephant'){
-                            movie.slug = "cher"
+                            newSlug = "cher"
                         }
                         else if (movie.slug=== 'lemony-snickets-a-series-of-unfortunate-events'){
-                            movie.slug = "a-series-of-unfortunate-events"
+                            newSlug = "a-series-of-unfortunate-events"
                         }
                         else if (movie.slug=== 'shes-out-of-my-league'){
-                            movie.slug = "she's-out-of-my-league"
+                            newSlug = "she's-out-of-my-league"
                         }
                         else if (movie.slug=== 'shes-out-of-my-league'){
-                            movie.slug = "she's-out-of-my-league"
+                            newSlug = "she's-out-of-my-league"
                         }
                         else if (movie.slug=== 'the-wild-thornberrys-movie'){
-                            movie.slug = "the-wild-thornberrys"
+                            newSlug = "the-wild-thornberrys"
                         }
                         else if (movie.slug=== 'jackass-25'){
-                            movie.slug = "jackass 2.5"
+                            newSlug = "jackass 2.5"
                         }
                         else if (movie.slug=== 'jackass-35'){
-                            movie.slug = "jackass 3.5"
+                            newSlug = "jackass 3.5"
                         }
                         else if (movie.slug=== 'the-wild-thornberrys-movie'){
-                            movie.slug = "the-wild-thornberrys"
+                            newSlug = "the-wild-thornberrys"
                         }
                         else if (movie.slug=== 'the-naked-gun-212-the-smell-of-fear'){
-                            movie.slug = "the-naked-gun"
+                            newSlug = "the-naked-gun"
                         }
                         else if (movie.slug=== 'police-story-3-supercop'){
-                            movie.slug = "supercop"
+                            newSlug = "supercop"
                         }
                         else if (movie.slug=== 'new-gods-nezha-reborn'){
-                            movie.slug = "nezha-reborn"
+                            newSlug = "nezha-reborn"
                         }
                         else if (movie.slug=== 'w-lesie-dzis-nie-zasnie-nikt'){
-                            movie.slug = "Nobody-Sleeps-in-the-Woods-Tonight"
+                            newSlug = "Nobody-Sleeps-in-the-Woods-Tonight"
                         }
                         else if (movie.slug=== 'strange-dastanas'){
-                            movie.slug = "Ajeeb Daastaans"
+                            newSlug = "Ajeeb Daastaans"
                         }
                         else if (movie.slug=== 'trolls-2'){
-                            movie.slug = "trolls-world-tour"
+                            newSlug = "trolls-world-tour"
                         }
                         else if (movie.slug=== 'journey-to-china-the-iron-mask-mystery'){
-                            movie.slug = "iron-mask"
+                            newSlug = "iron-mask"
                         }
                         else if (movie.slug=== 'limited-partners'){
-                            movie.slug = "like-a-boss"
+                            newSlug = "like-a-boss"
                         }
                         else if (movie.slug=== 'dorys-reef-cam'){
-                            movie.slug = "dory's-reef-cam"
+                            newSlug = "dory's-reef-cam"
                         }
                         else if (movie.slug=== 'zack-snyders-justice-league'){
-                            movie.slug = "zack-snyder's-justice-league"
+                            newSlug = "zack-snyder's-justice-league"
                         }
                         else if (movie.slug=== 'danger-close-the-battle-of-long-tan'){
-                            movie.slug = "danger-close"
+                            newSlug = "danger-close"
                         }
                         else if (movie.slug=== 'mortal-kombat-legends-scorpions-revenge'){
-                            movie.slug = "mortal-kombat-legends-scorpion's-revenge"
+                            newSlug = "mortal-kombat-legends-scorpion's-revenge"
                         }
                         else if (movie.slug=== 'birds-of-prey-and-the-fantabulous-emancipation-of-one-harley-quinn'){
-                            movie.slug = "birds-of-prey"
+                            newSlug = "birds-of-prey"
                         }
                         else if (movie.slug=== 'el-robo-del-siglo'){
-                            movie.slug = "The-Heist-of-the-Century"
+                            newSlug = "The-Heist-of-the-Century"
                         }
                         else if (movie.slug=== 'x-men-the-new-mutants'){
-                            movie.slug = "the-new-mutants"
+                            newSlug = "the-new-mutants"
                         }
                         else if (movie.slug=== 'oceans-eight'){
-                            movie.slug = "ocean's-eight"
+                            newSlug = "ocean's-eight"
                         }
                         else if (movie.slug=== 'upsidedown-magic'){
-                            movie.slug = "upside-down-magic"
+                            newSlug = "upside-down-magic"
                         }
                         else if (movie.slug=== 'supermanshazam-the-return-of-black-adam'){
-                            movie.slug = "superman/shazam-the-return-of-black-adam"
+                            newSlug = "superman/shazam-the-return-of-black-adam"
                         }
                         else if (movie.slug=== 'billie-eilish-the-worlds-a-little-blurry'){
-                            movie.slug = "billie-eilish-the-world's-a-little-blurry"
+                            newSlug = "billie-eilish-the-world's-a-little-blurry"
                         } 
                         else if (movie.slug=== 'its-the-great-pumpkin-charlie-brown'){
-                            movie.slug = "it's-the-great-pumpkin-charlie-brown"
+                            newSlug = "it's-the-great-pumpkin-charlie-brown"
                         } 
                         else if (movie.slug=== 'bruce-springsteens-letter-to-you'){
-                            movie.slug = "bruce-springsteen's-letter-to-you"
+                            newSlug = "bruce-springsteen's-letter-to-you"
                         } 
                         else if (movie.slug=== 'its-the-easter-beagle-charlie-brown'){
-                            movie.slug = "it's-the-easter-beagle-charlie-brown"
+                            newSlug = "it's-the-easter-beagle-charlie-brown"
                         } 
                         else if (movie.slug=== 'mariah-careys-magical-christmas-special'){
-                            movie.slug = "mariah-carey's-magical-christmas-special"
+                            newSlug = "mariah-carey's-magical-christmas-special"
                         } 
                         else if (movie.slug=== 'my-hero-academia-heroesrising'){
-                            movie.slug = "my-hero-academia-heroes-rising"
+                            newSlug = "my-hero-academia-heroes-rising"
                         } 
                         else if (movie.slug=== 'jennifers-body'){
-                            movie.slug = "jennifer's-body"
+                            newSlug = "jennifer's-body"
                         } 
                         else if (movie.slug=== 'love-weddings-and-other-disasters'){
-                            movie.slug = "Love-Weddings-Other-Disasters"
+                            newSlug = "Love-Weddings-Other-Disasters"
                         } 
                         else if (movie.slug=== 'war-room-2'){
-                            movie.slug = "war-room"
+                            newSlug = "war-room"
                         } 
                         else if (movie.slug=== 'a-dogs-journey'){
-                            movie.slug = "a-dog's-journey"
+                            newSlug = "a-dog's-journey"
                         }                          
                         else if (movie.slug=== 'a-serial-killers-guide-to-life'){
-                            movie.slug = "a-serial-killer's-guide-to-life"
+                            newSlug = "a-serial-killer's-guide-to-life"
                         } 
                         else if (movie.slug=== 'han-solo-a-star-wars-story'){
-                            movie.slug = "solo-a-star-wars-story"
+                            newSlug = "solo-a-star-wars-story"
                         } 
                         else if (movie.slug=== 'isnt-it-romantic'){
-                            movie.slug = "isn't-it-romantic"
+                            newSlug = "isn't-it-romantic"
                         } 
                         else if (movie.slug=== 'the-lego-movie-sequel'){
-                            movie.slug = "the-lego-movie-2"
+                            newSlug = "the-lego-movie-2"
                         } 
                         else if (movie.slug=== 'dont-leave-home'){
-                            movie.slug = "don't-leave-home"
+                            newSlug = "don't-leave-home"
                         } 
                         else if (movie.slug=== ''){
-                            movie.slug = ""
+                            newSlug = ""
                         } 
                         else if (movie.slug=== 'why-hide'){
-                            movie.slug = "christmas-presence"
+                            newSlug = "christmas-presence"
                         } 
                         else if (movie.slug=== 'the-trollenberg-terror'){
-                            movie.slug = "the-crawling-eye"
+                            newSlug = "the-crawling-eye"
                         } 
                         else if (movie.slug=== 'grandmas-boy'){
-                            movie.slug = "grandma's-boy"
+                            newSlug = "grandma's-boy"
                         } 
                         else if (movie.slug=== 'childs-play-2'){
-                            movie.slug = "child's-play-2"
+                            newSlug = "child's-play-2"
                         } 
                         else if (movie.slug=== 'childs-play-3'){
-                            movie.slug = "child's-play-3"
+                            newSlug = "child's-play-3"
                         } 
                         else if (movie.slug=== 'jeepers-creepers-3'){
-                            movie.slug = "jeepers-creepers-iii"
+                            newSlug = "jeepers-creepers-iii"
                         } 
                         else if (movie.slug=== 'saw-legacy'){
-                            movie.slug = "jigsaw"
+                            newSlug = "jigsaw"
                         } 
                         else if (movie.slug=== '6headed-shark-attack'){
-                            movie.slug = "6-headed-shark-attack"
+                            newSlug = "6-headed-shark-attack"
                         } 
                         else if (movie.slug=== 'spongebob-squarepants-3'){
-                            movie.slug = "the-spongeBob-Movie:-sponge on the run"
+                            newSlug = "the-spongeBob-Movie:-sponge on the run"
                         } 
                         else if (movie.slug=== 'the-godfather-coda-the-death-of-michael-corleone'){
-                            movie.slug = "the-godfather-part-iii"
+                            newSlug = "the-godfather-part-iii"
                         } 
                         else if (movie.slug=== 'texas-chainsaw-3d'){
-                            movie.slug = "Texas-Chainsaw"
+                            newSlug = "Texas-Chainsaw"
+                        }
+                        else if(movie.slug==="soul"){
+                            year = 2020
                         } 
                         /*
                         else if (movie.slug=== ''){
@@ -204,10 +209,15 @@ export function fetchMovies (id) {
                         }
                         */
                         
+                        if (newSlug === ''){
+                            newSlug = movie.slug 
+                        }
+                        if (year === 0){
+                            year = movie.year
+                        } 
+                         
                         
-                        
-                        
-                        fetch(`https://www.omdbapi.com/?t=${movie.slug}&y=${movie.year}&type=movie+&apikey=6b46131b`).then(response=>{return response.json()}).then(moreInfo =>{
+                        fetch(`https://www.omdbapi.com/?t=${newSlug}&y=${year}&type=movie+&apikey=6b46131b`).then(response=>{return response.json()}).then(moreInfo =>{
                             //mars fixed year movies cause error when rendered
                             //should be writting fixed year to backend
                             //might be fixed on reset
@@ -230,7 +240,7 @@ export function fetchMovies (id) {
                                 return newReturn 
                             }
                             }).then(newmovieInfo=>{
-                            let year = newmovieInfo.Year
+                            year = newmovieInfo.Year
                             if (movie.slug=== "100-wolf"){
                                 title = "100 Percent Wolf"
                             }
@@ -238,8 +248,10 @@ export function fetchMovies (id) {
                                 title = newmovieInfo.Title
                             }
                             poster = newmovieInfo.Poster
+
+
                             if (title !== undefined){
-                                fetch(`${URL}/${id}/movies/${movie_id}?poster=${poster}&title=${title}&year=${year}&slug=${movie.slug}`, {
+                                fetch(`${URL}/${id}/movies/${movie_id}?poster=${poster}&title=${title}&year=${year}&slug=${newSlug}`, {
                                     method: 'PATCH',
                                     headers: { "Content-Type": "application/json" },
                                 })
@@ -260,9 +272,9 @@ export function fetchMovies (id) {
                 })
                 ).then(response => {
                     if (listOfMoviesNotFound.length>0){
-                        console.log('id ' +id)
-                        console.log(listOfMoviesNotFound)
-                        console.log('count '+ notFoundCount)
+                        //console.log('id ' +id)
+                        //console.log(listOfMoviesNotFound)
+                        //console.log('count '+ notFoundCount)
                     }
                     try {
                         localStorage.setItem ('currentMovieList', JSON.stringify(listOfMovies))
@@ -299,13 +311,19 @@ async function getNewData(dataResponce,movie){
 
 
 export function listMovies(){
-    return (dispatch) => {
-        dispatch({ type: 'LOADING_MOVIES'})
-        fetch(`https://river-api.herokuapp.com/movies`).then(response => {
-            return response.json()
-        }).then(responseJSON => {
-            dispatch({ type: 'ADD_MOVIES', movies: responseJSON})
-        })
+    if (localStorage.AllMovies=== 'not loaded'){
+        return (dispatch) => {
+            dispatch({ type: 'LOADING_MOVIES'})
+            fetch(`https://river-api.herokuapp.com/movies`).then(response => {
+                return response.json()
+            }).then(responseJSON => {
+                localStorage.setItem ('AllMovies', JSON.stringify(responseJSON))
+                dispatch({ type: 'ADD_MOVIES', movies: responseJSON})
+            })
+        }
+    }
+    else return(dispatch) =>{
+        dispatch({type: 'ADD_MOVIES', movies: JSON.parse(localStorage.AllMovies)})
     }
 }
 

@@ -30,7 +30,8 @@ class MovieList extends React.Component {
   setCurrentMovieState = () =>{
     console.log('set new movie state')
     this.setState({
-        currentMovie: this.props.passedMovie
+        currentMovie: this.props.passedMovie,
+        clicked: true
     })
     //console.log(this.state.currentMovie)
   }

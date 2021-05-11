@@ -110,7 +110,7 @@ class InfoPage extends Component {
   }
 
   render() {
-    console.log(this.props)
+    console.log(this)
     return (
     <div className= "Info">
     	<div className="banner-3">{this.props.currentMovie.Title.toUpperCase()}</div>

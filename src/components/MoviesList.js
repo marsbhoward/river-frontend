@@ -200,7 +200,8 @@ function MoviesList (props){
           currentMovie: props.movie
         }}
       )
-      
+      window.location.reload() 
+      console.log("ok I'm reloaded")
       
       localStorage.setItem('currentStream', streamId);
       localStorage.setItem('currentStreamName', streamSlug);
