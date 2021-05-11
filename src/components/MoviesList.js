@@ -193,7 +193,7 @@ function MoviesList (props){
 //need to set current movie for info page
       console.log(streamSlug)
       
-      //localStorage.setItem('currentMovieList', JSON.stringify(props.movie))
+      //sessionStorage.setItem('currentMovieList', JSON.stringify(props.movie))
       history.push(`/streams/${currentStream.toLowerCase()}/movies`,
         {state: { 
           clicked: true, 
@@ -203,9 +203,9 @@ function MoviesList (props){
       window.location.reload() 
       console.log("ok I'm reloaded")
       
-      localStorage.setItem('currentStream', streamId);
-      localStorage.setItem('currentStreamName', streamSlug);
-      localStorage.setItem('currentMovie', props.movie.id)  
+      sessionStorage.setItem('currentStream', streamId);
+      sessionStorage.setItem('currentStreamName', streamSlug);
+      sessionStorage.setItem('currentMovie', props.movie.id)  
     //  window.history.pushState({ 'clicked': true },'',`/streams/${streamName.toLowerCase()}/movies`)
     //  window.location.reload();
 
@@ -216,8 +216,8 @@ function MoviesList (props){
     history.push({
       pathname: `/streams/${currentStream.toLowerCase()}/movies`,   
     })    
-    localStorage.setItem('currentStream', streamId);
-    localStorage.setItem('currentStreamName', streamSlug);             
+    sessionStorage.setItem('currentStream', streamId);
+    sessionStorage.setItem('currentStreamName', streamSlug);             
   }  
 
 

@@ -85,12 +85,12 @@ class Searchbox extends Component {
         console.log('no movie card')
         //window.location.reload();
       }
-      if (localStorage.AllMovies !== 'not loaded'){
-        let listM = JSON.parse(localStorage.AllMovies)
+      if (sessionStorage.AllMovies !== 'not loaded'){
+        let listM = JSON.parse(sessionStorage.AllMovies)
         listM.filter(movieCard=> {
           if(this.state.search.length >= 3 ){
             if (movieCard.slug.includes(this.state.search)){
-                moviesList = JSON.parse(localStorage.AllMovies).map((movie, index) => {
+                moviesList = JSON.parse(sessionStorage.AllMovies).map((movie, index) => {
                   return <MoviesList key={index} search={this.state.search}  movie={movie} movieID={(movie.id)} cardStyle='height: -webkit-fill-available;
                   overflow: hidden;'/>
                 })

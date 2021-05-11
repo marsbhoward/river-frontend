@@ -109,8 +109,8 @@ export class Stream extends Component {
 
   handleOnClick = () => {
     //returns the selected Stream id to streamsList
-    localStorage.setItem('currentStream', this.props.stream.id)
-    localStorage.setItem('currentStreamName', this.props.stream.name)
+    sessionStorage.setItem('currentStream', this.props.stream.id)
+    sessionStorage.setItem('currentStreamName', this.props.stream.name)
     this.props.handler(this.props.stream.id,this.props.stream.name)
     }
    

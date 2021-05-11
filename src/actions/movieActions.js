@@ -277,8 +277,8 @@ export function fetchMovies (id) {
                         //console.log('count '+ notFoundCount)
                     }
                     try {
-                        localStorage.setItem ('currentMovieList', JSON.stringify(listOfMovies))
-                        localStorage.setItem ('listOfMovieIds', JSON.stringify(listOfMovieIds))
+                        sessionStorage.setItem ('currentMovieList', JSON.stringify(listOfMovies))
+                        sessionStorage.setItem ('listOfMovieIds', JSON.stringify(listOfMovieIds))
                         dispatch({ type: 'ADD_MOVIES', movies: listOfMovies, currentMovieList: listOfMovies,ids: listOfMovieIds})
                     }
                     catch(error){
@@ -311,19 +311,19 @@ async function getNewData(dataResponce,movie){
 
 
 export function listMovies(){
-    if (localStorage.AllMovies=== 'not loaded'){
+    if (sessionStorage.AllMovies=== 'not loaded'){
         return (dispatch) => {
             dispatch({ type: 'LOADING_MOVIES'})
             fetch(`https://river-api.herokuapp.com/movies`).then(response => {
                 return response.json()
             }).then(responseJSON => {
-                localStorage.setItem ('AllMovies', JSON.stringify(responseJSON))
+                sessionStorage.setItem ('AllMovies', JSON.stringify(responseJSON))
                 dispatch({ type: 'ADD_MOVIES', movies: responseJSON})
             })
         }
     }
     else return(dispatch) =>{
-        dispatch({type: 'ADD_MOVIES', movies: JSON.parse(localStorage.AllMovies)})
+        dispatch({type: 'ADD_MOVIES', movies: JSON.parse(sessionStorage.AllMovies)})
     }
 }
 
@@ -337,7 +337,7 @@ export function fetchTitle (movieInfo){
             }).then(responseJSON => {
                             if(responseJSON.Title !== null){ 
                             try {
-                                localStorage.setItem('selectedMovie',JSON.stringify(responseJSON))
+                                sessionStorage.setItem('selectedMovie',JSON.stringify(responseJSON))
                                 dispatch({ type: 'ADD_MOVIES', movies: [], ids: [], currentTitle: responseJSON})
                             }
                             catch(error){

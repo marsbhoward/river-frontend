@@ -6,14 +6,14 @@ import StreamList from '../components/StreamList'
 class StreamsPage extends Component {   
   
   componentDidMount() {
-    localStorage.setItem('currentStream', '');
-    localStorage.setItem('currentStreamName', '');
+    sessionStorage.setItem('currentStream', '');
+    sessionStorage.setItem('currentStreamName', '');
     this.props.fetchStreams()
   }
 
   componentDidUpdate(){
-    localStorage.setItem('currentStream', '');
-    localStorage.setItem('currentStreamName', '');    
+    sessionStorage.setItem('currentStream', '');
+    sessionStorage.setItem('currentStreamName', '');    
   }
 //binds passed handler to StreamsPage handler
   constructor(props){

@@ -14,11 +14,11 @@ useEffect(() => {
 //refactor to use session storage to grab current movie 
 //this will also help search be implemented
 function handleOnClick(){
-  localStorage.setItem('currentMovie',props.movie.id)
-  localStorage.setItem('selectedMovie',JSON.stringify( props.movie))
+  sessionStorage.setItem('currentMovie',props.movie.id)
+  sessionStorage.setItem('selectedMovie',JSON.stringify( props.movie))
   props.handler(props.movie,true,props.movieID);
   
-    history.push(`/streams/${localStorage.currentStreamName}/movies`,
+    history.push(`/streams/${sessionStorage.currentStreamName}/movies`,
     {state: { 
       clicked: true, 
       currentMovie: props.movie

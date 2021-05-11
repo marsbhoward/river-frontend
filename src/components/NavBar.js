@@ -13,8 +13,8 @@ const NavBar  = withRouter (({ history, ...props}) => {
 
 
   function clearStream(){
-    localStorage.setItem('currentStream', ' ');
-    localStorage.setItem('currentStreamName', ' '); 
+    sessionStorage.setItem('currentStream', ' ');
+    sessionStorage.setItem('currentStreamName', ' '); 
   }
 
 
@@ -24,7 +24,7 @@ const NavBar  = withRouter (({ history, ...props}) => {
 	    <div className="homeButton" onClick={() => {clearStream(); history.push('/') }}>  
 	      RIVER
 	    </div>
-      <div>{localStorage.currentStreamName.toUpperCase()}</div>
+      <div>{sessionStorage.currentStreamName.toUpperCase()}</div>
       <Searchbox addCount={props.addCount} resetCount={props.resetCount} sBoxCount={props.sBoxCount} sBoxOpenState={props.sBoxOpenState} pointer={props.pointer}/>    
 	</div>
 

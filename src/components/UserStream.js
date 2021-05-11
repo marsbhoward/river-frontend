@@ -177,10 +177,10 @@ export class UserStream extends Component {
 
     handleOnClick = () => {
     //returns the selected Stream id to streamsList
-    localStorage.setItem('currentStream',  this.props.stream.stream_id)
-    localStorage.setItem('currentStreamName', this.state.streamName)
-    localStorage.setItem('currentMovieList', " ")
-    localStorage.setItem('selectedMovie', " ")
+    sessionStorage.setItem('currentStream',  this.props.stream.stream_id)
+    sessionStorage.setItem('currentStreamName', this.state.streamName)
+    sessionStorage.setItem('currentMovieList', " ")
+    sessionStorage.setItem('selectedMovie', " ")
     this.props.handler(this.props.stream.stream_id, this.state.streamName)
     }
 

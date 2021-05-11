@@ -32,10 +32,10 @@ const MoviesPage = (props) => {
       }       
     }, []);
     //dispatch({type: 'LOADING_MOVIES'})
-    //props.fetchMovies(localStorage.currentStream)
+    //props.fetchMovies(sessionStorage.currentStream)
     //console.log(props)
     //console.log(movieData)
-    //console.log(dispatch(fetchMovies(localStorage.currentStream)))
+    //console.log(dispatch(fetchMovies(sessionStorage.currentStream)))
   
   function changeClicked(){
     setCliked(true)
@@ -46,7 +46,7 @@ const MoviesPage = (props) => {
   }
 
   function getMoviesArray(){
-    dispatch(fetchMovies(localStorage.currentStream));
+    dispatch(fetchMovies(sessionStorage.currentStream));
     setMovieDataArray(movieData.movies)  
   }
   function getTitleData(){
@@ -61,7 +61,7 @@ const MoviesPage = (props) => {
     //dispatch(fetchTitle(Promise.resolve(location.state).then(location.state.state.currentMovie)))
     //dispatch(fetchTitle(location.state.state.currentMovie))
     setCurrentTitle(movieData.currentTitle)
-    localStorage.setItem('selectedMovie', movieData.currentTitle)
+    sessionStorage.setItem('selectedMovie', movieData.currentTitle)
   }
 
   function handleFunctions (e){
@@ -93,7 +93,7 @@ const MoviesPage = (props) => {
           //getcurrentTitle(movieData.currentTitle)
           return(
           <div className="moviesPage" onClick={handleFunctions}>
-            <MovieList handler={handler} movieBackend={location.state.state.currentMovie} passedMovie={JSON.parse(localStorage.selectedMovie)} streamID={localStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={localStorage.currentStreamName}/>                  
+            <MovieList handler={handler} movieBackend={location.state.state.currentMovie} passedMovie={JSON.parse(sessionStorage.selectedMovie)} streamID={sessionStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={sessionStorage.currentStreamName}/>                  
           </div>
           )
         }
@@ -101,7 +101,7 @@ const MoviesPage = (props) => {
         getTitleData()
           return(
             <div className="moviesPage" onClick={handleFunctions}>
-              <MovieList movieBackend={''} passedMovie={movieData.currentTitle} streamID={localStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={localStorage.currentStreamName}/>                  
+              <MovieList movieBackend={''} passedMovie={movieData.currentTitle} streamID={sessionStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={sessionStorage.currentStreamName}/>                  
             </div>
           )
       }
@@ -109,7 +109,7 @@ const MoviesPage = (props) => {
           //getMoviesArray()
             return (
               <div className="moviesPage" onClick={handleFunctions}>
-                  <MovieList handler={handler} passGetData={getcurrentTitle} streamID={localStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={localStorage.currentStreamName}/>                  
+                  <MovieList handler={handler} passGetData={getcurrentTitle} streamID={sessionStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={sessionStorage.currentStreamName}/>                  
               </div>
             )
         }

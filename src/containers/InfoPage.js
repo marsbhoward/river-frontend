@@ -18,7 +18,7 @@ class InfoPage extends Component {
   componentDidMount() {
     //pass stream id and movie id in props
     // only works with db complete reset
-    let apiMovieID = parseInt(localStorage.currentMovie )
+    let apiMovieID = parseInt(sessionStorage.currentMovie )
     adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => {
       this.logMovie(movie)
     })
@@ -34,7 +34,7 @@ class InfoPage extends Component {
   componentDidUpdate(prevProps){
   	if (this.props.currentMovie.Title !== prevProps.currentMovie.Title)
   	{
-      let apiMovieID = localStorage.currentMovie 
+      let apiMovieID = sessionStorage.currentMovie 
       adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
   	}
   }
@@ -47,7 +47,7 @@ class InfoPage extends Component {
           selectedMovie: selectedMovie
         })
 
-        //localStorage.setItem('currentMovie',selectedMovie)
+        //sessionStorage.setItem('currentMovie',selectedMovie)
 
       if (selectedMovie === null) {
       }
@@ -66,14 +66,14 @@ class InfoPage extends Component {
 
 
   trailerPath = (passedMovie) =>{
-    let newMovieList = JSON.parse(localStorage.currentMovieList)
+    let newMovieList = JSON.parse(sessionStorage.currentMovieList)
     
     //mars passed movie is coming back null on occation
     if (passedMovie){
       if (this.props.trailer.length > 0 && this.props.trailer !== "kJQP7kiw5Fk" && passedMovie.youtube_id === null){ 
         adapter.updateYoutubeID(passedMovie.stream_id,passedMovie.id,this.props.trailer).then(data => data)
         passedMovie.youtube_id = this.props.trailer
-        localStorage.setItem('currentMovieList',JSON.stringify(newMovieList)) 
+        sessionStorage.setItem('currentMovieList',JSON.stringify(newMovieList)) 
         console.log('trailer updated on backend') 
       }
       else if (this.props.trailer === 'kJQP7kiw5Fk') {

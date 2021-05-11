@@ -48,7 +48,7 @@ function HomePage(props) {
 
 
   if (loading) {
-    localStorage.setItem('currentStreamName', ' '); 
+    sessionStorage.setItem('currentStreamName', ' '); 
     return <div className = "home">Loading...</div>;
   }
 

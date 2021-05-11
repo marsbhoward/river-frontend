@@ -21,13 +21,19 @@ class ProfilePage extends Component {
 
   
   componentDidMount() {
+    console.log(this.props)
     this.props.fetchUserStreams(this.props.userId)
+    if (this.props.loading !== false){
+      console.log('timer started')
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    }
   }
 
-
   componentDidUpdate(prevProps){
-    localStorage.setItem('currentStream', ' ');
-    localStorage.setItem('currentStreamName', ' ');
+    sessionStorage.setItem('currentStream', ' ');
+    sessionStorage.setItem('currentStreamName', ' ');
   }
 
   fetchUserStreams = (id) => {
