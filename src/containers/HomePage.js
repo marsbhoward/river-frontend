@@ -79,6 +79,7 @@ function HomePage(props) {
          {isAuthenticated && (
             adapter.createUser(user.email,user.name).then(res=> {
               user.id = res.id
+              console.log('doing')
               getUserStreams(user.id)
               props.userID(user.id)
             }),            

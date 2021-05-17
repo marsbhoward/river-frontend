@@ -318,7 +318,6 @@ export function listMovies(){
             fetch(`https://river-api.herokuapp.com/movies`).then(response => {
                 return response.json()
             }).then(responseJSON => {
-                console.log(responseJSON)
                 sessionStorage.setItem ('AllMovies', JSON.stringify(responseJSON))
                 dispatch({ type: 'ADD_MOVIES', movies: responseJSON})
             })

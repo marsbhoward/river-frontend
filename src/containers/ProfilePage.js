@@ -132,6 +132,11 @@ class ProfilePage extends Component {
     }
   }
 
+  handleDarkMode = (user) => {
+    console.log(user)
+    this.props.darkModeSwitch(user)
+  }
+
   render() {
     const { loading, user } = this.context;
     //const { isAuthenticated, loginWithRedirect} = this.context;
@@ -152,7 +157,7 @@ class ProfilePage extends Component {
         <div className= "profile" onClick={this.handleFunctions}>
           <img src={user.picture} alt="Profile" />
           <h2>Hi, {user.name}</h2>
-          <p>email: {user.email}</p>
+          <p onClick={()=>this.handleDarkMode(user)}>email: {user.email}</p>
           <Button basic loading>
             Loading
           </Button>

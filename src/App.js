@@ -10,7 +10,6 @@ import StreamsPage from './containers/StreamsPage';
 import UserStreamsPage from './containers/UserStreamsPage';
 import MoviesPage from './containers/MoviesPage';
 import HomePage from './containers/HomePage';
-import './index.css';
 import $ from 'jquery'; 
 
 
@@ -26,14 +25,16 @@ class App extends Component {
     this.addCount=this.addCount.bind(this)
     this.resetCount=this.resetCount.bind(this)
     this.addHomeCount=this.addHomeCount.bind(this)
-    
+    this.darkModeSwitch = this.darkModeSwitch.bind(this)
+
     this.state = {
       currentStream: sessionStorage.currentStream,
       currentStreamName: sessionStorage.currentStreamName,
       target: "",
       sBoxOpenState: false,
       sBoxCount: 0,
-      homeCount: 0
+      homeCount: 0,
+      stylePath: './index.css'
     }
     
   }
@@ -55,6 +56,14 @@ componentDidMount() {
     */})
   }
 
+  darkModeSwitch = (user) => {
+    if (user.darkmode === false){
+      this.setState ({stylePath: './index.css'})
+    }
+    else{
+      //this.setState ({stylePath: 'darkmode css file'})
+    }
+  }
   
 
   UserID = (UserID) => {
@@ -110,8 +119,9 @@ componentDidMount() {
     return (
       <Router>
         <div className = "page">
+        <link rel="stylesheet" type="text/css" href={this.state.stylePath} />
           <Route exact path="/" render={() => <div><HomeBar/> <HomePage homeCount={this.state.homeCount} addHomeCount={this.addHomeCount} userID={this.UserID}/> </div>} />
-          <Route exact path="/profile" render={() => <div ><NavBar addCount={this.addCount}  resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <ProfilePage resetCount={this.resetCount} pointer={this.findTarget} userId={sessionStorage.currentUserID}/> </div>}  />
+          <Route exact path="/profile" render={() => <div ><NavBar addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <ProfilePage resetCount={this.resetCount} darkModeSwitch = {this.darkModeSwitch} pointer={this.findTarget} userId={sessionStorage.currentUserID}/> </div>}  />
           <Route exact path='/streams' render={() => <div><NavBar addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <StreamsPage resetCount={this.resetCount} pointer={this.findTarget} handler={this.handler} /> </div>} />
           <Route exact path='/userstreams' render={() => <div><NavBar addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <UserStreamsPage resetCount={this.resetCount} pointer={this.findTarget} handler={this.handler} userId={sessionStorage.currentUserID}/> </div>}  />
           <Route exact path='/streams/:id/movies' render={() => <div><NavBar addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <MoviesPage resetCount={this.resetCount} pointer={this.findTarget} handler= {this.state.currentStream} streamName= {this.state.currentStreamName}/> </div>} />

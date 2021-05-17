@@ -2,6 +2,7 @@
   "name": "river",
   "version": "0.1.0",
   "private": true,
+  "node": "15.4.0",
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.6.5",
     "@testing-library/jest-dom": "^4.2.4",
