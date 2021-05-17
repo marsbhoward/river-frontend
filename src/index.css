@@ -182,7 +182,8 @@ code {
 
 .movie{
   object-fit: cover;
-  width: 90%;
+  width: 100%;
+  height: 100%;
   text-align: center;
   padding: 5%;
 }
@@ -268,13 +269,12 @@ code {
 }
 
 .movie-list {
+  position: absolute;
+  overflow: auto;
   text-align: center;
   display: grid;
-  top: 0;
-  bottom: 0;
-  margin-top: 15px;
-  margin-bottom: 30px;
-  height: 100%;
+  top: 15%;
+  height: 80%;
   width: 100%;
   
   grid-template-columns: auto auto auto auto;

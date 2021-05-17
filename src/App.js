@@ -39,7 +39,6 @@ class App extends Component {
   }
 
 componentDidMount() {
-  console.log('app.js loaded')
   sessionStorage.setItem ('AllMovies', 'not loaded')
 }  
 

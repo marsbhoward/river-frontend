@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { listMovies } from '../actions/movieActions'
 import MoviesList from './MoviesList';
-import { Auth0Context } from "../react-auth0-spa";
-import { findDOMNode } from 'react-dom';
-import $ from 'jquery'; 
-import MovieList from './MovieList';
 
 let  moviesList
 
@@ -98,7 +94,8 @@ class Searchbox extends Component {
             }
             else{
               moviesList = ''
-            }        
+            }
+            return "done"        
           })
       }
       else{

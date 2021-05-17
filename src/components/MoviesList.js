@@ -1,23 +1,21 @@
 import React,{ useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovies } from '../actions/movieActions'
-import InfoPage from '../containers/InfoPage'
-import { useHistory, Link, useLocation } from "react-router-dom";
-import { useSelector, useDispatch, useStore } from 'react-redux'
+import { useHistory, useLocation } from "react-router-dom";
+import { useDispatch } from 'react-redux'
 
 
 
 function MoviesList (props){
   const location = useLocation();
   const dispatch = useDispatch();
-  const [movieDataArray,setMovieDataArray] = useState([]); 
   const history = useHistory();
 //binds passed handler to StreamsList handler
   const [streamName, setStreamName] = useState('');
   const [streamId, setStreamId] = useState('');
   const [streamSlug, setStreamSlug] = useState('');
   const [style, setStyle] = useState('');
-  const [movieName, setMovieName] =useState('');
+  //const [movieName, setMovieName] =useState('');
 
 
   useEffect(() => {
@@ -101,68 +99,61 @@ function MoviesList (props){
         break;
       case 12:
         // statements_1
-        setStreamName("CBS")
-        setStyle("movie-card cbs")
-        setStreamId (12);
-        setStreamSlug ('cbs');                  
-        break;
-      case 13:
-        // statements_1
         setStreamName("TBS")
         setStyle("movie-card tbs")
         setStreamId (13);
         setStreamSlug ('tbs');                  
         break;
-      case 14:
+      case 13:
         // statements_1
         setStreamName("TNT")
         setStyle("movie-card tnt")
         setStreamId (14);
         setStreamSlug ('tnt');                  
         break;
-      case 15:
+      case 14:
         // statements_1
         setStreamName("Shudder")
         setStyle("movie-card shudder")
         setStreamId (15);
         setStreamSlug ('shudder');                  
         break;
-      case 16:
+      case 15:
         // statements_1
         setStreamName("AMC")
         setStyle("movie-card amc")
         setStreamId (16);
         setStreamSlug ('amc');                  
         break;
-      case 17:
+      case 16:
         // statements_1
         setStreamName("FX")
         setStyle("movie-card fx")
         setStreamId (17);
         setStreamSlug ('fx');                  
         break;
-      case 18:
+      case 17:
         // statements_1
         setStreamName("SYFY")
         setStyle("movie-card stfy")
         setStreamId (18);
         setStreamSlug ('syfy');                  
         break;
-      case 19:
+      case 18:
         // statements_1
         setStreamName("IFC")
         setStyle("movie-card ifc")
         setStreamId (19);
         setStreamSlug ('ifc');                          
         break;
-      case 20:
+      case 19:
         // statements_1
         setStreamName("Peacock")
         setStyle("movie-card peacock")
         setStreamId (20);
         setStreamSlug ('peacock');                  
         break;
-      case 21:
+      case 20:
         // statements_1
         setStreamName("Paramount +")
         setStyle("movie-card paramount")
@@ -175,7 +166,7 @@ function MoviesList (props){
         setStyle("movie-card")          
         break;
       }
-      setMovieName(props.movie.id)
+      //setMovieName(props.movie.id)
     });
 
   function handleCollection(handleMovie){

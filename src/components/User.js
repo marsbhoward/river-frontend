@@ -6,8 +6,7 @@ import { useHistory } from "react-router-dom";
 
 function User(props) {  
  const history = useHistory();	
- const { isAuthenticated, loginWithRedirect} = useAuth0();	
- const { loading, user } = useAuth0();
+ const { isAuthenticated} = useAuth0();	
  return (
     <div>
    	  {!isAuthenticated && (

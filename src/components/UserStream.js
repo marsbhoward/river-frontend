@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-//import { fetchMovies } from '../actions/movieActions'
-import { connect } from 'react-redux';
 
 import netflix from'../streams_logos/netflix.png';
 import hulu from'../streams_logos/hulu.png';
@@ -110,59 +108,53 @@ export class UserStream extends Component {
         break;         
       case 12:
         this.setState({
-        	logo: cbs,
-        	streamName: "cbs"
-        })
-        break;
-      case 13:
-        this.setState({
         	logo: tbs,
         	streamName: "tbs"
         })
         break;
-      case 14:
+      case 13:
         this.setState({
         	logo: tnt,
         	streamName: "tnt"
         })
         break;
-      case 15:
+      case 14:
         this.setState({
         	logo: shudder,
         	streamName: "shudder"
         })
         break;
-      case 16:
+      case 15:
         this.setState({
         	logo: amc,
         	streamName: "amc"
         })
         break;
-      case 17:
+      case 16:
         this.setState({
         	logo: fx,
         	streamName: "fx"
         })
         break;         
-      case 18:
+      case 17:
         this.setState({
         	logo: syfy,
         	streamName: "syfy"
         })
         break;
-      case 19:
+      case 18:
         this.setState({
         	logo: ifc,
         	streamName: "ifc"
         })
         break; 
-        case 20:
+        case 19:
           this.setState({
             logo: peacock,
             streamName: "peacock"
           })
           break;
-        case 21:
+        case 20:
           this.setState({
             logo: paramount,
           streamName: "paramount"
@@ -203,7 +195,7 @@ export class UserStream extends Component {
     let streamId = this.props.stream
     if (this.props.streamLinks === true){
         return (
-          <Link to={`/streams/${this.state.streamName}/movies`} className= {this.state.streamClass}  onMouseMove={this.mouseEnter} onMouseLeave={this.mouseExit}>          
+          <Link to={`/streams/${this.state.streamName}/movies`} className= {this.state.streamClass} onClick={this.handleOnClick}  onMouseMove={this.mouseEnter} onMouseLeave={this.mouseExit}>          
             <img onClick={this.handleOnClick} className= "stream" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
           </Link>
         )

@@ -21,14 +21,7 @@ class ProfilePage extends Component {
 
   
   componentDidMount() {
-    console.log(this.props)
     this.props.fetchUserStreams(this.props.userId)
-    if (this.props.loading !== false){
-      console.log('timer started')
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
-    }
   }
 
   componentDidUpdate(prevProps){
@@ -144,6 +137,13 @@ class ProfilePage extends Component {
     //const { isAuthenticated, loginWithRedirect} = this.context;
     
     if (loading || !user) {
+      setTimeout(() => {
+        if (this.props.loading !== false){
+          console.log('timer executed')
+          window.location.reload();
+        }
+      }, 3500);
+    
       return <div>Loading...</div>;
     }
 

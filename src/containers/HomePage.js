@@ -1,21 +1,18 @@
-import React,{ useState, useEffect } from 'react';
+import React,{ useEffect } from 'react';
 import 'semantic-ui-css/semantic.min.css'
 import { connect } from 'react-redux';
 import { fetchMovies } from '../actions/movieActions'
-import { useSelector, useDispatch, useStore } from 'react-redux'
+import {  useDispatch } from 'react-redux'
 import { Button } from 'semantic-ui-react'
 import { useAuth0 } from "../react-auth0-spa";
 import { useHistory } from "react-router-dom";
-import { each } from 'jquery';
 
   const streamsList = [
-  {id: 1,name:"netflix"},{id: 2,name:"hulu"},{id: 3,name:"amazon"},
-  {id: 4,name:"hbo"},{id: 5,name:"disney"},{id: 6,name:"showtime"},
-  {id: 7,name:"starz"},{id: 8,name:"cinimax"},{id: 9,name:"dc"},
-  {id: 10,name:"apple"},{id: 11,name:"epix"},{id: 12,name:"cbs"},
-  {id: 13,name:"tbs"},{id: 14,name:"tnt"},{id: 15,name:"shudder"},
-  {id: 16,name:"amc"},{id: 17,name:"fx"},{id: 18,name:"syfy"},{id: 19,name:"ifc"},
-  {id: 20, name:"peacock"},{id: 21, name:"paramount"}
+  {id: 1,name:"netflix"},{id: 2,name:"hulu"},{id: 3,name:"amazon"},{id: 4,name:"hbo"},
+  {id: 5,name:"disney"},{id: 6,name:"showtime"},{id: 7,name:"starz"},{id: 8,name:"cinimax"},
+  {id: 9,name:"dc"},{id: 10,name:"apple"},{id: 11,name:"epix"},{id: 12,name:"tbs"},
+  {id: 13,name:"tnt"},{id: 14,name:"shudder"},{id: 15,name:"amc"},{id: 16,name:"fx"},
+  {id: 17,name:"syfy"},{id: 18,name:"ifc"},{id: 19, name:"peacock"},{id: 20, name:"paramount"}
   ]
 
 function HomePage(props) {  
@@ -23,7 +20,6 @@ function HomePage(props) {
   const { isAuthenticated, loginWithRedirect} = useAuth0();
   const { loading, user } = useAuth0();
   const history = useHistory();
-  const [movieDataArray,setMovieDataArray] = useState([]); 
 
   useEffect(() => {
     if (props.homeCount <= 0){

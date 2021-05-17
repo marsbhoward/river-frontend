@@ -4,18 +4,28 @@ import { fetchMovies } from '../actions/movieActions'
 import { fetchTitle } from '../actions/movieActions'
 import MovieList from '../components/MovieList'
 import { useLocation } from "react-router-dom";
-import { useSelector, useDispatch, useStore } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { useHistory} from "react-router-dom";
 
 const MoviesPage = (props) => { 
+  const history = useHistory();
   const movieData = useSelector(state => state.MoviesReducer, []) || []; 
   const dispatch = useDispatch();
   const location = useLocation();
   const [clicked, setCliked] = useState('');
-  const [movieDataArray,setMovieDataArray] = useState([]); 
-  const [currentTitle, setCurrentTitle] = useState([]); 
+  //const [movieDataArray,setMovieDataArray] = useState([]); 
+  //const [currentTitle, setCurrentTitle] = useState([]); 
   const [count, setCount]= useState([0]);
 
   useEffect(() => {
+    console.log(sessionStorage.currentStreamName)
+      if (sessionStorage.currentStreamName === " "){
+        alert("error selecting stream please try again")
+        history.push(`/userstreams`
+        )
+      }
+
+
       if (typeof location.state !== "undefined"){
         //set clicked
         changeClicked()
@@ -47,20 +57,20 @@ const MoviesPage = (props) => {
 
   function getMoviesArray(){
     dispatch(fetchMovies(sessionStorage.currentStream));
-    setMovieDataArray(movieData.movies)  
+    //setMovieDataArray(movieData.movies)  
   }
   function getTitleData(){
     dispatch(fetchTitle(location.state.state.currentMovie))
     //dispatch(fetchTitle(Promise.resolve(location.state).then(location.state.state.currentMovie)))
     //dispatch(fetchTitle(location.state.state.currentMovie))
-    setCurrentTitle(movieData.currentTitle)
+    //setCurrentTitle(movieData.currentTitle)
   }
 
   function getcurrentTitle(movieData){
     dispatch(fetchTitle(movieData))
     //dispatch(fetchTitle(Promise.resolve(location.state).then(location.state.state.currentMovie)))
     //dispatch(fetchTitle(location.state.state.currentMovie))
-    setCurrentTitle(movieData.currentTitle)
+    //setCurrentTitle(movieData.currentTitle)
     sessionStorage.setItem('selectedMovie', movieData.currentTitle)
   }
 

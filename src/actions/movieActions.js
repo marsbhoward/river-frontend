@@ -269,12 +269,13 @@ export function fetchMovies (id) {
                         listOfMoviesNotFound.push(movie)
                         notFoundCount++
                     }
+                    return 'done'
                 })
                 ).then(response => {
                     if (listOfMoviesNotFound.length>0){
-                        //console.log('id ' +id)
-                        //console.log(listOfMoviesNotFound)
-                        //console.log('count '+ notFoundCount)
+                        console.log('id ' +id)
+                        console.log(listOfMoviesNotFound)
+                        console.log('count '+ notFoundCount)
                     }
                     try {
                         sessionStorage.setItem ('currentMovieList', JSON.stringify(listOfMovies))
@@ -317,6 +318,7 @@ export function listMovies(){
             fetch(`https://river-api.herokuapp.com/movies`).then(response => {
                 return response.json()
             }).then(responseJSON => {
+                console.log(responseJSON)
                 sessionStorage.setItem ('AllMovies', JSON.stringify(responseJSON))
                 dispatch({ type: 'ADD_MOVIES', movies: responseJSON})
             })
