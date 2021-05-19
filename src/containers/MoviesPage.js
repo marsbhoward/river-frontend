@@ -110,7 +110,7 @@ const MoviesPage = (props) => {
         //getTitleData()
           return(
             <div className="moviesPage" onClick={handleFunctions}>
-              <MovieList movieBackend={''} passedMovie={movieData.currentTitle} streamID={sessionStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={sessionStorage.currentStreamName}/>                  
+              <MovieList handler={handler} movieBackend={''} passedMovie={movieData.currentTitle} streamID={sessionStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={sessionStorage.currentStreamName}/>                  
             </div>
           )
       }

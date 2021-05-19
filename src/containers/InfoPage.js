@@ -111,13 +111,20 @@ class InfoPage extends Component {
   }
 
   render() {
-    let title
+    let title = 'title'
     if (this.props.currentMovie.Title !== undefined){
       title = this.props.currentMovie.Title 
     }
     else{
-      title =  sessionStorage.selectedMovie.Title
+      if (sessionStorage.selectedMovie.title){
+        title =  JSON.parse (sessionStorage.selectedMovie.title)
+        console.log(title)
+      }
+      else{
+        window.location.reload()
+      }
     }
+    
     return (
     <div className= "Info">
     	<div className="banner-3">{title.toUpperCase()}</div>
