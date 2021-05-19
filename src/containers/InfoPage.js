@@ -116,7 +116,7 @@ class InfoPage extends Component {
       title = this.props.currentMovie.Title 
     }
     else{
-      title = localStorage.selectedMovie.Title
+      title =  sessionStorage.selectedMovie.Title
     }
     return (
     <div className= "Info">
