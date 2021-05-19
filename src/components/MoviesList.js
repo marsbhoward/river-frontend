@@ -191,8 +191,8 @@ function MoviesList (props){
           currentMovie: props.movie
         }}
       )
-      window.location.reload() 
-      console.log("ok I'm reloaded")
+      //window.location.reload() 
+      //console.log("ok I'm reloaded")
       
       sessionStorage.setItem('currentStream', streamId);
       sessionStorage.setItem('currentStreamName', streamSlug);

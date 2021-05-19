@@ -16,6 +16,7 @@ class InfoPage extends Component {
   } 
   
   componentDidMount() {
+    console.log('I was loaded')
     //pass stream id and movie id in props
     // only works with db complete reset
     let apiMovieID = parseInt(sessionStorage.currentMovie )
@@ -110,10 +111,16 @@ class InfoPage extends Component {
   }
 
   render() {
-    console.log(this)
+    let title
+    if (this.props.currentMovie.Title !== undefined){
+      title = this.props.currentMovie.Title 
+    }
+    else{
+      title = localStorage.selectedMovie.Title
+    }
     return (
     <div className= "Info">
-    	<div className="banner-3">{this.props.currentMovie.Title.toUpperCase()}</div>
+    	<div className="banner-3">{title.toUpperCase()}</div>
     	{this.handleLoading()}
 	</div>
  	);

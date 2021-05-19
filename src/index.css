@@ -269,7 +269,6 @@ code {
 }
 
 .movie-list {
-  position: absolute;
   overflow: auto;
   text-align: center;
   display: grid;

@@ -87,7 +87,6 @@ const MoviesPage = (props) => {
   //<MovieList streamID={props.handler} movieCards={props.movieCards} movieIds={props.movieIds} trailerID={props.trailerID} currentStream={props.currentStream}/>
   function handleLoading (){
     if (count< 1 && typeof location.state !== "undefined"){
-      console.log(count)
       getTitleData()
       getMoviesArray()
       setCount (count+1)
@@ -108,7 +107,7 @@ const MoviesPage = (props) => {
           )
         }
         else
-        getTitleData()
+        //getTitleData()
           return(
             <div className="moviesPage" onClick={handleFunctions}>
               <MovieList movieBackend={''} passedMovie={movieData.currentTitle} streamID={sessionStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={sessionStorage.currentStreamName}/>                  

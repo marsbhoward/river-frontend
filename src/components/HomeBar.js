@@ -13,7 +13,7 @@ const HomeBar = withRouter(({ history }) => {
 	      RIVER
 	    </span>
 	</div>
-  
+   
 
     <div className="footer">
       {isAuthenticated && <span className="profileButton" onClick={() => { history.push('/profile') }}>Profile</span>}

@@ -8,7 +8,7 @@ let moviesList
 
 class MovieList extends React.Component {
   componentDidMount() {
-    
+    console.log("I was loaded too")
     if (typeof this.props.passedMovie !== "undefined"){
       this.setCurrentMovieState()
     }
@@ -28,7 +28,6 @@ class MovieList extends React.Component {
   }
 
   setCurrentMovieState = () =>{
-    console.log('set new movie state')
     this.setState({
         currentMovie: this.props.passedMovie,
         clicked: true
