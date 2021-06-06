@@ -55,12 +55,12 @@ class MovieList extends React.Component {
     //addition if to make sure passed movie is in
     if (sessionStorage.currentMovieList !== " "){
       moviesList = JSON.parse(sessionStorage.currentMovieList).map((movie, index) => {
-        return <Movie key={index} movie={movie} passGetData={this.props.passGetData} handler={this.handler} movieID={(index+1)}/>
+        return <Movie key={index} movie={movie} darkmodeProp = {this.props.darkmodeProp}  passGetData={this.props.passGetData} handler={this.handler} movieID={(index+1)}/>
       })
     }
     else{
       moviesList = this.props.movieCards.map((movie, index) => {
-        return <Movie key={index} movie={movie} passGetData={this.props.passGetData} handler={this.handler} movieID={(index+1)}/>
+        return <Movie key={index} movie={movie} darkmodeProp = {this.props.darkmodeProp}  passGetData={this.props.passGetData} handler={this.handler} movieID={(index+1)}/>
       })  
     }
 
@@ -80,7 +80,7 @@ class MovieList extends React.Component {
         return(
           <div className = "WasClicked">
             <br/>
-            <InfoPage movieIds={this.props.movieIds} streamID={this.props.streamID} movieID={parseInt(sessionStorage.currentMovie)} currentBackend={this.props.movieBackend} currentMovie={this.props.passedMovie} trailerID={this.trailerID}/>
+            <InfoPage darkmodeProp = {this.props.darkmodeProp} css={this.props.css} movieIds={this.props.movieIds} streamID={this.props.streamID} movieID={parseInt(sessionStorage.currentMovie)} currentBackend={this.props.movieBackend} currentMovie={this.props.passedMovie} trailerID={this.trailerID}/>
             <div className="movie-list">
                 {moviesList}
                 <br/>
@@ -94,7 +94,7 @@ class MovieList extends React.Component {
         return(
           <div>
             <br/>
-            <InfoPage movieIds={this.props.movieIds} streamID={this.props.streamID} movieID={parseInt(sessionStorage.currentMovie)} currentMovie={JSON.parse(sessionStorage.selectedMovie)} trailerID={this.trailerID}/>
+            <InfoPage darkmodeProp = {this.props.darkmodeProp} css={this.props.css} movieIds={this.props.movieIds} streamID={this.props.streamID} movieID={parseInt(sessionStorage.currentMovie)} currentMovie={JSON.parse(sessionStorage.selectedMovie)} trailerID={this.trailerID}/>
             <div className="movie-list">
                 {moviesList}
             </div>

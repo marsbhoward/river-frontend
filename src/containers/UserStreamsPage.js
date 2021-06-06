@@ -5,6 +5,15 @@ import Profile from '../components/Profile';
 import User from '../components/User';
 
 class UserStreamsPage extends Component {   
+  constructor(props){
+    super(props)
+    //binds passed handler to UserStreamsPage handler
+    this.handler = this.handler.bind(this)
+    this.state = {
+      cssColor: ""
+    }
+  } 
+
   
   componentDidMount() {
     sessionStorage.setItem('currentStream', ' ');
@@ -12,18 +21,17 @@ class UserStreamsPage extends Component {
     this.props.fetchUserStreams(this.props.userId)
   }
 
-  componentDidUpdate(){
-    sessionStorage.setItem('currentStream', ' ');
-    sessionStorage.setItem('currentStreamName', ' ');   
-  }
+  componentDidUpdate(prevProps){
+    if (prevProps!== this.props){
+      console.log(this.state.cssColor)
+      this.setState({cssColor: this.props.css('UserStreams',this.props.darkmodeProp)}) 
+      sessionStorage.setItem('currentStream', ' ');
+      sessionStorage.setItem('currentStreamName', ' '); 
+    }
+  }   
 
-//binds passed handler to StreamsPage handler
-  constructor(props){
-    super(props)
-    this.handler = this.handler.bind(this)
-  }
+
 // recieves id from passed handler
-//mars error occuring where stream id and name are not being sent correctly
   handler = (id,name) => {
     console.log('stream set')
     this.setState({
@@ -58,7 +66,7 @@ class UserStreamsPage extends Component {
 
   render() {
     return (
-      <div className="App" onClick={this.handleFunctions}>
+      <div style={{background:this.state.cssColor}}  className="App" onClick={this.handleFunctions}>
         <User/>
         {this.handleLoading(this.props.userId)}
       </div>

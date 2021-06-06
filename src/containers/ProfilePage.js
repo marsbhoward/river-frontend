@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserStreams } from '../actions/userStreamActions'
 import Profile from '../components/Profile';
+import DarkmodeSwitch from '../components/DarkmodeSwitch'
 import { Auth0Context } from "../react-auth0-spa";
 import 'semantic-ui-css/semantic.min.css'
 import { Button } from 'semantic-ui-react'
 import $ from 'jquery'; 
+
 
 
 let selectList = []
@@ -15,18 +17,21 @@ class ProfilePage extends Component {
   constructor(props){
     super(props)
     this.state = {
-      streamEdit: false
+      streamEdit: false,
+      cssColor: ""
     }
   } 
 
-  
   componentDidMount() {
     this.props.fetchUserStreams(this.props.userId)
   }
 
   componentDidUpdate(prevProps){
-    sessionStorage.setItem('currentStream', ' ');
-    sessionStorage.setItem('currentStreamName', ' ');
+    if (prevProps!== this.props){
+      this.setState({cssColor: this.props.css('Profile',this.props.darkmodeProp)}) 
+      sessionStorage.setItem('currentStream', ' ');
+      sessionStorage.setItem('currentStreamName', ' ');
+    }
   }
 
   fetchUserStreams = (id) => {
@@ -58,6 +63,8 @@ class ProfilePage extends Component {
         break;
     }
   }
+
+  
 
   handleLists = (stream) => {
     //can use stream.selected
@@ -149,7 +156,7 @@ class ProfilePage extends Component {
 
     if (this.state.streamEdit === true){
       return ( 
-        <div className= "profile" onClick={this.handleFunctions}>
+        <div style={{background:this.state.cssColor}} className= "profile" onClick={this.handleFunctions}>
           <img src={user.picture} alt="Profile" />
           <h2>Hi, {user.name}</h2>
           <p>email: {user.email}</p>
@@ -164,13 +171,11 @@ class ProfilePage extends Component {
     }
     else{
       return ( 
-        <div className= "profile" onClick={this.handleFunctions}>
+        <div style={{background:this.state.cssColor}} className= "profile" onClick={this.handleFunctions}>
           <img src={user.picture} alt="Profile" />
           <h2>Hi, {user.name}</h2>
           <p>email: {user.email}</p>
-          <div className= "search">
-            
-          </div>
+          <DarkmodeSwitch updateDarkmode = {this.props.updateDarkmode} userID={sessionStorage.currentUserID}/>
           <Button onClick={this.handleClick} color='black'>Edit Streams</Button>
           {this.handleLoading(this.props.userId)}
         </div>             

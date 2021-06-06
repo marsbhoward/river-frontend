@@ -26,6 +26,8 @@ class App extends Component {
     this.addCount=this.addCount.bind(this)
     this.resetCount=this.resetCount.bind(this)
     this.addHomeCount=this.addHomeCount.bind(this)
+    this.UserInfo= this.UserInfo.bind(this)
+    this.updateDarkmode = this.updateDarkmode.bind(this)
     
     this.state = {
       currentStream: sessionStorage.currentStream,
@@ -33,7 +35,8 @@ class App extends Component {
       target: "",
       sBoxOpenState: false,
       sBoxCount: 0,
-      homeCount: 0
+      homeCount: 0,
+      darkmode: false
     }
     
   }
@@ -41,6 +44,12 @@ class App extends Component {
 componentDidMount() {
   sessionStorage.setItem ('AllMovies', 'not loaded')
 }  
+
+/*
+componentDidUpdate(){
+  console.log(this)
+}
+*/
 
 // recieves id from passed handler and sets as state   
   handler = (id,name) => {
@@ -55,10 +64,15 @@ componentDidMount() {
     */})
   }
 
-  
 
-  UserID = (UserID) => {
+  UserInfo = (UserID,darkmode) => {
     sessionStorage.setItem('currentUserID', UserID)
+    sessionStorage.setItem('darkmode', darkmode)
+    this.setState({darkmode: darkmode})
+  }
+
+  updateDarkmode = (darkmode) =>{
+    this.setState({darkmode: darkmode})
   }
   
   findTarget = (e) => {
@@ -104,17 +118,62 @@ componentDidMount() {
       sBoxCount: this.state.sBoxCount+1
     })
 }
+
+  cssSwitch(component,darkmode){
+    let background 
+    //let color
+    switch (component) {
+      case 'NavBar':
+        if (darkmode === false){
+          background = '#fe2d56'
+        }
+        else{
+          background = '#202125'
+        }
+        break;
+      case 'Profile':
+      case 'UserStreams':
+      case 'Movies':
+      case 'Page':
+        if (darkmode === false){
+          background = '#ffffff'
+          //color = black
+        }
+        else{
+          background = '#333438'
+          //color = 'white'
+        }
+      break;
+      case 'Info':
+        if (darkmode === false){
+          background = 'linear-gradient(#fe2d56,white, white)';
+          //color= 'black'
+        }
+        else{
+          background = 'linear-gradient(lightgray,#333438, #333438)'
+          //color = 'black'
+        }
+        break;      
+    
+      default:
+        break;
+    }
+
+    return background
+  }
   
+
   render() {
     //const { isAuthenticated } = this.props.auth;
+    let pageCss = this.cssSwitch("Page", this.state.darkmode)
     return (
       <Router>
-        <div className = "page">
-          <Route exact path="/" render={() => <div><HomeBar/> <HomePage homeCount={this.state.homeCount} addHomeCount={this.addHomeCount} userID={this.UserID}/> </div>} />
-          <Route exact path="/profile" render={() => <div ><NavBar addCount={this.addCount}  resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <ProfilePage resetCount={this.resetCount} pointer={this.findTarget} userId={sessionStorage.currentUserID}/> </div>}  />
-          <Route exact path='/streams' render={() => <div><NavBar addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <StreamsPage resetCount={this.resetCount} pointer={this.findTarget} handler={this.handler} /> </div>} />
-          <Route exact path='/userstreams' render={() => <div><NavBar addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <UserStreamsPage resetCount={this.resetCount} pointer={this.findTarget} handler={this.handler} userId={sessionStorage.currentUserID}/> </div>}  />
-          <Route exact path='/streams/:id/movies' render={() => <div><NavBar addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <MoviesPage resetCount={this.resetCount} pointer={this.findTarget} handler= {this.state.currentStream} streamName= {this.state.currentStreamName}/> </div>} />
+        <div style={{background:pageCss}}  className = "page">
+          <Route exact path="/" render={() => <div><HomeBar/> <HomePage homeCount={this.state.homeCount} addHomeCount={this.addHomeCount} userInfo={this.UserInfo}/> </div>} />
+          <Route exact path="/profile" render={() => <div ><NavBar darkmodeProp = {this.state.darkmode} css={this.cssSwitch} addCount={this.addCount}  resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <ProfilePage css={this.cssSwitch} darkmodeProp = {this.state.darkmode} updateDarkmode = {this.updateDarkmode} resetCount={this.resetCount} pointer={this.findTarget} userId={sessionStorage.currentUserID}/> </div>}  />
+          <Route exact path='/streams' render={() => <div><NavBar darkmodeProp = {this.state.darkmode} css={this.cssSwitch} addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <StreamsPage css={this.cssSwitch} darkmodeProp = {this.state.darkmode} resetCount={this.resetCount} pointer={this.findTarget} handler={this.handler} /> </div>} />
+          <Route exact path='/userstreams' render={() => <div><NavBar darkmodeProp = {this.state.darkmode} css={this.cssSwitch} addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <UserStreamsPage css={this.cssSwitch} darkmodeProp = {this.state.darkmode} resetCount={this.resetCount} pointer={this.findTarget} handler={this.handler} userId={sessionStorage.currentUserID}/> </div>}  />
+          <Route exact path='/streams/:id/movies' render={() => <div><NavBar darkmodeProp = {this.state.darkmode} css={this.cssSwitch} addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <MoviesPage css={this.cssSwitch} darkmodeProp = {this.state.darkmode} resetCount={this.resetCount} pointer={this.findTarget} handler= {this.state.currentStream} streamName= {this.state.currentStreamName}/> </div>} />
         </div>
       </Router>
     );

@@ -80,7 +80,7 @@ function HomePage(props) {
             adapter.createUser(user.email,user.name).then(res=> {
               user.id = res.id
               getUserStreams(user.id)
-              props.userID(user.id)
+              props.userInfo(user.id,res.darkmode)
             }),            
             <div className="greeting">
               <h2> Hi {user.name} </h2>

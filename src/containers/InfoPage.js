@@ -10,7 +10,8 @@ class InfoPage extends Component {
     this.trailerPath = this.trailerPath.bind(this)
     this.state = {
       selectedMovie: null,
-      youtube: null
+      youtube: null,
+      cssColor: ""
     }
 
   } 
@@ -33,10 +34,11 @@ class InfoPage extends Component {
   }
 
   componentDidUpdate(prevProps){
-  	if (this.props.currentMovie.Title !== prevProps.currentMovie.Title)
+  	if (prevProps!== this.props)
   	{
       let apiMovieID = sessionStorage.currentMovie 
       adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
+      this.setState({cssColor: this.props.css('Info',this.props.darkmodeProp)}) 
   	}
   }
 
@@ -87,6 +89,7 @@ class InfoPage extends Component {
   }
 
   fetchTrailer = () => {
+    console.log(this.props.currentMovie.Title)
   	this.props.fetchTrailers(this.props.currentMovie.Title,this.props.currentMovie.Year)
   }
 
@@ -126,7 +129,7 @@ class InfoPage extends Component {
     }
     
     return (
-    <div className= "Info">
+    <div style={{background:this.state.cssColor}}  className= "Info">
     	<div className="banner-3">{title.toUpperCase()}</div>
     	{this.handleLoading()}
 	</div>
