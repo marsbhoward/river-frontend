@@ -23,8 +23,6 @@ function HomePage(props) {
 
   useEffect(() => {
     if (props.homeCount <= 0){
-      console.log('done')
-      console.log(props.homeCount)
       props.addHomeCount()
       streamsList.forEach(stream =>{
         dispatch(fetchMovies(stream.id));
@@ -81,6 +79,7 @@ function HomePage(props) {
               user.id = res.id
               getUserStreams(user.id)
               props.userInfo(user.id,res.darkmode)
+              console.log("I passed user info")
             }),            
             <div className="greeting">
               <h2> Hi {user.name} </h2>

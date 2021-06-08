@@ -175,7 +175,7 @@ class ProfilePage extends Component {
           <img src={user.picture} alt="Profile" />
           <h2>Hi, {user.name}</h2>
           <p>email: {user.email}</p>
-          <DarkmodeSwitch updateDarkmode = {this.props.updateDarkmode} userID={sessionStorage.currentUserID}/>
+          <DarkmodeSwitch darkmodeProp ={this.props.darkmodeProp} updateDarkmode = {this.props.updateDarkmode} userID={sessionStorage.currentUserID}/>
           <Button onClick={this.handleClick} color='black'>Edit Streams</Button>
           {this.handleLoading(this.props.userId)}
         </div>             

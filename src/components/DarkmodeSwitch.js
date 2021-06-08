@@ -6,23 +6,28 @@ import { withStyles } from '@material-ui/core/styles';
 
 const DarkmodeSwitch = (props) => { 
     const [state, setState] = useState({
-        DarkmodeChecked: false,
+        DarkmodeChecked: props.darkmodeProp,
     });
+
+    useEffect(() => {
+      console.log(state)
+    },[])
 
 
     const handleChange = (event) => {
         //returns if dark mode is true or false
-        //adapter.editStream(stream.id,stream.selected,stream.user_id,stream.stream_id).then(data => data)
         sessionStorage.setItem('darkmode', event.target.checked)
         setState({ ...state, [event.target.name]: event.target.checked });
         props.updateDarkmode(event.target.checked)
+        //adapter.editStream(stream.id,stream.selected,stream.user_id,stream.stream_id).then(data => data)
+        //console.log(event.target.checked)
+        adapter.toggleDarkmode(sessionStorage.currentUserID,event.target.checked).then(data => console.log(data))
       };
 
       const adapter = {
         toggleDarkmode: (user_id,darkmodeValue) => {
-          return fetch(`https://river-api.herokuapp.com/users/${user_id}`, {
+          return fetch(`https://river-api.herokuapp.com/users/${user_id}?darkmode=${darkmodeValue}`, {
             method: 'PATCH',
-            body: JSON.stringify({user_id,darkmodeValue}),
             headers: { "Content-Type": "application/json" },
             
           })

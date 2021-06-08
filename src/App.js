@@ -45,11 +45,15 @@ componentDidMount() {
   sessionStorage.setItem ('AllMovies', 'not loaded')
 }  
 
-/*
+
 componentDidUpdate(){
-  console.log(this)
+ //need to update darkmode if homepage isnt called
+ if (this.state.darkmode === false && sessionStorage.darkmode === 'true'){
+   console.log("updated from session")
+   this.UserInfo(sessionStorage.currentUserID,sessionStorage.darkmode)
+ }
 }
-*/
+
 
 // recieves id from passed handler and sets as state   
   handler = (id,name) => {
@@ -68,6 +72,7 @@ componentDidUpdate(){
   UserInfo = (UserID,darkmode) => {
     sessionStorage.setItem('currentUserID', UserID)
     sessionStorage.setItem('darkmode', darkmode)
+    console.log(darkmode)
     this.setState({darkmode: darkmode})
   }
 
