@@ -26,10 +26,12 @@ class Searchbox extends Component {
     this.handleStuff()
   }
 
-  componentDidUpdate(){
-    if (this.props.sBoxCount < 1){
-      this.handleStuff()
-      this.props.addCount()
+  componentDidUpdate(prevProps){
+    if (this.props !== prevProps){
+      if (this.props.sBoxCount < 1){
+        this.handleStuff()
+        this.props.addCount()
+      }
     }
   }
 

@@ -16,12 +16,11 @@ const MoviesPage = (props) => {
   const [cssColor, setCssColor] = useState("")
   //const [movieDataArray,setMovieDataArray] = useState([]); 
   //const [currentTitle, setCurrentTitle] = useState([]); 
-  const [count, setCount]= useState([0]);
+  const [count, setCount]= useState(0);
+  const [pageCount, setPageCount]= useState(0);
 
   useEffect(() => {
     setCssColor(props.css('Movies',props.darkmodeProp))
-    console.log(props.css('Movies',props.darkmodeProp))
-    console.log(sessionStorage.currentStreamName)
       if (sessionStorage.currentStreamName === " "){
         alert("error selecting stream please try again")
         history.push(`/userstreams`
@@ -33,7 +32,7 @@ const MoviesPage = (props) => {
         //set clicked
         changeClicked()
         getTitleData()
-       
+        console.log('default')
         
         
        // CurrentMovie(movieData)
@@ -41,9 +40,10 @@ const MoviesPage = (props) => {
 
       }
       else{
+        console.log('got array')
         getMoviesArray()
       }       
-    }, [props.darkmodeProp]);
+    }, []);
     //dispatch({type: 'LOADING_MOVIES'})
     //props.fetchMovies(sessionStorage.currentStream)
     //console.log(props)
@@ -97,10 +97,11 @@ const MoviesPage = (props) => {
     
     if(movieData.loading) {
       return <div>Loading Movies...</div>
-    } 
-    else {
+    }
+    else{ 
       if (typeof location.state !== "undefined"){
         if (typeof movieData.currentTitle !== "undefined"){
+          
           //getTitleData()
           //getcurrentTitle(movieData.currentTitle)
           return(
@@ -109,29 +110,31 @@ const MoviesPage = (props) => {
           </div>
           )
         }
-        else
+        else{
         //getTitleData()
+        
           return(
             <div className="moviesPage" onClick={handleFunctions}>
               <MovieList handler={handler} darkmodeProp = {props.darkmodeProp} css={props.css} movieBackend={''} passedMovie={movieData.currentTitle} streamID={sessionStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={sessionStorage.currentStreamName}/>                  
             </div>
           )
+        }
       }
         else{
+          
           //getMoviesArray()
             return (
               <div className="moviesPage" onClick={handleFunctions}>
                   <MovieList handler={handler} darkmodeProp = {props.darkmodeProp} css={props.css} passGetData={getcurrentTitle} streamID={sessionStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={sessionStorage.currentStreamName}/>                  
               </div>
             )
-        }
-      
-    }
+        }  
+      }
   }
 
   
     return (
-      <div style={{background: cssColor}}  className="App">
+      <div style={{background: cssColor.background}}  className="App">
         {handleLoading()}
       </div>
     );

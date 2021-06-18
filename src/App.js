@@ -72,7 +72,6 @@ componentDidUpdate(){
   UserInfo = (UserID,darkmode) => {
     sessionStorage.setItem('currentUserID', UserID)
     sessionStorage.setItem('darkmode', darkmode)
-    console.log(darkmode)
     this.setState({darkmode: darkmode})
   }
 
@@ -124,16 +123,15 @@ componentDidUpdate(){
     })
 }
 
-  cssSwitch(component,darkmode){
-    let background 
-    //let color
+  cssSwitch(component,darkmode){  
+    let scheme = {color:"", background:""};
     switch (component) {
       case 'NavBar':
         if (darkmode === false){
-          background = '#fe2d56'
+          scheme.background = '#fe2d56'
         }
         else{
-          background = '#202125'
+          scheme.background = '#202125'
         }
         break;
       case 'Profile':
@@ -141,22 +139,22 @@ componentDidUpdate(){
       case 'Movies':
       case 'Page':
         if (darkmode === false){
-          background = '#ffffff'
+          scheme.background = '#ffffff'
           //color = black
         }
         else{
-          background = '#333438'
+          scheme.background = '#333438'
           //color = 'white'
         }
       break;
       case 'Info':
         if (darkmode === false){
-          background = 'linear-gradient(#fe2d56,white, white)';
-          //color= 'black'
+          scheme.background = 'linear-gradient(#fe2d56,white, white)';
+          scheme.color= 'black'
         }
         else{
-          background = 'linear-gradient(lightgray,#333438, #333438)'
-          //color = 'black'
+          scheme.background = 'linear-gradient(lightgray,#333438, #333438)'
+          scheme.color= '#ffffff'
         }
         break;      
     
@@ -164,7 +162,7 @@ componentDidUpdate(){
         break;
     }
 
-    return background
+    return scheme
   }
   
 
@@ -173,7 +171,7 @@ componentDidUpdate(){
     let pageCss = this.cssSwitch("Page", this.state.darkmode)
     return (
       <Router>
-        <div style={{background:pageCss}}  className = "page">
+        <div style={{background:pageCss.background}}  className = "page">
           <Route exact path="/" render={() => <div><HomeBar/> <HomePage homeCount={this.state.homeCount} addHomeCount={this.addHomeCount} userInfo={this.UserInfo}/> </div>} />
           <Route exact path="/profile" render={() => <div ><NavBar darkmodeProp = {this.state.darkmode} css={this.cssSwitch} addCount={this.addCount}  resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <ProfilePage css={this.cssSwitch} darkmodeProp = {this.state.darkmode} updateDarkmode = {this.updateDarkmode} resetCount={this.resetCount} pointer={this.findTarget} userId={sessionStorage.currentUserID}/> </div>}  />
           <Route exact path='/streams' render={() => <div><NavBar darkmodeProp = {this.state.darkmode} css={this.cssSwitch} addCount={this.addCount} resetCount={this.resetCount} sBoxCount={this.state.sBoxCount} sBoxOpenState={this.state.sBoxOpenState} pointer={this.findTarget}/> <StreamsPage css={this.cssSwitch} darkmodeProp = {this.state.darkmode} resetCount={this.resetCount} pointer={this.findTarget} handler={this.handler} /> </div>} />

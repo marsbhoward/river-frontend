@@ -4,7 +4,11 @@ import Video from './Video';
 class MovieInfo extends Component {
 
   componentDidMount() {
-    this.props.path(this.props.selectedMovie)
+    
+    if (this.props.selectedMovie!== null){
+      console.log(this.props.selectedMovie)
+      this.props.path(this.props.selectedMovie)
+    }
   }
 
    componentDidUpdate(prevProps){
@@ -29,6 +33,7 @@ class MovieInfo extends Component {
       }
       }
     else{
+      
     }
   }
 

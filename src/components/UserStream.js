@@ -195,7 +195,7 @@ export class UserStream extends Component {
     let streamId = this.props.stream
     if (this.props.streamLinks === true){
         return (
-          <Link to={`/streams/${this.state.streamName}/movies`} className= {this.state.streamClass} onClick={this.handleOnClick}  onMouseMove={this.mouseEnter} onMouseLeave={this.mouseExit}>          
+          <Link to={`/streams/${this.state.streamName}/movies`} className= {this.state.streamClass + " streamBox"} onClick={this.handleOnClick}  onMouseMove={this.mouseEnter} onMouseLeave={this.mouseExit}>          
             <img onClick={this.handleOnClick} className= "stream" id={streamId.stream_id} alt={this.state.streamName} src={streamSrc}></img>
           </Link>
         )

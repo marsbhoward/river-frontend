@@ -66,7 +66,7 @@ class UserStreamsPage extends Component {
 
   render() {
     return (
-      <div style={{background:this.state.cssColor}}  className="App" onClick={this.handleFunctions}>
+      <div style={{background:this.state.cssColor.background}}  className="App" onClick={this.handleFunctions}>
         <User/>
         {this.handleLoading(this.props.userId)}
       </div>

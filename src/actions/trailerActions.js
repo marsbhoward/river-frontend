@@ -13,6 +13,7 @@ export function fetchTrailers (movieTitle,movieYear) {
 			}
 			catch(error){
 				console.error('Error:', error);
+				console.log(responseJSON)
 				dispatch({ type: 'LOAD_TRAILER', trailer: 'kJQP7kiw5Fk'})
 		  }
     	})

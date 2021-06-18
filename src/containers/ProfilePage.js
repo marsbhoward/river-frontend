@@ -156,7 +156,7 @@ class ProfilePage extends Component {
 
     if (this.state.streamEdit === true){
       return ( 
-        <div style={{background:this.state.cssColor}} className= "profile" onClick={this.handleFunctions}>
+        <div style={{background:this.state.cssColor.background}} className= "profile" onClick={this.handleFunctions}>
           <img src={user.picture} alt="Profile" />
           <h2>Hi, {user.name}</h2>
           <p>email: {user.email}</p>
@@ -171,7 +171,7 @@ class ProfilePage extends Component {
     }
     else{
       return ( 
-        <div style={{background:this.state.cssColor}} className= "profile" onClick={this.handleFunctions}>
+        <div style={{background:this.state.cssColor.background}} className= "profile" onClick={this.handleFunctions}>
           <img src={user.picture} alt="Profile" />
           <h2>Hi, {user.name}</h2>
           <p>email: {user.email}</p>

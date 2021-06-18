@@ -8,7 +8,7 @@ let moviesList
 
 class MovieList extends React.Component {
   componentDidMount() {
-    console.log("I was loaded too")
+    
     if (typeof this.props.passedMovie !== "undefined"){
       this.setCurrentMovieState()
     }
@@ -76,9 +76,8 @@ class MovieList extends React.Component {
    }
     else
       if (typeof this.props.passedMovie !== "undefined"){
-        
         return(
-          <div className = "WasClicked">
+          <div className = "WasClicked-undefined">
             <br/>
             <InfoPage darkmodeProp = {this.props.darkmodeProp} css={this.props.css} movieIds={this.props.movieIds} streamID={this.props.streamID} movieID={parseInt(sessionStorage.currentMovie)} currentBackend={this.props.movieBackend} currentMovie={this.props.passedMovie} trailerID={this.trailerID}/>
             <div className="movie-list">
@@ -89,13 +88,13 @@ class MovieList extends React.Component {
         )
       }
       else{
-        
+
         // get omdb movie
         return(
-          <div>
+          <div className = "WasClicked">
             <br/>
             <InfoPage darkmodeProp = {this.props.darkmodeProp} css={this.props.css} movieIds={this.props.movieIds} streamID={this.props.streamID} movieID={parseInt(sessionStorage.currentMovie)} currentMovie={JSON.parse(sessionStorage.selectedMovie)} trailerID={this.trailerID}/>
-            <div className="movie-list">
+            <div className="movie-list" style={{background:this.props.css("Movies",this.props.darkmodeProp).background}}>
                 {moviesList}
             </div>
           </div>

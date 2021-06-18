@@ -17,7 +17,7 @@ class InfoPage extends Component {
   } 
   
   componentDidMount() {
-    console.log('I was loaded')
+    
     //pass stream id and movie id in props
     // only works with db complete reset
     let apiMovieID = parseInt(sessionStorage.currentMovie )
@@ -99,9 +99,9 @@ class InfoPage extends Component {
   }
 
   handleLoading = () => {
-    if(this.props.loading) 
+    if(this.props.loading===true) 
     {
-      return <div>Loading Movies...</div>
+      return <div>Loading Info...</div>
     } 
     else {
       // change selected movie to backend movie
@@ -129,7 +129,7 @@ class InfoPage extends Component {
     }
     
     return (
-    <div style={{background:this.state.cssColor}}  className= "Info">
+    <div style={{background:this.state.cssColor.background,color:this.state.cssColor.color}}  className= "Info">
     	<div className="banner-3">{title.toUpperCase()}</div>
     	{this.handleLoading()}
 	</div>

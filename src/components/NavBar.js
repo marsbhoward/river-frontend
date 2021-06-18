@@ -32,7 +32,7 @@ const NavBar  = withRouter (({ history, ...props}) => {
     'text-align': 'center',
     'display': 'flex',
     'flex-wrap': 'nowrap',
-    'background': cssColor,
+    'background': cssColor.background,
     'z-index':1 
     } 
 
