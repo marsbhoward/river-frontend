@@ -189,6 +189,7 @@ code {
 }
 
 .Info{
+  overflow-x: hidden;
   width: 100%;
   height: 80%;
   background: linear-gradient(#fe2d56,white, white);
@@ -205,6 +206,10 @@ code {
   height: 100%;
   text-align: center;
   padding: 5%;
+}
+
+.moviesPage{
+  margin-top: -2.4vh;
 }
 
 .profile {
