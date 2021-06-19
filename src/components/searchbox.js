@@ -31,6 +31,7 @@ class Searchbox extends Component {
       if (this.props.sBoxCount < 1){
         this.handleStuff()
         this.props.addCount()
+        this.props.listMovies()
       }
     }
   }
@@ -101,7 +102,7 @@ class Searchbox extends Component {
           })
       }
       else{
-        this.props.listMovies()
+        //this.props.listMovies()
       }
     }
   }

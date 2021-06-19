@@ -9,7 +9,7 @@ class InfoPage extends Component {
     super(props)
     this.trailerPath = this.trailerPath.bind(this)
     this.state = {
-      selectedMovie: null,
+      selectedMovie: JSON.parse(sessionStorage.currentMovieList).find(element => element.id === parseInt(sessionStorage.currentMovie)),
       youtube: null,
       cssColor: ""
     }
@@ -21,9 +21,7 @@ class InfoPage extends Component {
     //pass stream id and movie id in props
     // only works with db complete reset
     let apiMovieID = parseInt(sessionStorage.currentMovie )
-    adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => {
-      this.logMovie(movie)
-    })
+
 
     //if current movie does not have a youtube_id on the backend
   	  
@@ -36,61 +34,70 @@ class InfoPage extends Component {
   componentDidUpdate(prevProps){
   	if (prevProps!== this.props)
   	{
+      
       let apiMovieID = sessionStorage.currentMovie 
-      adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => this.logMovie(movie))
-      this.setState({cssColor: this.props.css('Info',this.props.darkmodeProp)}) 
+      if (prevProps.currentBackend !== this.props.currentBackend){
+        console.log(this.props)
+        console.log('updated')
+        adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => {
+          this.logMovie(movie)
+        })
+      }
+      
+      //if (prevProps.darkmodeProp !== this.props.darkmodeProp){
+        this.setState({cssColor: this.props.css('Info',this.props.darkmodeProp)}) 
+      //}
   	}
   }
 
   logMovie = (selectedMovie) => {    
-    if (this.state.youtube === null){
-      this.setState({youtube: selectedMovie.youtube_id})
+    //mars rerender problem?
+      this.setState({
+        selectedMovie: selectedMovie
+      })
+      console.log('STATE SET')
+    if(selectedMovie.youtube_id === null){
+      //if youtube_id on api is empty
+      //not getting updated trailer here
+      this.fetchTrailer(selectedMovie.title,selectedMovie.year)
+      console.log('got trailer')
     }
-        this.setState({
-          selectedMovie: selectedMovie
-        })
-
-        //sessionStorage.setItem('currentMovie',selectedMovie)
-
-      if (selectedMovie === null) {
-      }
-      else{
-        if(selectedMovie.youtube_id === null){
-          //if youtube_id on api is empty
-          //not getting updated trailer here
-          this.fetchTrailer()
-          this.setState({youtube: null})
-        }
-        else {
-          //this.setState({youtube: "yes"})
-        }        
-      }
+    else {
+      this.setState({youtube: selectedMovie.youtube_id})
+    }        
   }
 
 
   trailerPath = (passedMovie) =>{
     let newMovieList = JSON.parse(sessionStorage.currentMovieList)
-    
+    console.log(this)
     //mars passed movie is coming back null on occation
     if (passedMovie){
-      if (this.props.trailer.length > 0 && this.props.trailer !== "kJQP7kiw5Fk" && passedMovie.youtube_id === null){ 
-        adapter.updateYoutubeID(passedMovie.stream_id,passedMovie.id,this.props.trailer).then(data => data)
+      if (this.props.trailer !== "kJQP7kiw5Fk" && passedMovie.youtube_id === null){ 
+        adapter.updateYoutubeID(passedMovie.stream_id,passedMovie.id,this.props.trailer).then(data => {
+          console.log(data)
+        })
         passedMovie.youtube_id = this.props.trailer
         sessionStorage.setItem('currentMovieList',JSON.stringify(newMovieList)) 
         console.log('trailer updated on backend') 
       }
       else if (this.props.trailer === 'kJQP7kiw5Fk') {
+     
         console.log('error loading video from youtube')
       }
       else {
         console.log('trailer was loaded from backend') 
       }
+      this.setState({
+        youtube:this.props.trailer
+      })
     }
   }
 
-  fetchTrailer = () => {
-    console.log(this.props.currentMovie.Title)
-  	this.props.fetchTrailers(this.props.currentMovie.Title,this.props.currentMovie.Year)
+  fetchTrailer = (title, year) => {
+    console.log('grabbing trailer')
+  	this.props.fetchTrailers(title,year)
+
   }
 
   handler = (trailer) => {
@@ -124,6 +131,7 @@ class InfoPage extends Component {
         console.log(title)
       }
       else{
+        console.log('reached')
         window.location.reload()
       }
     }

@@ -14,8 +14,7 @@ useEffect(() => {
 //refactor to use session storage to grab current movie 
 //this will also help search be implemented
 function handleOnClick(){
-  sessionStorage.setItem('currentMovie',props.movie.id)
-  sessionStorage.setItem('selectedMovie',JSON.stringify( props.movie))
+  //follow this path to fix error mars
   props.handler(props.movie,true,props.movieID);
   
     history.push(`/streams/${sessionStorage.currentStreamName}/movies`,

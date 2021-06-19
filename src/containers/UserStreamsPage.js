@@ -23,7 +23,7 @@ class UserStreamsPage extends Component {
 
   componentDidUpdate(prevProps){
     if (prevProps!== this.props){
-      console.log(this.state.cssColor)
+     
       this.setState({cssColor: this.props.css('UserStreams',this.props.darkmodeProp)}) 
       sessionStorage.setItem('currentStream', ' ');
       sessionStorage.setItem('currentStreamName', ' '); 
@@ -33,7 +33,6 @@ class UserStreamsPage extends Component {
 
 // recieves id from passed handler
   handler = (id,name) => {
-    console.log('stream set')
     this.setState({
       currentStream: id,
       currentStreamName: name

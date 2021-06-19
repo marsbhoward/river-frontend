@@ -5,27 +5,24 @@ import InfoPage from '../containers/InfoPage'
 
 let moviesList
 
-
+// mars this page is causing multiple rerenders
 class MovieList extends React.Component {
+
+  //binds passed handler to MoviesPage handler
+  constructor(props){
+    super(props)
+    this.handler = this.handler.bind(this);
+  }
+
   componentDidMount() {
-    
     if (typeof this.props.passedMovie !== "undefined"){
+      console.log(this.props)
       this.setCurrentMovieState()
     }
     else{
       
     }
    }
-
-//binds passed handler to MoviesPage handler
-  constructor(props){
-    super(props)
-    this.handler = this.handler.bind(this);
-    this.state = {
-      clicked: this.props.isClicked
-    }
-
-  }
 
   setCurrentMovieState = () =>{
     this.setState({
@@ -35,16 +32,20 @@ class MovieList extends React.Component {
     //console.log(this.state.currentMovie)
   }
 
+ 
+
 // recieves id from passed handler
   handler = (movie, clicked, movieID) => {
     //sessionStorage.setItem('currentMovie', this.props.movieIds[(movieID-1)])
-    
+    console.log('state set')
     this.props.handler()
-    this.setState({
+    sessionStorage.setItem('currentMovie',movie.id)
+    sessionStorage.setItem('selectedMovie',JSON.stringify( movie))
+    this.setState(prevState=>({
       currentMovie: movie,
-      clicked: true,
+      //this.props.isClicked fucntion
       movieID: movieID
-    })   
+    }))   
   }
 
   trailerID = (trailer) => { 
@@ -64,7 +65,7 @@ class MovieList extends React.Component {
       })  
     }
 
-    if (this.state.clicked !== true) {  
+    if (this.props.isClicked !== true) {  
      return (
        <div className= "NotClicked">
          <br/>

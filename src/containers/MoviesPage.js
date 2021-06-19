@@ -12,7 +12,7 @@ const MoviesPage = (props) => {
   const movieData = useSelector(state => state.MoviesReducer, []) || []; 
   const dispatch = useDispatch();
   const location = useLocation();
-  const [clicked, setCliked] = useState('');
+  const [clicked, setCliked] = useState(false);
   const [cssColor, setCssColor] = useState("")
   //const [movieDataArray,setMovieDataArray] = useState([]); 
   //const [currentTitle, setCurrentTitle] = useState([]); 
@@ -32,7 +32,7 @@ const MoviesPage = (props) => {
         //set clicked
         changeClicked()
         getTitleData()
-        console.log('default')
+        
         
         
        // CurrentMovie(movieData)
@@ -106,7 +106,7 @@ const MoviesPage = (props) => {
           //getcurrentTitle(movieData.currentTitle)
           return(
           <div className="moviesPage" onClick={handleFunctions}>
-            <MovieList handler={handler} darkmodeProp = {props.darkmodeProp} css={props.css} movieBackend={location.state.state.currentMovie} passedMovie={JSON.parse(sessionStorage.selectedMovie)} streamID={sessionStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={sessionStorage.currentStreamName}/>                  
+            <MovieList clickValue={clicked} handler={handler} darkmodeProp = {props.darkmodeProp} css={props.css} movieBackend={location.state.state.currentMovie} passedMovie={JSON.parse(sessionStorage.selectedMovie)} streamID={sessionStorage.currentStream} isClicked={clicked} trailerID={trailerID} movieCards={movieData.movies} movieIds={movieData.ids}  currentStream={sessionStorage.currentStreamName}/>                  
           </div>
           )
         }
