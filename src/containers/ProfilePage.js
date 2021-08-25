@@ -25,10 +25,7 @@ class ProfilePage extends Component {
 
   componentDidMount() {
     this.props.fetchUserStreams(this.props.userId)
-    if (this.state.load === 0){
-      this.setState({load: 1})
-      //this.window.reload()
-    }
+
   }
 
   componentDidUpdate(prevProps){
@@ -147,6 +144,10 @@ class ProfilePage extends Component {
   render() {
     const { loading, user } = this.context;
     //const { isAuthenticated, loginWithRedirect} = this.context;
+    if (this.state.load === 0){
+      this.setState({load: 1})
+      //this.window.reload()
+    }
     
     if (loading || !user) {
       setTimeout(() => {
