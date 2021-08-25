@@ -19,7 +19,6 @@ class ProfilePage extends Component {
     this.state = {
       streamEdit: false,
       cssColor: "",
-      load: 0
     }
   } 
 
@@ -132,6 +131,13 @@ class ProfilePage extends Component {
     
   }
 
+  timeCheck = () =>{
+    setTimeout(function(){
+        console.log('timer executed')
+        sessionStorage.setItem('load', 1); 
+        window.location.reload();
+    }, 3000);
+  }
 
   handleLoading = (id) => {
     if(this.props.loading) {
@@ -144,21 +150,16 @@ class ProfilePage extends Component {
   render() {
     const { loading, user } = this.context;
     //const { isAuthenticated, loginWithRedirect} = this.context;
-    if (this.state.load === 0){
-      this.setState({load: 1})
-      //this.window.reload()
-    }
     
     if (loading || !user) {
-      setTimeout(() => {
-        if (this.props.loading !== false){
-          console.log('timer executed')
-          window.location.reload();
-        }
-      }, 3500);
-    
       return <div>Loading...</div>;
     }
+
+    if (sessionStorage.load === '0'){
+      this.timeCheck()
+      //window.location.reload();
+    }
+    
 
     if (this.state.streamEdit === true){
       return ( 
