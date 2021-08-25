@@ -20,7 +20,21 @@ class InfoPage extends Component {
     
     //pass stream id and movie id in props
     // only works with db complete reset
-    let apiMovieID = parseInt(sessionStorage.currentMovie )
+          let apiMovieID = sessionStorage.currentMovie 
+      
+        console.log(this.props)
+        console.log('updated')
+        adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => {
+          console.log('getting youtube info')
+          this.logMovie(movie)
+        })
+      
+      
+      //if (prevProps.darkmodeProp !== this.props.darkmodeProp){
+        this.setState({cssColor: this.props.css('Info',this.props.darkmodeProp)}) 
+      //}
+  	
+    
 
 
     //if current movie does not have a youtube_id on the backend
@@ -34,20 +48,7 @@ class InfoPage extends Component {
   componentDidUpdate(prevProps){
   	if (prevProps!== this.props)
   	{
-      
-      let apiMovieID = sessionStorage.currentMovie 
-      if (prevProps.currentBackend !== this.props.currentBackend){
-        console.log(this.props)
-        console.log('updated')
-        adapter.getYoutubeID(this.props.streamID, apiMovieID).then(movie => {
-          this.logMovie(movie)
-        })
-      }
-      
-      //if (prevProps.darkmodeProp !== this.props.darkmodeProp){
-        this.setState({cssColor: this.props.css('Info',this.props.darkmodeProp)}) 
-      //}
-  	}
+    }
   }
 
   logMovie = (selectedMovie) => {    
@@ -55,12 +56,10 @@ class InfoPage extends Component {
       this.setState({
         selectedMovie: selectedMovie
       })
-      console.log('STATE SET')
-    if(selectedMovie.youtube_id === null){
+    if(selectedMovie.youtube_id === null || selectedMovie.youtube_id === ""){
       //if youtube_id on api is empty
       //not getting updated trailer here
       this.fetchTrailer(selectedMovie.title,selectedMovie.year)
-      console.log('got trailer')
     }
     else {
       this.setState({youtube: selectedMovie.youtube_id})
@@ -70,16 +69,16 @@ class InfoPage extends Component {
 
   trailerPath = (passedMovie) =>{
     let newMovieList = JSON.parse(sessionStorage.currentMovieList)
-    console.log(this)
     //mars passed movie is coming back null on occation
     if (passedMovie){
-      if (this.props.trailer !== "kJQP7kiw5Fk" && passedMovie.youtube_id === null){ 
-        adapter.updateYoutubeID(passedMovie.stream_id,passedMovie.id,this.props.trailer).then(data => {
-          console.log(data)
-        })
-        passedMovie.youtube_id = this.props.trailer
-        sessionStorage.setItem('currentMovieList',JSON.stringify(newMovieList)) 
-        console.log('trailer updated on backend') 
+      if (this.props.trailer !== "kJQP7kiw5Fk"){
+        if(passedMovie.youtube_id === null|| passedMovie.youtube_id === ""){
+          adapter.updateYoutubeID(passedMovie.stream_id,passedMovie.id,this.props.trailer).then(data => {
+          })
+          passedMovie.youtube_id = this.props.trailer
+          sessionStorage.setItem('currentMovieList',JSON.stringify(newMovieList)) 
+          console.log('trailer updated on backend') 
+        }
       }
       else if (this.props.trailer === 'kJQP7kiw5Fk') {
      
@@ -96,7 +95,7 @@ class InfoPage extends Component {
 
   fetchTrailer = (title, year) => {
     console.log('grabbing trailer')
-  	this.props.fetchTrailers(title,year)
+  	this.props.fetchTrailers(this.props.currentMovie.Title, this.props.currentMovie.Year)
 
   }
 

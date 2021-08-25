@@ -1,4 +1,4 @@
-const trailersReducer = (state = { trailer: [], loading: false }, action) => {
+const trailersReducer = (state = { trailer: "", loading: false }, action) => {
    switch(action.type) {
     case 'LOADING_TRAILER':
       return {

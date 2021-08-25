@@ -16,7 +16,6 @@ useEffect(() => {
 function handleOnClick(){
   //follow this path to fix error mars
   props.handler(props.movie,true,props.movieID);
-  
     history.push(`/streams/${sessionStorage.currentStreamName}/movies`,
     {state: { 
       clicked: true, 

@@ -18,12 +18,17 @@ class ProfilePage extends Component {
     super(props)
     this.state = {
       streamEdit: false,
-      cssColor: ""
+      cssColor: "",
+      load: 0
     }
   } 
 
   componentDidMount() {
     this.props.fetchUserStreams(this.props.userId)
+    if (this.state.load === 0){
+      this.setState({load: 1})
+      //this.window.reload()
+    }
   }
 
   componentDidUpdate(prevProps){
