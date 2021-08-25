@@ -169,14 +169,20 @@ function MoviesList (props){
       //setMovieName(props.movie.id)
     });
 
-  function handleCollection(handleMovie){
+  function handleCollection(handleclick){
     //dispatch(fetchMovies(streamId));
     fetchMovies(streamId);
-    handleMovie();
+    handleclick();
   }
 
   function handleClick(){
     handleCollection(handleMovie, console.log('finished'));
+    window.location.reload()
+  }
+
+  function handleClickStream(){
+    handleCollection(handleStream, console.log('finished'));
+    window.location.reload()
   }
 
 
@@ -243,7 +249,7 @@ function MoviesList (props){
               
               
             
-              <span onClick= {handleStream} className= 'stream-name'> {streamName}</span>
+              <span onClick= {handleClickStream} className= 'stream-name'> {streamName}</span>
           </div>
         )
       }
