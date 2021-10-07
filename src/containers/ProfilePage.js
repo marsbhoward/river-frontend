@@ -136,7 +136,7 @@ class ProfilePage extends Component {
         console.log('timer executed')
         sessionStorage.setItem('load', 1); 
         window.location.reload();
-    }, 3000);
+    }, 500);
   }
 
   handleLoading = (id) => {
