@@ -1,5 +1,5 @@
 const URLa = 'https://www.googleapis.com/youtube/v3/search?part=snippet%20&maxResults=1&order=relevance&q='
-const URLb = '%20trailer&key=AIzaSyDJoamFx61luWHpVofetaLKwu_FacN1O18'
+const URLb = '%20official%20trailer%20trailer&key=AIzaSyDJoamFx61luWHpVofetaLKwu_FacN1O18'
 
 
 //https://www.googleapis.com/youtube/v3/search?part=snippet%20&maxResults=1&order=relevance&q=Blade%20Runner%2020492017%20trailer&key=AIzaSyDJoamFx61luWHpVofetaLKwu_FacN1O18
