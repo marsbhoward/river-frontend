@@ -157,7 +157,7 @@ class ProfilePage extends Component {
 
     if (sessionStorage.load === '0'){
       this.timeCheck()
-      //window.location.reload();
+
     }
     
 

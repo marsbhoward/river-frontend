@@ -12,6 +12,9 @@ class MovieList extends React.Component {
   constructor(props){
     super(props)
     this.handler = this.handler.bind(this);
+    this.state = {
+      cssColor: ""
+    }
   }
 
   componentDidMount() {
@@ -19,9 +22,7 @@ class MovieList extends React.Component {
       console.log(this.props)
       this.setCurrentMovieState()
     }
-    else{
-      
-    }
+    this.setState({cssColor: this.props.css('Info',this.props.darkmodeProp)})
    }
 
   setCurrentMovieState = () =>{
@@ -75,8 +76,7 @@ class MovieList extends React.Component {
        </div>
      )
    }
-    else
-      if (typeof this.props.passedMovie !== "undefined"){
+    else if (typeof this.props.passedMovie !== "undefined"){
         return(
           <div className = "WasClicked-undefined">
             <br/>

@@ -23,11 +23,16 @@ function HomePage(props) {
 
   useEffect(() => {
     if (props.homeCount <= 0){
-      sessionStorage.setItem('load', 0); 
-      props.addHomeCount()
-      streamsList.forEach(stream =>{
-        dispatch(fetchMovies(stream.id));
-      })
+      if (sessionStorage.load){
+
+      }
+      else{
+        sessionStorage.setItem('load', 0); 
+        props.addHomeCount()
+        streamsList.forEach(stream =>{
+          dispatch(fetchMovies(stream.id));
+        })
+      }
     }
   },[])
 

@@ -18,11 +18,12 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 
-const store = createStore(combineReducers({
+let rootReducer
+const store = createStore(rootReducer = (combineReducers({
 	MoviesReducer,
 	StreamsReducer,
 	TrailersReducer
-}),
+})),
  applyMiddleware(thunk));
 
 // A function that routes the user to the right place

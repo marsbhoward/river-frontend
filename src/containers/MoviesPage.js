@@ -10,7 +10,7 @@ import { useHistory} from "react-router-dom";
 const MoviesPage = (props) => { 
   const history = useHistory();
   //const movieData = useSelector(state => state.MoviesReducer, []) || []; 
-  const movieData = useSelector(state => state.MoviesReducer || []);
+  const movieData = useSelector(state =>  state.MoviesReducer)
   const dispatch = useDispatch();
   const location = useLocation();
   const [clicked, setCliked] = useState(false);
@@ -71,6 +71,7 @@ const MoviesPage = (props) => {
   }
 
   function getcurrentTitle(movieData){
+    console.log(movieData)
     dispatch(fetchTitle(movieData))
     //dispatch(fetchTitle(Promise.resolve(location.state).then(location.state.state.currentMovie)))
     //dispatch(fetchTitle(location.state.state.currentMovie))

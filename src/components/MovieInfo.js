@@ -17,6 +17,17 @@ class MovieInfo extends Component {
      
   }
 
+  ratingsFunction = (currentMovie) => {
+    if (currentMovie.Ratings){
+      return currentMovie.Ratings.map((rating, index) =>(
+          <li  key={index}>» {rating.Source}: {rating.Value} «</li>  
+        ));
+      }
+    else{
+      return [0,0,0]
+    }
+  }
+
   shouldTrailerLoad = (passedMovie) => {
     if (passedMovie !== null){
       if (this.props.youtube !== null) {
@@ -74,6 +85,8 @@ class MovieInfo extends Component {
   }
 */
   render() {
+    console.log(this.props.currentMovie)
+    console.log(this.props.selectedMovie)
   	let currentMovie = this.props.currentMovie
     let videoId 
     let errorMsg
@@ -88,9 +101,8 @@ class MovieInfo extends Component {
       this.props.handler(this.props.trailer)
     }
 
-  	const ratings = currentMovie.Ratings.map((rating, index) =>(
-  		<li  key={index}>» {rating.Source}: {rating.Value} «</li>  
- 	  ));    
+   const ratings = this.ratingsFunction(currentMovie)
+
 
     return (
     	<div className = "show_Movie" >

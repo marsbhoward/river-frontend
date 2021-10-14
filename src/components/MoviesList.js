@@ -171,6 +171,7 @@ function MoviesList (props){
 
   function handleCollection(handleclick){
     //dispatch(fetchMovies(streamId));
+    console.log(streamId)
     fetchMovies(streamId);
     handleclick();
   }
